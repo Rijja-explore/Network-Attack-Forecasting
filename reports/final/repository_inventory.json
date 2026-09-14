@@ -1,0 +1,855 @@
+{
+  "purpose": "Commit-scoped repository inventory. Raw data/models are excluded by .gitignore.",
+  "committed_candidate_count": 53,
+  "artifacts": [
+    {
+      "path": ".gitignore",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1178
+    },
+    {
+      "path": "LICENSE",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1070
+    },
+    {
+      "path": "README.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 4657
+    },
+    {
+      "path": "app/app.py",
+      "purpose": "offline dashboard",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python",
+        "Streamlit"
+      ],
+      "size_bytes": 3374
+    },
+    {
+      "path": "configs/default.yaml",
+      "purpose": "configuration/registry",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 335
+    },
+    {
+      "path": "configs/model_registry.yaml",
+      "purpose": "configuration/registry",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 2042
+    },
+    {
+      "path": "data/README.md",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 703
+    },
+    {
+      "path": "demo/README.md",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 518
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1368
+    },
+    {
+      "path": "docs/analyst_workflow.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 541
+    },
+    {
+      "path": "docs/architecture.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 789
+    },
+    {
+      "path": "docs/datasets.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 550
+    },
+    {
+      "path": "docs/feature_dictionary.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1012
+    },
+    {
+      "path": "docs/judge_qa.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1330
+    },
+    {
+      "path": "docs/limitations.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 620
+    },
+    {
+      "path": "docs/methodology.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 787
+    },
+    {
+      "path": "docs/model_cards.md",
+      "purpose": "documentation",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1315
+    },
+    {
+      "path": "models/README.md",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 550
+    },
+    {
+      "path": "processed_data/analyst/contextual_assessment_examples.json",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 6153
+    },
+    {
+      "path": "processed_data/final_demo/demo_cases.json",
+      "purpose": "recorded deterministic demo input",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 5734
+    },
+    {
+      "path": "pyproject.toml",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 250
+    },
+    {
+      "path": "reports/final/FINAL_HANDOFF_REPORT.md",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1550
+    },
+    {
+      "path": "reports/final/FINAL_STATUS.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1969
+    },
+    {
+      "path": "reports/final/analyst_decision_schema.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1016
+    },
+    {
+      "path": "reports/final/approved_claims.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1320
+    },
+    {
+      "path": "reports/final/canonical_architecture.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1285
+    },
+    {
+      "path": "reports/final/claim_audit.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 3176
+    },
+    {
+      "path": "reports/final/demo_cases.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 6240
+    },
+    {
+      "path": "reports/final/demo_run_report.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 736
+    },
+    {
+      "path": "reports/final/final_model_selection.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 10144
+    },
+    {
+      "path": "reports/final/final_pipeline_progress.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 988
+    },
+    {
+      "path": "reports/final/final_scorecard.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 2654
+    },
+    {
+      "path": "reports/final/git_readiness.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 5326
+    },
+    {
+      "path": "reports/final/integrity_audit.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 4203
+    },
+    {
+      "path": "reports/final/project_inventory.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 9824
+    },
+    {
+      "path": "reports/final/repository_inventory.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 24377
+    },
+    {
+      "path": "reports/final/reproducibility_report.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": true,
+      "required_for_demo": true,
+      "safe_to_commit": true,
+      "generated": true,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1541
+    },
+    {
+      "path": "reports/final_ml_intelligence_report.json",
+      "purpose": "final audit/claim/delivery report",
+      "stage": "final delivery",
+      "input": "existing validated artifacts",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 2233
+    },
+    {
+      "path": "requirements-demo.txt",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 117
+    },
+    {
+      "path": "requirements.txt",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 247
+    },
+    {
+      "path": "scripts/generate_demo_outputs.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 382
+    },
+    {
+      "path": "scripts/generate_repository_reports.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 4034
+    },
+    {
+      "path": "scripts/run_demo.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 279
+    },
+    {
+      "path": "scripts/validate_environment.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 1169
+    },
+    {
+      "path": "src/__init__.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 38
+    },
+    {
+      "path": "src/assessment/__init__.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 56
+    },
+    {
+      "path": "src/assessment/schema.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 843
+    },
+    {
+      "path": "src/mitre/__init__.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 42
+    },
+    {
+      "path": "src/mitre/engine.py",
+      "purpose": "package support",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 927
+    },
+    {
+      "path": "tests/test_assessment.py",
+      "purpose": "test",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 546
+    },
+    {
+      "path": "tests/test_demo.py",
+      "purpose": "test",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 511
+    },
+    {
+      "path": "tests/test_inference.py",
+      "purpose": "test",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 539
+    },
+    {
+      "path": "tests/test_integrity.py",
+      "purpose": "test",
+      "stage": "packaging",
+      "input": "repository package",
+      "output": "portable handoff/demo support",
+      "model": "none at startup",
+      "canonical": false,
+      "required_for_demo": false,
+      "safe_to_commit": true,
+      "generated": false,
+      "dependencies": [
+        "Python"
+      ],
+      "size_bytes": 731
+    }
+  ]
+}

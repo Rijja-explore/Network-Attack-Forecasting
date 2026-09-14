@@ -1,0 +1,39 @@
+{
+  "PROJECT_STATUS": "READY_WITH_LIMITATIONS",
+  "DATA_STATUS": "PASS",
+  "MODEL_STATUS": "PASS",
+  "FORECASTING_STATUS": "LIMITED",
+  "ANALYST_INTELLIGENCE_STATUS": "PASS",
+  "DEMO_STATUS": "PASS",
+  "REPRODUCIBILITY_STATUS": "PASS",
+  "CLAIM_SAFETY_STATUS": "PASS",
+  "top_remaining_weaknesses": [
+    "Binary label blocks make persistence difficult to beat and can miss transitions.",
+    "Stage-1 test has only six normal windows; false-positive metrics are unstable.",
+    "State-transition test generalization is weak (mean R\u00b2=0.0086).",
+    "Small Sogou/Virut holdouts constrain Stage-2 per-family confidence.",
+    "True packet+flow temporal fusion is blocked without co-captured correspondence."
+  ],
+  "strongest_judge_facing_capabilities": [
+    "Chronological, leakage-aware Stage-1 and Stage-2 evaluation artifacts.",
+    "Strong Stage-1 current-risk validation XGBoost result.",
+    "Seven-family packet behavioral characterization with frozen CatBoost.",
+    "Transparent provenance/uncertainty/claim controls.",
+    "Offline deterministic analyst demo with separate evidence channels."
+  ],
+  "must_not_claim": [
+    "Early warning lead time before attacks.",
+    "Learned forecasting beats persistence.",
+    "Real-time deployment validation.",
+    "Unseen/zero-day attack generalization.",
+    "Stage-2 predicts Stage-1 outcomes or is temporally fused with Stage-1."
+  ],
+  "can_confidently_demonstrate": [
+    "Current flow-window risk classification on the validated experiment.",
+    "Next observed-window state forecasting experiment with persistence reference.",
+    "Packet-window attack-family characterization across seven CTU families.",
+    "Transparent MITRE behavior evidence and native global feature drivers.",
+    "Provenance-preserving contextual analyst assessment."
+  ],
+  "handoff_recommendation": "Ready for PPT/demo team if all judge-facing text follows approved_claims.json exactly."
+}

@@ -1,0 +1,9 @@
+[project]
+name = "sih153-network-attack-forecasting"
+version = "0.1.0"
+description = "Provenance-safe offline analyst decision-support demo for SIH26153."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -1,0 +1,36 @@
+{
+  "layers": {
+    "data": [
+      "Stage-1 flow telemetry \u2192 chronological 60-second windows/features",
+      "Stage-2 CTU original-PCAP packet telemetry \u2192 chronological 60-second behavioral windows"
+    ],
+    "ai_backend": [
+      "Stage-1 XGBoost current risk",
+      "Stage-1 persistence reference / lagged forecasting experiment",
+      "Stage-1 compact state-transition experiment",
+      "Stage-2 CatBoost family characterization",
+      "Stage-2 state encoder",
+      "transparent MITRE rules",
+      "native global XAI"
+    ],
+    "intelligence": [
+      "future observed-window risk trajectory",
+      "network-state evidence",
+      "attack-family evidence",
+      "packet behavioral change",
+      "MITRE evidence",
+      "uncertainty"
+    ],
+    "ui_analyst": [
+      "offline dashboard",
+      "risk/trajectory",
+      "packet family/state",
+      "MITRE evidence",
+      "top drivers",
+      "provenance and limitations",
+      "recommendation"
+    ]
+  },
+  "fusion_boundary": "Stage-1 and Stage-2 remain separate evidence channels. The decision layer aggregates context only; temporal_fusion=false.",
+  "true_fusion_requirement": "Co-captured flow and packet observations with defensible temporal/capture correspondence."
+}

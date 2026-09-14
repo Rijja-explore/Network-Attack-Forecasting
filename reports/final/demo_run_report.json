@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "launch_status": "Streamlit application source syntax-checked and successfully started in headless smoke test at localhost:8502; it was then intentionally stopped.",
+  "files_loaded": [
+    "processed_data/final_demo/demo_cases.json",
+    "reports/final/approved_claims.json"
+  ],
+  "models_loaded": "Demo renders deterministic saved outputs; no model retraining or cloud dependency at startup.",
+  "demo_cases_tested": [
+    "CASE_1_STABLE_LOW_RISK",
+    "CASE_2_PERSISTENT_HIGH_RISK",
+    "CASE_3_PACKET_FAMILY_IDENTIFICATION",
+    "CASE_4_CONTEXTUAL_EVIDENCE_CHANNELS"
+  ],
+  "errors": [],
+  "offline": true,
+  "limitation": "Interactive browser verification is left to the local operator."
+}

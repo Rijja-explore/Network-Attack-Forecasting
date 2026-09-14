@@ -1,0 +1,80 @@
+{
+  "scale": "0-10; deliberately non-inflated",
+  "scores": [
+    {
+      "area": "Problem alignment",
+      "score": 8,
+      "justification": "Directly addresses network attack-state assessment and forecasting research objective."
+    },
+    {
+      "area": "Data validity",
+      "score": 7,
+      "justification": "Chronological splits and PCAP provenance audits exist; source distributions remain limited."
+    },
+    {
+      "area": "Feature engineering",
+      "score": 8,
+      "justification": "Flow and packet behavioral window features are documented and audited."
+    },
+    {
+      "area": "ML validity",
+      "score": 7,
+      "justification": "Validation-first model selection and leakage controls documented; test class imbalance limits confidence."
+    },
+    {
+      "area": "Forecasting validity",
+      "score": 5,
+      "justification": "Valid experiment and strong persistence reference, but learned forecasting does not beat it."
+    },
+    {
+      "area": "State modelling",
+      "score": 4,
+      "justification": "Validation signal exists, but test R\u00b2 generalization is near zero."
+    },
+    {
+      "area": "Packet-level intelligence",
+      "score": 8,
+      "justification": "Seven-family CatBoost characterization with behavioral state features."
+    },
+    {
+      "area": "MITRE mapping",
+      "score": 5,
+      "justification": "Transparent evidence rules; no ground-truth MITRE validation."
+    },
+    {
+      "area": "Explainability",
+      "score": 6,
+      "justification": "Native global feature importance is usable, but local causal attribution is limited."
+    },
+    {
+      "area": "Novelty",
+      "score": 7,
+      "justification": "Provenance-safe dual-channel analyst decision framing is differentiated."
+    },
+    {
+      "area": "Analyst usefulness",
+      "score": 7,
+      "justification": "Evidence, uncertainty, recommendations, and provenance are explicit."
+    },
+    {
+      "area": "Demo readiness",
+      "score": 8,
+      "justification": "Offline deterministic cases and Streamlit package provided."
+    },
+    {
+      "area": "Reproducibility",
+      "score": 7,
+      "justification": "Saved artifacts load and reports are inventoried; historic manifests are absent."
+    },
+    {
+      "area": "Claim defensibility",
+      "score": 9,
+      "justification": "Explicit supported/limited/not-supported language blocks overclaims."
+    },
+    {
+      "area": "SIH judge readiness",
+      "score": 7,
+      "justification": "Ready with limitations if presentation uses approved claims exactly."
+    }
+  ]
+}

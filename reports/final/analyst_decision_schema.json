@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Provenance-preserving analyst contextual evidence aggregation; not a mathematical cross-stage fusion.",
+  "required_fields": [
+    "assessment_id",
+    "severity",
+    "stage1_evidence",
+    "stage2_evidence",
+    "mitre_evidence",
+    "xai_evidence",
+    "uncertainty",
+    "provenance",
+    "limitations",
+    "analyst_recommendation"
+  ],
+  "severity_logic": {
+    "LOW": "max Stage-1 predicted risk < 0.35",
+    "MEDIUM": "0.35 <= max Stage-1 predicted risk < 0.70, or packet-only contextual family evidence",
+    "HIGH": "max Stage-1 predicted risk >= 0.70",
+    "CRITICAL": "reserved: requires an externally validated critical operational policy; no demo case assigns it"
+  },
+  "forbidden_operations": [
+    "row-level Stage-1/Stage-2 alignment",
+    "combined uncalibrated probability",
+    "Stage-2-to-Stage-1 forecasting claim"
+  ],
+  "provenance_requirement": "Always state separate source capture/dataset and temporal_fusion=false."
+}

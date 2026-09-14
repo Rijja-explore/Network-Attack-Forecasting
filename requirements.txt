@@ -1,0 +1,12 @@
+# Core offline demo
+-r requirements-demo.txt
+
+# Lightweight validation/test tooling
+pytest>=8,<9
+PyYAML>=6,<7
+joblib>=1.3,<2
+scikit-learn>=1.3,<2
+catboost>=1.2,<2
+
+# Optional historical research dependency (not required by the demo):
+# tensorflow

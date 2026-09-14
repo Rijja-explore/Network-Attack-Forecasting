@@ -1,0 +1,91 @@
+{
+  "purpose": "Read-only integration integrity audit.",
+  "overall_status": "PASS_WITH_CAVEAT",
+  "checks": [
+    {
+      "check": "stage1_model_load",
+      "status": "PASS",
+      "evidence": "Loaded pickle dictionary; 51 features; model expects 51.",
+      "affected_artifact": "models/stage1/xgboost.pkl",
+      "corrective_action": "None"
+    },
+    {
+      "check": "stage2_model_load",
+      "status": "PASS",
+      "evidence": "Loaded CatBoost model; report declares 50 numeric inputs.",
+      "affected_artifact": "models/stage2/stage2_family_best_model.joblib",
+      "corrective_action": "None"
+    },
+    {
+      "check": "forecasting_artifact_load",
+      "status": "PASS",
+      "evidence": "Loaded lagged model package: K=3, horizon=1, features=51.",
+      "affected_artifact": "models/forecasting/best_forecaster.pkl",
+      "corrective_action": "None"
+    },
+    {
+      "check": "state_transition_artifact_load",
+      "status": "PASS",
+      "evidence": "Loaded state-transition package with 12 state features.",
+      "affected_artifact": "models/forecasting/state_transition_xgboost.pkl",
+      "corrective_action": "None"
+    },
+    {
+      "check": "stage2_probability_vectors",
+      "status": "PASS",
+      "evidence": "max absolute probability-sum error=8.88e-16; rows=4460.",
+      "affected_artifact": "processed_data/stage2_state/stage2_attack_state.csv",
+      "corrective_action": "None"
+    },
+    {
+      "check": "final_analyst_artifact_finiteness",
+      "status": "PASS",
+      "evidence": "state NaN=0; numeric Inf=0.",
+      "affected_artifact": "processed_data/stage2_state/stage2_attack_state.csv",
+      "corrective_action": "None"
+    },
+    {
+      "check": "train_validation_test_separation",
+      "status": "PASS",
+      "evidence": "Existing reports specify chronological fixed Stage-1 splits and independent chronological per-scenario Stage-2 splits.",
+      "affected_artifact": "reports/stage1_tabular_progress.json; reports/stage2/stage2_family_model_report.json",
+      "corrective_action": "None"
+    },
+    {
+      "check": "target_leakage",
+      "status": "PASS",
+      "evidence": "Stage-1 report lists 51 features excluding target; Stage-2 report explicitly excludes target, label, scenario identifiers, and timestamps.",
+      "affected_artifact": "reports/stage1_tabular_progress.json; reports/stage2/stage2_family_model_report.json",
+      "corrective_action": "None"
+    },
+    {
+      "check": "future_window_leakage",
+      "status": "PASS",
+      "evidence": "Forecasting and state-transition reports document chronological split isolation and future targets excluded from X.",
+      "affected_artifact": "reports/forecasting/temporal_integrity_report.json; reports/forecasting/state_transition_report.json",
+      "corrective_action": "None"
+    },
+    {
+      "check": "cross_stage_provenance",
+      "status": "PASS",
+      "evidence": "Alignment audit blocks row-level Stage-1/Stage-2 fusion due to no defensible correspondence.",
+      "affected_artifact": "reports/fusion_alignment_report.json",
+      "corrective_action": "None"
+    },
+    {
+      "check": "source_modification",
+      "status": "PASS",
+      "evidence": "This final pass only reads existing datasets/models and writes new final/demo/app artifacts. Historic modification cannot be proven without a pre-existing manifest.",
+      "affected_artifact": "processed_data; models",
+      "corrective_action": "No corrective action; final inventory captures current lightweight hashes."
+    },
+    {
+      "check": "gru_reuse_audit",
+      "status": "PASS_WITH_CAVEAT",
+      "evidence": "Existing report records a loadable .keras artifact, 5x51 sequence contract, and saved validation/test predictions. TensorFlow reload was intentionally not retried because prior TensorFlow runs stalled.",
+      "affected_artifact": "models/level1_gru.keras; reports/gru_level1_report.json",
+      "corrective_action": "None"
+    }
+  ],
+  "caveat": "Historic filesystem immutability cannot be established retroactively without a baseline manifest; no source/model writes occur in this pass."
+}

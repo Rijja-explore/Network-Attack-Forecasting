@@ -1,0 +1,339 @@
+{
+  "stage1_current_risk": {
+    "model": "XGBoost",
+    "purpose": "Current flow-window attack-risk classification",
+    "dataset": "processed_data/temporal fixed chronological splits",
+    "input_features": [
+      "number_of_flows",
+      "mean_dst_port",
+      "mean_flow_duration",
+      "mean_total_packets",
+      "total_packets",
+      "mean_total_bytes",
+      "total_bytes",
+      "mean_source_bytes",
+      "source_bytes",
+      "mean_iat_variance",
+      "mean_s_tos",
+      "mean_d_tos",
+      "mean_tot_fwd_pkts",
+      "mean_tot_bwd_pkts",
+      "mean_totlen_fwd_pkts",
+      "mean_totlen_bwd_pkts",
+      "mean_flow_byts_s",
+      "mean_flow_pkts_s",
+      "mean_flow_iat_mean",
+      "mean_flow_iat_std",
+      "mean_flow_iat_max",
+      "mean_flow_iat_min",
+      "mean_fwd_pkts_s",
+      "mean_bwd_pkts_s",
+      "mean_down_up_ratio",
+      "mean_fin_flag_cnt",
+      "mean_syn_flag_cnt",
+      "mean_rst_flag_cnt",
+      "mean_psh_flag_cnt",
+      "mean_ack_flag_cnt",
+      "mean_urg_flag_cnt",
+      "mean_cwe_flag_count",
+      "mean_ece_flag_cnt",
+      "mean_init_fwd_win_byts",
+      "mean_init_bwd_win_byts",
+      "mean_fwd_pkt_len_max",
+      "mean_fwd_pkt_len_min",
+      "mean_fwd_pkt_len_mean",
+      "mean_fwd_pkt_len_std",
+      "mean_bwd_pkt_len_max",
+      "mean_bwd_pkt_len_min",
+      "mean_bwd_pkt_len_mean",
+      "mean_bwd_pkt_len_std",
+      "mean_pkt_len_min",
+      "mean_pkt_len_max",
+      "mean_pkt_len_mean",
+      "mean_pkt_len_std",
+      "mean_pkt_len_var",
+      "mean_pkt_size_avg",
+      "mean_fwd_seg_size_avg",
+      "mean_bwd_seg_size_avg"
+    ],
+    "output": "attack probability / binary label at validation-selected threshold 0.1",
+    "validation_metrics": {
+      "validation_precision": 0.9716981132075472,
+      "validation_recall": 0.911504424778761,
+      "validation_f1": 0.9406392694063926,
+      "validation_pr_auc": 0.9871058785831927,
+      "validation_roc_auc": 0.966769008488351,
+      "validation_fpr": 0.061224489795918366,
+      "validation_confusion_matrix": [
+        [
+          46,
+          3
+        ],
+        [
+          10,
+          103
+        ]
+      ]
+    },
+    "test_metrics": {
+      "test_precision": 0.9627329192546584,
+      "test_recall": 0.9748427672955975,
+      "test_f1": 0.96875,
+      "test_pr_auc": 0.9929935712106814,
+      "test_roc_auc": 0.8291404612159328,
+      "test_fpr": 1.0,
+      "test_confusion_matrix": [
+        [
+          0,
+          6
+        ],
+        [
+          4,
+          155
+        ]
+      ]
+    },
+    "why_selected": "Best stated Stage-1 tabular validation F1/PR-AUC among evaluated lightweight tabular models.",
+    "limitation": "Test has only six normal windows; test FPR is unstable and this is current risk, not a lead-time claim."
+  },
+  "stage1_forecasting_reference": {
+    "model": "Persistence",
+    "purpose": "Reference for next observed traffic-window attack state",
+    "dataset": "existing fixed chronological forecasting experiment",
+    "input_features": [
+      "last observed attack state"
+    ],
+    "output": "K-step probabilities equal to last observed state",
+    "validation_metrics": {
+      "pr_auc": 0.9676763577077372,
+      "f1": 0.9748956821480407
+    },
+    "test_metrics": "See persistence comparison; not used for model selection.",
+    "why_selected": "Validation-only selection report ranks persistence above learned lagged models.",
+    "limitation": "Strong performance reflects highly block-contiguous labels; it can miss transitions (e.g., 0->1)."
+  },
+  "stage1_state_transition": {
+    "model": "RandomForest",
+    "purpose": "Experimental one-step 12-variable compact state transition",
+    "dataset": "Stage-1 temporal train/validation/test",
+    "input_features": [
+      "number_of_flows",
+      "total_packets",
+      "total_bytes",
+      "mean_flow_duration",
+      "mean_flow_pkts_s",
+      "mean_flow_byts_s",
+      "mean_flow_iat_mean",
+      "mean_flow_iat_std",
+      "mean_syn_flag_cnt",
+      "mean_ack_flag_cnt",
+      "mean_rst_flag_cnt",
+      "mean_down_up_ratio"
+    ],
+    "output": "next compact network state",
+    "validation_metrics": {
+      "mean_r2": 0.2024199170153742
+    },
+    "test_metrics": {
+      "mean_r2": 0.00864937977495292
+    },
+    "why_selected": "Best validation mean R2 in the reported comparison.",
+    "limitation": "Weak test generalization; descriptive/experimental, not a world model."
+  },
+  "stage2_attack_family": {
+    "model": "CatBoost",
+    "purpose": "Attack-family / packet-state characterization",
+    "dataset": "stage2_pcap_features_multi_v2.csv",
+    "input_features": [
+      "packet_count",
+      "byte_count",
+      "packets_per_second",
+      "bytes_per_second",
+      "unique_src_ips",
+      "unique_dst_ips",
+      "unique_src_ports",
+      "unique_dst_ports",
+      "tcp_count",
+      "udp_count",
+      "icmp_count",
+      "other_protocol_count",
+      "packet_size_mean",
+      "packet_size_std",
+      "packet_size_min",
+      "packet_size_max",
+      "packet_size_median",
+      "packet_size_p25",
+      "packet_size_p75",
+      "iat_mean",
+      "iat_std",
+      "iat_min",
+      "iat_max",
+      "iat_median",
+      "syn_count",
+      "ack_count",
+      "rst_count",
+      "fin_count",
+      "psh_count",
+      "urg_count",
+      "forward_packet_count",
+      "backward_packet_count",
+      "forward_byte_count",
+      "backward_byte_count",
+      "unique_5tuple_count",
+      "flow_count",
+      "mean_flow_duration",
+      "packets_per_flow_mean",
+      "bytes_per_flow_mean",
+      "forward_backward_packet_ratio",
+      "forward_backward_byte_ratio",
+      "syn_ack_ratio",
+      "tcp_fraction",
+      "udp_fraction",
+      "icmp_fraction",
+      "unique_dst_ports_per_src_ip",
+      "unique_dst_ips_per_src_ip",
+      "unique_src_ips_per_dst_ip",
+      "port_diversity",
+      "destination_diversity"
+    ],
+    "output": "seven family probabilities and predicted family",
+    "validation_metrics": {
+      "validation_inference_seconds": 0.017357299977447838,
+      "validation_accuracy": 0.9804804804804805,
+      "validation_macro_precision": 0.8281364625349588,
+      "validation_macro_recall": 0.7585513078470825,
+      "validation_macro_f1": 0.7680591338815795,
+      "validation_weighted_f1": 0.9796944975871107
+    },
+    "test_metrics": {
+      "test_accuracy": 0.9600591715976331,
+      "test_macro_precision": 0.6574634170214848,
+      "test_macro_recall": 0.6911845585507989,
+      "test_macro_f1": 0.6707901404356846,
+      "test_weighted_f1": 0.9574782451852984
+    },
+    "why_selected": "Selected by validation macro-F1 across lightweight family models.",
+    "limitation": "All rows are attack-positive scenario windows; not a binary detector. Very small Sogou/Virut holdouts weaken per-family estimates."
+  },
+  "stage1_gru_baseline": {
+    "model": "Existing GRU",
+    "purpose": "Historical sequence baseline",
+    "dataset": "Stage-1 temporal data",
+    "input_features": [
+      "number_of_flows",
+      "mean_dst_port",
+      "mean_flow_duration",
+      "mean_total_packets",
+      "total_packets",
+      "mean_total_bytes",
+      "total_bytes",
+      "mean_source_bytes",
+      "source_bytes",
+      "mean_iat_variance",
+      "mean_s_tos",
+      "mean_d_tos",
+      "mean_tot_fwd_pkts",
+      "mean_tot_bwd_pkts",
+      "mean_totlen_fwd_pkts",
+      "mean_totlen_bwd_pkts",
+      "mean_flow_byts_s",
+      "mean_flow_pkts_s",
+      "mean_flow_iat_mean",
+      "mean_flow_iat_std",
+      "mean_flow_iat_max",
+      "mean_flow_iat_min",
+      "mean_fwd_pkts_s",
+      "mean_bwd_pkts_s",
+      "mean_down_up_ratio",
+      "mean_fin_flag_cnt",
+      "mean_syn_flag_cnt",
+      "mean_rst_flag_cnt",
+      "mean_psh_flag_cnt",
+      "mean_ack_flag_cnt",
+      "mean_urg_flag_cnt",
+      "mean_cwe_flag_count",
+      "mean_ece_flag_cnt",
+      "mean_init_fwd_win_byts",
+      "mean_init_bwd_win_byts",
+      "mean_fwd_pkt_len_max",
+      "mean_fwd_pkt_len_min",
+      "mean_fwd_pkt_len_mean",
+      "mean_fwd_pkt_len_std",
+      "mean_bwd_pkt_len_max",
+      "mean_bwd_pkt_len_min",
+      "mean_bwd_pkt_len_mean",
+      "mean_bwd_pkt_len_std",
+      "mean_pkt_len_min",
+      "mean_pkt_len_max",
+      "mean_pkt_len_mean",
+      "mean_pkt_len_std",
+      "mean_pkt_len_var",
+      "mean_pkt_size_avg",
+      "mean_fwd_seg_size_avg",
+      "mean_bwd_seg_size_avg"
+    ],
+    "output": "next-window attack probability",
+    "validation_metrics": {
+      "samples": 154,
+      "normal": 45,
+      "attack": 109,
+      "accuracy": 0.8961038961038961,
+      "precision": 1.0,
+      "recall": 0.8532110091743119,
+      "f1": 0.9207920792079208,
+      "pr_auc": 0.9883686104055206,
+      "roc_auc": 0.9645259938837922,
+      "confusion_matrix_labels": [
+        "NORMAL",
+        "ATTACK"
+      ],
+      "confusion_matrix": [
+        [
+          45,
+          0
+        ],
+        [
+          16,
+          93
+        ]
+      ],
+      "tn": 45,
+      "fp": 0,
+      "fn": 16,
+      "tp": 93,
+      "threshold": 0.5
+    },
+    "test_metrics": {
+      "samples": 157,
+      "normal": 6,
+      "attack": 151,
+      "accuracy": 0.9617834394904459,
+      "precision": 0.9617834394904459,
+      "recall": 1.0,
+      "f1": 0.9805194805194806,
+      "pr_auc": 0.9877958561258352,
+      "roc_auc": 0.7328918322295805,
+      "confusion_matrix_labels": [
+        "NORMAL",
+        "ATTACK"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          151
+        ]
+      ],
+      "tn": 0,
+      "fp": 6,
+      "fn": 0,
+      "tp": 151,
+      "threshold": 0.5
+    },
+    "why_selected": "Retained as audited baseline only; no retraining/reload in final pass.",
+    "limitation": "Validation F1 below selected Stage-1 XGBoost and persistence forecasting is stronger for block-contiguous labels."
+  }
+}

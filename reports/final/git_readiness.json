@@ -1,0 +1,177 @@
+{
+  "repository_ready": true,
+  "branch": "sih153-final-delivery",
+  "remote": "https://github.com/Rijja-explore/Network-Attack-Forecasting.git",
+  "tests_passed": "pytest -q: 5 passed",
+  "demo_passed": "Streamlit headless smoke test passed after replay polish.",
+  "hardcoded_paths_found": [],
+  "secrets_found": [],
+  "large_files_found": [
+    {
+      "path": "botnet-capture-20110810-neris.pcap",
+      "size_bytes": 58266506,
+      "ignored": true
+    },
+    {
+      "path": "Friday-02-03-2018_TrafficForML_CICFlowMeter.csv",
+      "size_bytes": 352368373,
+      "ignored": true
+    },
+    {
+      "path": "CTU42_Neris/botnet-capture-20110810-neris.pcap",
+      "size_bytes": 58266506,
+      "ignored": true
+    },
+    {
+      "path": "CTU42_Neris/capture20110810.binetflow",
+      "size_bytes": 386629271,
+      "ignored": true
+    },
+    {
+      "path": "CTU44_RBot/botnet-capture-20110812-rbot.pcap",
+      "size_bytes": 128575191,
+      "ignored": true
+    },
+    {
+      "path": "CTU44_RBot/capture20110812.binetflow",
+      "size_bytes": 639643247,
+      "ignored": true
+    },
+    {
+      "path": "CTU46_Virut/botnet-capture-20110815-fast-flux.pcap",
+      "size_bytes": 30941919,
+      "ignored": true
+    },
+    {
+      "path": "CTU46_Virut/capture20110815-2.binetflow",
+      "size_bytes": 17766203,
+      "ignored": true
+    },
+    {
+      "path": "CTU47_DonBot/capture20110816.binetflow",
+      "size_bytes": 76780048,
+      "ignored": true
+    },
+    {
+      "path": "CTU48_Sogou/botnet-capture-20110816-sogou.pcap",
+      "size_bytes": 18868213,
+      "ignored": true
+    },
+    {
+      "path": "CTU48_Sogou/capture20110816-2.binetflow",
+      "size_bytes": 15630512,
+      "ignored": true
+    },
+    {
+      "path": "CTU49_Murlo/botnet-capture-20110816-qvod.pcap",
+      "size_bytes": 21366192,
+      "ignored": true
+    },
+    {
+      "path": "CTU49_Murlo/capture20110816-3.binetflow",
+      "size_bytes": 403955463,
+      "ignored": true
+    },
+    {
+      "path": "CTU53_NSIS_Agent/botnet-capture-20110819-bot.pcap",
+      "size_bytes": 294902378,
+      "ignored": true
+    },
+    {
+      "path": "CTU53_NSIS_Agent/capture20110819.binetflow",
+      "size_bytes": 44718958,
+      "ignored": true
+    },
+    {
+      "path": "models/stage2/stage2_family_extratrees.joblib",
+      "size_bytes": 12762407,
+      "ignored": true
+    },
+    {
+      "path": "processed_data/cic_level1.csv",
+      "size_bytes": 320270047,
+      "ignored": true
+    },
+    {
+      "path": "processed_data/ctu_level1.csv",
+      "size_bytes": 650632196,
+      "ignored": true
+    },
+    {
+      "path": "processed_data/stage2_pcap/ctu42_pcap_flow_matches.csv",
+      "size_bytes": 166122782,
+      "ignored": true
+    },
+    {
+      "path": "stage2_investigation_qz61y5dw/flows.sqlite",
+      "size_bytes": 520990720,
+      "ignored": true
+    }
+  ],
+  "files_to_commit": [
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "app/app.py",
+    "configs/default.yaml",
+    "configs/model_registry.yaml",
+    "data/README.md",
+    "demo/README.md",
+    "docs/HANDOFF.md",
+    "docs/analyst_workflow.md",
+    "docs/architecture.md",
+    "docs/datasets.md",
+    "docs/feature_dictionary.md",
+    "docs/judge_qa.md",
+    "docs/limitations.md",
+    "docs/methodology.md",
+    "docs/model_cards.md",
+    "models/README.md",
+    "processed_data/analyst/contextual_assessment_examples.json",
+    "processed_data/final_demo/demo_cases.json",
+    "pyproject.toml",
+    "reports/final/FINAL_HANDOFF_REPORT.md",
+    "reports/final/FINAL_STATUS.json",
+    "reports/final/analyst_decision_schema.json",
+    "reports/final/approved_claims.json",
+    "reports/final/canonical_architecture.json",
+    "reports/final/claim_audit.json",
+    "reports/final/demo_cases.json",
+    "reports/final/demo_run_report.json",
+    "reports/final/final_model_selection.json",
+    "reports/final/final_pipeline_progress.json",
+    "reports/final/final_scorecard.json",
+    "reports/final/git_readiness.json",
+    "reports/final/integrity_audit.json",
+    "reports/final/project_inventory.json",
+    "reports/final/repository_inventory.json",
+    "reports/final/reproducibility_report.json",
+    "reports/final_ml_intelligence_report.json",
+    "requirements-demo.txt",
+    "requirements.txt",
+    "scripts/generate_demo_outputs.py",
+    "scripts/generate_repository_reports.py",
+    "scripts/run_demo.py",
+    "scripts/validate_environment.py",
+    "src/__init__.py",
+    "src/assessment/__init__.py",
+    "src/assessment/schema.py",
+    "src/mitre/__init__.py",
+    "src/mitre/engine.py",
+    "tests/test_assessment.py",
+    "tests/test_demo.py",
+    "tests/test_inference.py",
+    "tests/test_integrity.py"
+  ],
+  "files_ignored": [
+    "raw PCAP/.binetflow files",
+    "large source/generated CSVs",
+    "model binaries",
+    "virtual environments and local tooling",
+    "legacy one-off research scripts"
+  ],
+  "manual_actions_remaining": [
+    "Review staged diff, commit, then push only when ready.",
+    "Provision raw data/model binaries separately for research inference."
+  ]
+}

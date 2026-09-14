@@ -1,0 +1,30 @@
+{
+  "existing_gru_reusable": "PARTIALLY_CONFIRMED: saved .keras model, preprocessing, report, and predictions exist; final pass intentionally did not initialize TensorFlow because prior attempts stalled.",
+  "pytorch_gru": "NOT_ATTEMPTED: existing validated GRU baseline and stronger/safer classical evidence made further training unnecessary.",
+  "best_temporal_model": "Persistence reference, selected by validation-only mean PR-AUC/F1 for the completed binary forecasting experiment.",
+  "learned_forecasting_beats_persistence": false,
+  "predictable_state_variables": "Random Forest improved validation MAE over persistence for 11 of 12 compact variables, but test mean R2=0.0086 prevents a robust predictability claim.",
+  "state_transition_generalization": "LIMITED: validation mean R2=0.2024; test mean R2=0.0086.",
+  "stage1_xai": "Global/native feature importance is available through the saved Stage-1 XGBoost report; it is not causal/local SHAP.",
+  "stage2_xai_top_features": [
+    "packet_size_max",
+    "syn_ack_ratio",
+    "iat_median",
+    "packet_size_median",
+    "fin_count"
+  ],
+  "stage2_attack_families": "Neris, RBot, Virut, DonBot, Sogou, Murlo, NSIS Agent; CatBoost validation macro-F1=0.7681, test macro-F1=0.6708.",
+  "behavioral_changes_detected": "Per-scenario descriptive packet/byte/TCP-flag/IAT/diversity/directionality change features; not future forecasts.",
+  "mitre_stages": "Rule/evidence layer covers Reconnaissance, Command and Control, and Lateral Movement; Initial Access/Exfiltration may return INSUFFICIENT_EVIDENCE.",
+  "cannot_infer": [
+    "Per-packet maliciousness",
+    "trained MITRE labels",
+    "unseen attack generalization",
+    "real-time performance",
+    "Stage-2 prediction of Stage-1 futures",
+    "true temporal fusion"
+  ],
+  "contextual_fusion": "Separate Stage-1 and Stage-2 evidence is displayed with source provenance; no combined probability or synchronized row assumption is made.",
+  "scientifically_defensible_claims": "See reports/final/approved_claims.json and reports/final/claim_audit.json.",
+  "streamlit_next_step": "Run streamlit run app/app.py; use only deterministic packaged cases and show the provenance/limitations panel."
+}

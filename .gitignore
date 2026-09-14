@@ -1,0 +1,57 @@
+# Python and local tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db
+
+# Raw source captures and large datasets (never commit)
+*.pcap
+*.pcapng
+*.binetflow
+*.sqlite
+*.rrd
+*.exe
+*.zip
+*.parquet
+/CTU*/
+/processed_data/**
+!/processed_data/final_demo/
+!/processed_data/final_demo/**
+!/processed_data/analyst/
+!/processed_data/analyst/contextual_assessment_examples.json
+/catboost_info/
+/stage2_investigation_*/
+/Friday-02-03-2018_TrafficForML_CICFlowMeter.csv
+
+# Model binaries are distributed separately; commit registry and documentation only
+/models/**
+!/models/README.md
+
+# Preserve selected small reports and demo inputs, not research intermediates
+/reports/*.json
+/reports/*.csv
+/reports/forecasting/*.csv
+/reports/forecasting/*.json
+/reports/stage2/*.csv
+/reports/stage2/*.json
+/reports/stage2_state/*.json
+/reports/fusion/*.csv
+/reports/fusion/*.json
+/reports/analyst/*.csv
+/reports/analyst/*.json
+/reports/analyst/*.py
+!/reports/final/
+!/reports/final/**
+!/reports/final_ml_intelligence_report.json
+
+# Legacy one-off workspace scripts are not the packaged application
+/*.py
+/*.ps1
+/ctu13_raw_audit.csv
+/ctu13_raw_audit.json

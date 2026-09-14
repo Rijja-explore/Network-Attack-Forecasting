@@ -1,0 +1,20 @@
+{
+  "ppt": [
+    "The system combines flow-level current-risk assessment, next observed-window forecasting experiments, packet-level attack-family characterization, transparent MITRE evidence, and explainability in an offline analyst view.",
+    "Stage-2 characterizes seven botnet attack families from packet-window behavior; it is not presented as a normal-vs-attack detector.",
+    "The analyst view preserves Stage-1 and Stage-2 provenance as separate evidence channels."
+  ],
+  "demo": [
+    "Forecast trajectory is an observed-window state forecast; persistence is the strongest validated reference because labels are highly contiguous.",
+    "MITRE results are rule-based evidence, not a trained ATT&CK classifier.",
+    "Contextual evidence from independent dataset/capture pipelines; not a supervised temporal fusion prediction."
+  ],
+  "architecture": [
+    "Real flow+packet temporal fusion is blocked pending co-captured data with defensible correspondence.",
+    "State-transition results are an experimental network-state proxy with weak chronological test generalization."
+  ],
+  "judge_explanation": [
+    "Learned binary forecasting does not currently beat persistence.",
+    "No lead-time, real-time, unseen-attack, world-model, or cross-stage predictive-fusion claim is made."
+  ]
+}

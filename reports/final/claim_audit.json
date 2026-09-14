@@ -1,0 +1,69 @@
+{
+  "categories": [
+    "SUPPORTED",
+    "LIMITED",
+    "NOT_SUPPORTED"
+  ],
+  "claims": [
+    {
+      "claim": "Forecasting",
+      "classification": "SUPPORTED",
+      "defensible_interpretation": "Forecasts the next observed traffic-window attack state in the validated chronological experiment.",
+      "restriction": "Do not call this early prediction before attack or claim lead time."
+    },
+    {
+      "claim": "Learned forecasting beats persistence",
+      "classification": "NOT_SUPPORTED",
+      "defensible_interpretation": "Persistence is the selected validation reference: mean F1=0.9749 and PR-AUC=0.9677, above lagged learned models.",
+      "restriction": "Use persistence as a strong baseline caused by label contiguity."
+    },
+    {
+      "claim": "Network state transition",
+      "classification": "LIMITED",
+      "defensible_interpretation": "A 12-variable one-step proxy has Random Forest validation mean R\u00b2=0.2024.",
+      "restriction": "Test mean R\u00b2=0.0086; not a robust world model."
+    },
+    {
+      "claim": "MITRE ATT&CK mapping",
+      "classification": "LIMITED",
+      "defensible_interpretation": "Transparent packet-behavior rules provide stage evidence and can return INSUFFICIENT_EVIDENCE.",
+      "restriction": "Not a trained or ground-truth validated MITRE classifier."
+    },
+    {
+      "claim": "Explainable AI",
+      "classification": "LIMITED",
+      "defensible_interpretation": "Native global feature importances identify model-driving features.",
+      "restriction": "Importance is not causal; Stage-1 local SHAP was not rerun."
+    },
+    {
+      "claim": "Unseen attack generalization",
+      "classification": "NOT_SUPPORTED",
+      "defensible_interpretation": "No held-out unseen-family/domain generalization experiment exists.",
+      "restriction": "Do not claim zero-day or unseen-attack capability."
+    },
+    {
+      "claim": "Real-time detection",
+      "classification": "NOT_SUPPORTED",
+      "defensible_interpretation": "Saved artifacts can support offline inference.",
+      "restriction": "No deployment latency, streaming, or production evaluation was completed."
+    },
+    {
+      "claim": "Packet-level analysis",
+      "classification": "SUPPORTED",
+      "defensible_interpretation": "Sequential PCAP-derived 60-second behavioral features characterize seven attack-family scenarios.",
+      "restriction": "Dataset is attack-positive botnet-capture provenance, not per-packet maliciousness."
+    },
+    {
+      "claim": "Stage-1 + Stage-2 fusion",
+      "classification": "NOT_SUPPORTED",
+      "defensible_interpretation": "No defensible row-level temporal correspondence exists.",
+      "restriction": "Only provenance-preserving contextual evidence aggregation is presented."
+    },
+    {
+      "claim": "Stage-2 family characterization",
+      "classification": "SUPPORTED",
+      "defensible_interpretation": "CatBoost achieves validation macro-F1 0.7681 and test macro-F1 0.6708 on chronological per-scenario splits.",
+      "restriction": "Small-family support constrains Sogou/Virut interpretation."
+    }
+  ]
+}

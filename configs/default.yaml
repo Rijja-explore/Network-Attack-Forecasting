@@ -1,0 +1,7 @@
+project: SIH26153
+mode: offline_recorded_dataset_replay
+temporal_fusion: false
+demo_cases: processed_data/final_demo/demo_cases.json
+approved_claims: reports/final/approved_claims.json
+limitations: reports/final/FINAL_STATUS.json
+forecasting_note: "Persistence is the strongest validated forecasting reference on the current dataset."

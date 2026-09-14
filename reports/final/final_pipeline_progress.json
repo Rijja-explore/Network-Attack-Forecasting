@@ -1,0 +1,27 @@
+{
+  "phase": "FINAL_INTEGRATION_DELIVERY",
+  "status": "PASS_WITH_CAVEAT",
+  "what_was_done": "Inventoried artifacts; audited saved packages/outputs; reconciled metrics; packaged claim-safe demo data, schema, architecture, scorecard, and handoff.",
+  "inputs": [
+    "processed_data",
+    "models",
+    "reports"
+  ],
+  "outputs": [
+    "reports/final",
+    "processed_data/final_demo",
+    "app/app.py"
+  ],
+  "metrics": {
+    "stage1_xgb_validation_f1": 0.9406392694063926,
+    "persistence_validation_mean_f1": 0.9748956821480407,
+    "stage2_catboost_validation_macro_f1": 0.7680591338815795
+  },
+  "leakage": "PASS",
+  "validity": "Contextual evidence aggregation only; no Stage-1/Stage-2 row alignment.",
+  "limitations": [
+    "TensorFlow GRU not reloaded because reruns previously stalled.",
+    "Forecasting/state-transition limitations are explicitly retained."
+  ],
+  "next_dependency": "PPT/demo team should use reports/final/approved_claims.json."
+}

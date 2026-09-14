@@ -1,0 +1,43 @@
+stage1:
+  xgboost_current_risk:
+    artifact: models/stage1/xgboost.pkl
+    purpose: Current flow-window attack-risk classification
+    dataset: processed_data/temporal/train.csv
+    split: Fixed chronological train/validation/test
+    input_feature_count: 51
+    output: Attack probability and thresholded binary state
+    validation: {f1: 0.9406, pr_auc: 0.9871, roc_auc: 0.9668}
+    limitations: Test has only six normal windows; not a lead-time model.
+  logistic_regression_baseline:
+    artifact: models/stage1/logistic_regression.pkl
+    purpose: Stage-1 tabular baseline
+  gru_baseline:
+    artifact: models/level1_gru.keras
+    purpose: Historical sequence baseline
+    input: 5 windows x 51 features
+    validation: {f1: 0.9208}
+    limitations: Historical artifact; TensorFlow is not required by the demo.
+  forecasting_reference:
+    artifact: reports/forecasting/forecasting_final_selection.json
+    model: Persistence
+    purpose: Next observed traffic-window state reference
+    validation: {mean_f1: 0.9749, mean_pr_auc: 0.9677}
+    limitations: Label contiguity makes persistence strong; it may miss transitions.
+  state_transition:
+    artifact: models/forecasting/state_transition_xgboost.pkl
+    selected_validation_model: RandomForest
+    purpose: Experimental one-step compact network-state prediction
+    validation: {mean_r2: 0.2024}
+    test: {mean_r2: 0.0086}
+    limitations: Weak chronological test generalization.
+stage2:
+  catboost_attack_family:
+    artifact: models/stage2/stage2_family_best_model.joblib
+    purpose: Seven-family packet behavioral characterization, not binary detection
+    dataset: processed_data/stage2_pcap/multi_scenario/stage2_pcap_features_multi_v2.csv
+    split: Per-scenario chronological 70/15/15
+    input_feature_count: 50
+    output: Family probabilities, predicted family, confidence, entropy, margin
+    validation: {macro_f1: 0.7681}
+    test: {macro_f1: 0.6708, weighted_f1: 0.9575}
+    limitations: Sogou and Virut have very small holdouts; all scenarios are attack-positive.

@@ -1,0 +1,139 @@
+{
+  "purpose": "Deterministic offline demo cases from existing validated outputs.",
+  "cases": [
+    {
+      "case_id": "CASE_1_STABLE_LOW_RISK",
+      "purpose": "Benign/low-risk validated Stage-1 trajectory example",
+      "input_context": {
+        "stage1_validation_row_index": 80
+      },
+      "stage1_output": {
+        "current_observed_attack_state": 0,
+        "forecast": {
+          "t+1": 0.1086254566907882,
+          "t+2": 0.0963999256491661,
+          "t+3": 0.1062149330973625,
+          "t+4": 0.0658337473869323,
+          "t+5": 0.0947386771440506
+        },
+        "trajectory": "STABLE"
+      },
+      "stage2_output": null,
+      "mitre_evidence": "INSUFFICIENT_EVIDENCE: no packet channel in this case.",
+      "xai_evidence": "Use Stage-1 global native importance only; no local causal claim.",
+      "confidence": "Medium: validation example, but forecast reference is persistence.",
+      "uncertainty": [
+        "Persistence can miss state transitions.",
+        "No Stage-2 packet evidence is attached."
+      ],
+      "severity": "LOW",
+      "recommended_action": "Continue monitoring; inspect flow-feature drivers if risk rises.",
+      "provenance": "Stage-1 validation trajectory only."
+    },
+    {
+      "case_id": "CASE_2_PERSISTENT_HIGH_RISK",
+      "purpose": "High attack-risk forecast example",
+      "input_context": {
+        "stage1_validation_row_index": 4
+      },
+      "stage1_output": {
+        "current_observed_attack_state": 1,
+        "forecast": {
+          "t+1": 0.930474042892456,
+          "t+2": 0.9294995665550232,
+          "t+3": 0.9473633766174316,
+          "t+4": 0.9206295609474182,
+          "t+5": 0.9614259600639344
+        },
+        "trajectory": "STABLE_HIGH_RISK"
+      },
+      "stage2_output": null,
+      "mitre_evidence": "INSUFFICIENT_EVIDENCE: packet evidence not attached.",
+      "xai_evidence": "Use Stage-1 global native importance only; no local causal claim.",
+      "confidence": "Medium: validation example; persistence is strongest reference for block-contiguous labels.",
+      "uncertainty": [
+        "This is not an early-warning/lead-time claim.",
+        "No Stage-2 packet evidence is attached."
+      ],
+      "severity": "HIGH",
+      "recommended_action": "Prioritize analyst review and inspect the underlying flow telemetry.",
+      "provenance": "Stage-1 validation trajectory only."
+    },
+    {
+      "case_id": "CASE_3_PACKET_FAMILY_IDENTIFICATION",
+      "purpose": "Independent Stage-2 packet-level family characterization",
+      "input_context": {
+        "stage2_row_index": 925
+      },
+      "stage1_output": null,
+      "stage2_output": {
+        "dominant_family": "RBot",
+        "dominant_family_probability": 0.9996419848236424,
+        "second_family": "Murlo",
+        "second_family_probability": 0.0002972369927663,
+        "top1_top2_margin": 0.9993447478308761,
+        "family_entropy": 0.0034554212511724,
+        "behavioral_change_score": 0.0060005694436822,
+        "top_behavior_changes": "[\"state_entropy_change\", \"state_top_probability_change\", \"state_iat_change\"]",
+        "scenario_metadata": {
+          "scenario_id": "CTU44",
+          "split": "train"
+        }
+      },
+      "mitre_evidence": "Rule-based evidence available only from packet behavior; any inferred stage is low-confidence contextual evidence.",
+      "xai_evidence": "CatBoost global top drivers: packet_size_max, syn_ack_ratio, iat_median.",
+      "confidence": "High family posterior within this CTU attack-family dataset; not calibrated operational severity.",
+      "uncertainty": [
+        "Stage-2 is attack-family characterization on attack-positive capture scenarios.",
+        "It is not benign-vs-attack detection."
+      ],
+      "severity": "MEDIUM",
+      "recommended_action": "Use family/state evidence to guide packet investigation; do not infer Stage-1 future risk.",
+      "provenance": "Stage-2 PCAP scenario only."
+    },
+    {
+      "case_id": "CASE_4_CONTEXTUAL_EVIDENCE_CHANNELS",
+      "purpose": "Separate flow forecast and packet-state evidence displayed together",
+      "input_context": {
+        "stage1_validation_row_index": 4,
+        "stage2_row_index": 4455
+      },
+      "stage1_output": {
+        "current_observed_attack_state": 1,
+        "forecast": {
+          "t+1": 0.930474042892456,
+          "t+2": 0.9294995665550232,
+          "t+3": 0.9473633766174316,
+          "t+4": 0.9206295609474182,
+          "t+5": 0.9614259600639344
+        },
+        "trajectory": "STABLE_HIGH_RISK"
+      },
+      "stage2_output": {
+        "dominant_family": "NSIS Agent",
+        "dominant_family_probability": 0.9958811428549528,
+        "second_family": "Murlo",
+        "second_family_probability": 0.0013539642801073,
+        "top1_top2_margin": 0.9945271785748455,
+        "family_entropy": 0.0336911088633512,
+        "behavioral_change_score": 2897.8380715514613,
+        "top_behavior_changes": "[\"state_byte_rate_change\", \"state_packet_rate_change\", \"state_destination_diversity_change\"]",
+        "scenario_metadata": {
+          "scenario_id": "CTU53",
+          "split": "test"
+        }
+      },
+      "mitre_evidence": "Rule evidence should be treated as contextual and may be insufficient.",
+      "xai_evidence": "Stage-1 and Stage-2 global model drivers remain separate; no combined probability is calculated.",
+      "confidence": "Medium: strong Stage-1 forecast context plus independent packet-state characterization.",
+      "uncertainty": [
+        "Contextual evidence from independent dataset/capture pipelines; not a supervised temporal fusion prediction.",
+        "No synchronized timestamps or row alignment."
+      ],
+      "severity": "HIGH",
+      "recommended_action": "Escalate for analyst triage while preserving each evidence channel and its provenance.",
+      "provenance": "Stage-1 validation and Stage-2 PCAP evidence are independently sourced and unsynchronized."
+    }
+  ],
+  "required_disclaimer": "Contextual evidence from independent dataset/capture pipelines; not a supervised temporal fusion prediction."
+}
