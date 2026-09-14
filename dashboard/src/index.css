@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+.glass-card {
+  @apply bg-[#18181b]/70 backdrop-blur-md border border-white/[0.08] rounded-2xl;
+}
+
+.banana-glow {
+  box-shadow: 0 0 12px rgba(253, 224, 71, 0.4);
+}
+.banana-glow-lg {
+  box-shadow: 0 0 24px rgba(253, 224, 71, 0.5);
+}
+
+.bg-banana-gradient {
+  background: linear-gradient(135deg, #fde047 0%, #eab308 100%);
+}
+
+.pulse-dot {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.grid-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
