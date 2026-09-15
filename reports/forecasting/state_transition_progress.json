@@ -1,0 +1,9 @@
+{
+  "phase1": "PASS",
+  "phase2": "PASS",
+  "phase3": "PASS",
+  "phase4": "PASS WITH CAVEAT",
+  "phase5": "NOT RUN",
+  "phase6": "BLOCKED compact state cannot validly feed full attack classifier",
+  "leakage": "PASS"
+}

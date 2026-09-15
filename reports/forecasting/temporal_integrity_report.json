@@ -1,0 +1,36 @@
+{
+  "split_integrity": {
+    "train": {
+      "rows": 760,
+      "row_index_available": false,
+      "row_index_monotonic": "not available; CSV row order used",
+      "duplicate_row_indices": 0,
+      "target_distribution": {
+        "0": 407,
+        "1": 353
+      }
+    },
+    "validation": {
+      "rows": 162,
+      "row_index_available": false,
+      "row_index_monotonic": "not available; CSV row order used",
+      "duplicate_row_indices": 0,
+      "target_distribution": {
+        "1": 113,
+        "0": 49
+      }
+    },
+    "test": {
+      "rows": 165,
+      "row_index_available": false,
+      "row_index_monotonic": "not available; CSV row order used",
+      "duplicate_row_indices": 0,
+      "target_distribution": {
+        "1": 159,
+        "0": 6
+      }
+    }
+  },
+  "policy": "Sequences constructed independently inside each fixed chronological split; no boundary crossing.",
+  "limitation": "No explicit timestamp column in source CSV; row order is the available chronology."
+}

@@ -1,0 +1,168 @@
+{
+  "features": [
+    "number_of_flows",
+    "mean_dst_port",
+    "mean_flow_duration",
+    "mean_total_packets",
+    "total_packets",
+    "mean_total_bytes",
+    "total_bytes",
+    "mean_source_bytes",
+    "source_bytes",
+    "mean_iat_variance",
+    "mean_s_tos",
+    "mean_d_tos",
+    "mean_tot_fwd_pkts",
+    "mean_tot_bwd_pkts",
+    "mean_totlen_fwd_pkts",
+    "mean_totlen_bwd_pkts",
+    "mean_flow_byts_s",
+    "mean_flow_pkts_s",
+    "mean_flow_iat_mean",
+    "mean_flow_iat_std",
+    "mean_flow_iat_max",
+    "mean_flow_iat_min",
+    "mean_fwd_pkts_s",
+    "mean_bwd_pkts_s",
+    "mean_down_up_ratio",
+    "mean_fin_flag_cnt",
+    "mean_syn_flag_cnt",
+    "mean_rst_flag_cnt",
+    "mean_psh_flag_cnt",
+    "mean_ack_flag_cnt",
+    "mean_urg_flag_cnt",
+    "mean_cwe_flag_count",
+    "mean_ece_flag_cnt",
+    "mean_init_fwd_win_byts",
+    "mean_init_bwd_win_byts",
+    "mean_fwd_pkt_len_max",
+    "mean_fwd_pkt_len_min",
+    "mean_fwd_pkt_len_mean",
+    "mean_fwd_pkt_len_std",
+    "mean_bwd_pkt_len_max",
+    "mean_bwd_pkt_len_min",
+    "mean_bwd_pkt_len_mean",
+    "mean_bwd_pkt_len_std",
+    "mean_pkt_len_min",
+    "mean_pkt_len_max",
+    "mean_pkt_len_mean",
+    "mean_pkt_len_std",
+    "mean_pkt_len_var",
+    "mean_pkt_size_avg",
+    "mean_fwd_seg_size_avg",
+    "mean_bwd_seg_size_avg"
+  ],
+  "results": [
+    {
+      "model": "logistic_regression",
+      "selected_threshold": 0.1,
+      "training_time_seconds": 0.05428433418273926,
+      "validation_precision": 0.989247311827957,
+      "validation_recall": 0.8141592920353983,
+      "validation_f1": 0.8932038834951457,
+      "validation_pr_auc": 0.9800121362015861,
+      "validation_roc_auc": 0.9452772259346217,
+      "validation_fpr": 0.02040816326530612,
+      "test_precision": 0.9634146341463414,
+      "test_recall": 0.9937106918238994,
+      "test_f1": 0.978328173374613,
+      "test_pr_auc": 0.9860940824684604,
+      "test_roc_auc": 0.7127882599580713,
+      "test_fpr": 1.0,
+      "validation_confusion_matrix": [
+        [
+          48,
+          1
+        ],
+        [
+          21,
+          92
+        ]
+      ],
+      "test_confusion_matrix": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          158
+        ]
+      ]
+    },
+    {
+      "model": "random_forest",
+      "selected_threshold": 0.3,
+      "training_time_seconds": 0.5253219604492188,
+      "validation_precision": 0.9107142857142857,
+      "validation_recall": 0.9026548672566371,
+      "validation_f1": 0.9066666666666666,
+      "validation_pr_auc": 0.97668894816558,
+      "validation_roc_auc": 0.9389561134188189,
+      "validation_fpr": 0.20408163265306123,
+      "test_precision": 0.9631901840490797,
+      "test_recall": 0.9874213836477987,
+      "test_f1": 0.9751552795031055,
+      "test_pr_auc": 0.9941939273674477,
+      "test_roc_auc": 0.860587002096436,
+      "test_fpr": 1.0,
+      "validation_confusion_matrix": [
+        [
+          39,
+          10
+        ],
+        [
+          11,
+          102
+        ]
+      ],
+      "test_confusion_matrix": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          157
+        ]
+      ]
+    },
+    {
+      "model": "xgboost",
+      "selected_threshold": 0.1,
+      "training_time_seconds": 2.1107070446014404,
+      "validation_precision": 0.9716981132075472,
+      "validation_recall": 0.911504424778761,
+      "validation_f1": 0.9406392694063926,
+      "validation_pr_auc": 0.9871058785831927,
+      "validation_roc_auc": 0.966769008488351,
+      "validation_fpr": 0.061224489795918366,
+      "test_precision": 0.9627329192546584,
+      "test_recall": 0.9748427672955975,
+      "test_f1": 0.96875,
+      "test_pr_auc": 0.9929935712106814,
+      "test_roc_auc": 0.8291404612159328,
+      "test_fpr": 1.0,
+      "validation_confusion_matrix": [
+        [
+          46,
+          3
+        ],
+        [
+          10,
+          103
+        ]
+      ],
+      "test_confusion_matrix": [
+        [
+          0,
+          6
+        ],
+        [
+          4,
+          155
+        ]
+      ]
+    }
+  ]
+}

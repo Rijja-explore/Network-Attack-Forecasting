@@ -1,0 +1,627 @@
+{
+  "purpose": "Attack-family classification only; no benign class exists in this dataset.",
+  "source_dataset": "D:\\New folder\\processed_data\\stage2_pcap\\multi_scenario\\stage2_pcap_features_multi_v2.csv",
+  "source_dataset_modified": false,
+  "target": "attack_type",
+  "excluded_columns": [
+    "attack_type",
+    "binary_label",
+    "scenario_family",
+    "scenario_id",
+    "window_end",
+    "window_start"
+  ],
+  "numerical_features": [
+    "packet_count",
+    "byte_count",
+    "packets_per_second",
+    "bytes_per_second",
+    "unique_src_ips",
+    "unique_dst_ips",
+    "unique_src_ports",
+    "unique_dst_ports",
+    "tcp_count",
+    "udp_count",
+    "icmp_count",
+    "other_protocol_count",
+    "packet_size_mean",
+    "packet_size_std",
+    "packet_size_min",
+    "packet_size_max",
+    "packet_size_median",
+    "packet_size_p25",
+    "packet_size_p75",
+    "iat_mean",
+    "iat_std",
+    "iat_min",
+    "iat_max",
+    "iat_median",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "fin_count",
+    "psh_count",
+    "urg_count",
+    "forward_packet_count",
+    "backward_packet_count",
+    "forward_byte_count",
+    "backward_byte_count",
+    "unique_5tuple_count",
+    "flow_count",
+    "mean_flow_duration",
+    "packets_per_flow_mean",
+    "bytes_per_flow_mean",
+    "forward_backward_packet_ratio",
+    "forward_backward_byte_ratio",
+    "syn_ack_ratio",
+    "tcp_fraction",
+    "udp_fraction",
+    "icmp_fraction",
+    "unique_dst_ports_per_src_ip",
+    "unique_dst_ips_per_src_ip",
+    "unique_src_ips_per_dst_ip",
+    "port_diversity",
+    "destination_diversity"
+  ],
+  "feature_count": 50,
+  "split_method": "Per-scenario chronological: first 70% train, next 15% validation, final 15% test; no shuffle.",
+  "split_audit": {
+    "CTU42": {
+      "total": 285,
+      "train": 199,
+      "validation": 42,
+      "test": 44,
+      "train_end": "2011-08-10T12:24:00+00:00",
+      "validation_end": "2011-08-10T13:06:00+00:00",
+      "test_start": "2011-08-10T13:06:00+00:00"
+    },
+    "CTU44": {
+      "total": 2842,
+      "train": 1989,
+      "validation": 426,
+      "test": 427,
+      "train_end": "2011-08-14T16:08:00+00:00",
+      "validation_end": "2011-08-15T00:37:00+00:00",
+      "test_start": "2011-08-15T00:37:00+00:00"
+    },
+    "CTU46": {
+      "total": 21,
+      "train": 14,
+      "validation": 3,
+      "test": 4,
+      "train_end": "2011-08-15T15:06:00+00:00",
+      "validation_end": "2011-08-15T15:09:00+00:00",
+      "test_start": "2011-08-15T15:09:00+00:00"
+    },
+    "CTU47": {
+      "total": 122,
+      "train": 85,
+      "validation": 18,
+      "test": 19,
+      "train_end": "2011-08-16T09:34:00+00:00",
+      "validation_end": "2011-08-16T09:52:00+00:00",
+      "test_start": "2011-08-16T09:52:00+00:00"
+    },
+    "CTU48": {
+      "total": 8,
+      "train": 5,
+      "validation": 1,
+      "test": 2,
+      "train_end": "2011-08-16T12:01:00+00:00",
+      "validation_end": "2011-08-16T12:07:00+00:00",
+      "test_start": "2011-08-16T12:07:00+00:00"
+    },
+    "CTU49": {
+      "total": 1118,
+      "train": 782,
+      "validation": 167,
+      "test": 169,
+      "train_end": "2011-08-17T02:11:00+00:00",
+      "validation_end": "2011-08-17T04:58:00+00:00",
+      "test_start": "2011-08-17T04:58:00+00:00"
+    },
+    "CTU53": {
+      "total": 64,
+      "train": 44,
+      "validation": 9,
+      "test": 11,
+      "train_end": "2011-08-19T09:26:00+00:00",
+      "validation_end": "2011-08-19T09:35:00+00:00",
+      "test_start": "2011-08-19T09:35:00+00:00"
+    }
+  },
+  "family_counts_all": {
+    "DonBot": 122,
+    "Murlo": 1118,
+    "NSIS Agent": 64,
+    "Neris": 285,
+    "RBot": 2842,
+    "Sogou": 8,
+    "Virut": 21
+  },
+  "family_counts": {
+    "train": {
+      "DonBot": 85,
+      "Murlo": 782,
+      "NSIS Agent": 44,
+      "Neris": 199,
+      "RBot": 1989,
+      "Sogou": 5,
+      "Virut": 14
+    },
+    "validation": {
+      "DonBot": 18,
+      "Murlo": 167,
+      "NSIS Agent": 9,
+      "Neris": 42,
+      "RBot": 426,
+      "Sogou": 1,
+      "Virut": 3
+    },
+    "test": {
+      "DonBot": 19,
+      "Murlo": 169,
+      "NSIS Agent": 11,
+      "Neris": 44,
+      "RBot": 427,
+      "Sogou": 2,
+      "Virut": 4
+    }
+  },
+  "class_weighting": "Natural class distribution only; no oversampling or class weighting in this lightweight benchmark.",
+  "model_availability": [
+    "XGBoost",
+    "CatBoost"
+  ],
+  "selection_rule": "Highest validation macro F1; weighted F1 secondary. Test was not used for selection.",
+  "best_model": "CatBoost",
+  "validation_metrics_best": {
+    "accuracy": 0.9804804804804805,
+    "macro_precision": 0.8281364625349588,
+    "macro_recall": 0.7585513078470825,
+    "macro_f1": 0.7680591338815795,
+    "weighted_f1": 0.9796944975871107,
+    "confusion_matrix": [
+      [
+        18,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        167,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        9,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        42,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        9,
+        416,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1
+      ]
+    ],
+    "per_family": {
+      "DonBot": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 18
+      },
+      "Murlo": {
+        "precision": 0.9940476190476191,
+        "recall": 1.0,
+        "f1": 0.9970149253731343,
+        "support": 167
+      },
+      "NSIS Agent": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 9
+      },
+      "Neris": {
+        "precision": 0.8076923076923077,
+        "recall": 1.0,
+        "f1": 0.8936170212765957,
+        "support": 42
+      },
+      "RBot": {
+        "precision": 0.9952153110047847,
+        "recall": 0.9765258215962441,
+        "f1": 0.985781990521327,
+        "support": 426
+      },
+      "Sogou": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1
+      },
+      "Virut": {
+        "precision": 1.0,
+        "recall": 0.3333333333333333,
+        "f1": 0.5,
+        "support": 3
+      }
+    }
+  },
+  "test_metrics_best": {
+    "accuracy": 0.9600591715976331,
+    "macro_precision": 0.6574634170214848,
+    "macro_recall": 0.6911845585507989,
+    "macro_f1": 0.6707901404356846,
+    "weighted_f1": 0.9574782451852984,
+    "confusion_matrix": [
+      [
+        19,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        168,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        10,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        43,
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        16,
+        409,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        3,
+        0,
+        0
+      ]
+    ],
+    "per_family": {
+      "DonBot": {
+        "precision": 0.9047619047619048,
+        "recall": 1.0,
+        "f1": 0.95,
+        "support": 19
+      },
+      "Murlo": {
+        "precision": 1.0,
+        "recall": 0.9940828402366864,
+        "f1": 0.9970326409495549,
+        "support": 169
+      },
+      "NSIS Agent": {
+        "precision": 1.0,
+        "recall": 0.9090909090909091,
+        "f1": 0.9523809523809523,
+        "support": 11
+      },
+      "Neris": {
+        "precision": 0.7166666666666667,
+        "recall": 0.9772727272727273,
+        "f1": 0.8269230769230769,
+        "support": 44
+      },
+      "RBot": {
+        "precision": 0.9808153477218226,
+        "recall": 0.9578454332552693,
+        "f1": 0.9691943127962085,
+        "support": 427
+      },
+      "Sogou": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 2
+      },
+      "Virut": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 4
+      }
+    }
+  },
+  "all_model_rows": [
+    {
+      "model": "CatBoost",
+      "training_seconds": 58.88906289997976,
+      "validation_inference_seconds": 0.017357299977447838,
+      "validation_accuracy": 0.9804804804804805,
+      "validation_macro_precision": 0.8281364625349588,
+      "validation_macro_recall": 0.7585513078470825,
+      "validation_macro_f1": 0.7680591338815795,
+      "validation_weighted_f1": 0.9796944975871107,
+      "test_accuracy": 0.9600591715976331,
+      "test_macro_precision": 0.6574634170214848,
+      "test_macro_recall": 0.6911845585507989,
+      "test_macro_f1": 0.6707901404356846,
+      "test_weighted_f1": 0.9574782451852984
+    },
+    {
+      "model": "RandomForest",
+      "training_seconds": 0.8678350999834947,
+      "validation_inference_seconds": 0.12446929997531697,
+      "validation_accuracy": 0.9804804804804805,
+      "validation_macro_precision": 0.8268097344562092,
+      "validation_macro_recall": 0.7585513078470825,
+      "validation_macro_f1": 0.7671417881195881,
+      "validation_weighted_f1": 0.9798498049059285,
+      "test_accuracy": 0.9630177514792899,
+      "test_macro_precision": 0.6710819411296739,
+      "test_macro_recall": 0.6918536786578581,
+      "test_macro_f1": 0.6782811251324775,
+      "test_weighted_f1": 0.9604228505975971
+    },
+    {
+      "model": "HistGradientBoosting",
+      "training_seconds": 13.36971599998651,
+      "validation_inference_seconds": 0.2051283000037074,
+      "validation_accuracy": 0.9804804804804805,
+      "validation_macro_precision": 0.8268097344562092,
+      "validation_macro_recall": 0.7585513078470825,
+      "validation_macro_f1": 0.7671417881195881,
+      "validation_weighted_f1": 0.9798498049059285,
+      "test_accuracy": 0.9659763313609467,
+      "test_macro_precision": 0.6731638418079096,
+      "test_macro_recall": 0.6803810943155205,
+      "test_macro_f1": 0.6728797239829897,
+      "test_weighted_f1": 0.9630933242872275
+    },
+    {
+      "model": "LogisticRegression",
+      "training_seconds": 0.16399089997867122,
+      "validation_inference_seconds": 0.0017171999788843095,
+      "validation_accuracy": 0.972972972972973,
+      "validation_macro_precision": 0.836091818964454,
+      "validation_macro_recall": 0.7445926390010053,
+      "validation_macro_f1": 0.7664018300887142,
+      "validation_weighted_f1": 0.9714455950532276,
+      "test_accuracy": 0.9408284023668639,
+      "test_macro_precision": 0.629852516559337,
+      "test_macro_recall": 0.6362277465018555,
+      "test_macro_f1": 0.6228989562409109,
+      "test_weighted_f1": 0.9382861565201234
+    },
+    {
+      "model": "ExtraTrees",
+      "training_seconds": 1.8280863999971189,
+      "validation_inference_seconds": 0.14447960001416504,
+      "validation_accuracy": 0.9744744744744744,
+      "validation_macro_precision": 0.8198881001676034,
+      "validation_macro_recall": 0.7572099262240107,
+      "validation_macro_f1": 0.7621585947811961,
+      "validation_weighted_f1": 0.9743051153498914,
+      "test_accuracy": 0.9644970414201184,
+      "test_macro_precision": 0.6674759558996012,
+      "test_macro_recall": 0.6921882387113877,
+      "test_macro_f1": 0.6771078798675918,
+      "test_weighted_f1": 0.961524445566358
+    },
+    {
+      "model": "XGBoost",
+      "training_seconds": 4.845590899989475,
+      "validation_inference_seconds": 0.022501499974168837,
+      "validation_accuracy": 0.975975975975976,
+      "validation_macro_precision": 0.8192038066179943,
+      "validation_macro_recall": 0.7575452716297786,
+      "validation_macro_f1": 0.7616883116883117,
+      "validation_weighted_f1": 0.976030576030576,
+      "test_accuracy": 0.9659763313609467,
+      "test_macro_precision": 0.6543426606469129,
+      "test_macro_recall": 0.693033547249004,
+      "test_macro_f1": 0.6705350343025824,
+      "test_weighted_f1": 0.9625364695897688
+    }
+  ],
+  "feature_importance_method": "native",
+  "top_20_features": [
+    {
+      "rank": 1,
+      "feature": "packet_size_max",
+      "importance": 22.89745176765862,
+      "method": "native"
+    },
+    {
+      "rank": 2,
+      "feature": "syn_ack_ratio",
+      "importance": 9.123617169757924,
+      "method": "native"
+    },
+    {
+      "rank": 3,
+      "feature": "iat_median",
+      "importance": 8.538503604837807,
+      "method": "native"
+    },
+    {
+      "rank": 4,
+      "feature": "packet_size_median",
+      "importance": 2.9252175406467873,
+      "method": "native"
+    },
+    {
+      "rank": 5,
+      "feature": "fin_count",
+      "importance": 2.8722518046747356,
+      "method": "native"
+    },
+    {
+      "rank": 6,
+      "feature": "syn_count",
+      "importance": 2.7047019037270794,
+      "method": "native"
+    },
+    {
+      "rank": 7,
+      "feature": "forward_backward_packet_ratio",
+      "importance": 2.533249631906285,
+      "method": "native"
+    },
+    {
+      "rank": 8,
+      "feature": "destination_diversity",
+      "importance": 2.5324155431406807,
+      "method": "native"
+    },
+    {
+      "rank": 9,
+      "feature": "packet_size_std",
+      "importance": 2.390736317266506,
+      "method": "native"
+    },
+    {
+      "rank": 10,
+      "feature": "bytes_per_flow_mean",
+      "importance": 2.1142653034553995,
+      "method": "native"
+    },
+    {
+      "rank": 11,
+      "feature": "unique_dst_ips",
+      "importance": 2.0618220199943083,
+      "method": "native"
+    },
+    {
+      "rank": 12,
+      "feature": "mean_flow_duration",
+      "importance": 2.060838333768392,
+      "method": "native"
+    },
+    {
+      "rank": 13,
+      "feature": "psh_count",
+      "importance": 2.0216328617101054,
+      "method": "native"
+    },
+    {
+      "rank": 14,
+      "feature": "packet_size_mean",
+      "importance": 1.9539299296638406,
+      "method": "native"
+    },
+    {
+      "rank": 15,
+      "feature": "iat_max",
+      "importance": 1.6253277653348182,
+      "method": "native"
+    },
+    {
+      "rank": 16,
+      "feature": "unique_src_ips_per_dst_ip",
+      "importance": 1.624730526294288,
+      "method": "native"
+    },
+    {
+      "rank": 17,
+      "feature": "udp_count",
+      "importance": 1.5842744495867043,
+      "method": "native"
+    },
+    {
+      "rank": 18,
+      "feature": "packets_per_flow_mean",
+      "importance": 1.548936175408358,
+      "method": "native"
+    },
+    {
+      "rank": 19,
+      "feature": "packet_size_p25",
+      "importance": 1.4708859265640553,
+      "method": "native"
+    },
+    {
+      "rank": 20,
+      "feature": "udp_fraction",
+      "importance": 1.4628751267090165,
+      "method": "native"
+    }
+  ],
+  "interpretation": "Results measure separation of capture/scenario attack families using PCAP behavioral windows, not attack detection. Because each family maps to one scenario/capture, generalization to unseen captures or families is not established.",
+  "stage2_representation_assessment": "Useful as a compact attack-state representation if retained with temporal/capture provenance caveats; evaluate on independent captures before operational claims."
+}

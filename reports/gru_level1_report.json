@@ -1,0 +1,382 @@
+{
+  "model": "GRU sequence baseline",
+  "architecture": {
+    "sequence_length": 5,
+    "features": 51,
+    "gru_units": 64,
+    "dense_units": 32,
+    "dropout": 0.2
+  },
+  "training_configuration": {
+    "epochs_requested": 30,
+    "epochs_completed": 10,
+    "batch_size": 32,
+    "early_stopping_monitor": "val_loss",
+    "patience": 5,
+    "best_epoch": 5,
+    "shuffle": false,
+    "seed": 42
+  },
+  "sample_shapes": {
+    "train": {
+      "X": [
+        752,
+        5,
+        51
+      ],
+      "y": [
+        752
+      ]
+    },
+    "validation": {
+      "X": [
+        154,
+        5,
+        51
+      ],
+      "y": [
+        154
+      ]
+    },
+    "test": {
+      "X": [
+        157,
+        5,
+        51
+      ],
+      "y": [
+        157
+      ]
+    }
+  },
+  "class_distribution": {
+    "train": {
+      "normal": 403,
+      "attack": 349
+    },
+    "validation": {
+      "normal": 45,
+      "attack": 109
+    },
+    "test": {
+      "normal": 6,
+      "attack": 151
+    }
+  },
+  "class_weights": {
+    "0": 0.9330024813895782,
+    "1": 1.0773638968481376
+  },
+  "preprocessing": {
+    "features": [
+      "number_of_flows",
+      "mean_dst_port",
+      "mean_flow_duration",
+      "mean_total_packets",
+      "total_packets",
+      "mean_total_bytes",
+      "total_bytes",
+      "mean_source_bytes",
+      "source_bytes",
+      "mean_iat_variance",
+      "mean_s_tos",
+      "mean_d_tos",
+      "mean_tot_fwd_pkts",
+      "mean_tot_bwd_pkts",
+      "mean_totlen_fwd_pkts",
+      "mean_totlen_bwd_pkts",
+      "mean_flow_byts_s",
+      "mean_flow_pkts_s",
+      "mean_flow_iat_mean",
+      "mean_flow_iat_std",
+      "mean_flow_iat_max",
+      "mean_flow_iat_min",
+      "mean_fwd_pkts_s",
+      "mean_bwd_pkts_s",
+      "mean_down_up_ratio",
+      "mean_fin_flag_cnt",
+      "mean_syn_flag_cnt",
+      "mean_rst_flag_cnt",
+      "mean_psh_flag_cnt",
+      "mean_ack_flag_cnt",
+      "mean_urg_flag_cnt",
+      "mean_cwe_flag_count",
+      "mean_ece_flag_cnt",
+      "mean_init_fwd_win_byts",
+      "mean_init_bwd_win_byts",
+      "mean_fwd_pkt_len_max",
+      "mean_fwd_pkt_len_min",
+      "mean_fwd_pkt_len_mean",
+      "mean_fwd_pkt_len_std",
+      "mean_bwd_pkt_len_max",
+      "mean_bwd_pkt_len_min",
+      "mean_bwd_pkt_len_mean",
+      "mean_bwd_pkt_len_std",
+      "mean_pkt_len_min",
+      "mean_pkt_len_max",
+      "mean_pkt_len_mean",
+      "mean_pkt_len_std",
+      "mean_pkt_len_var",
+      "mean_pkt_size_avg",
+      "mean_fwd_seg_size_avg",
+      "mean_bwd_seg_size_avg"
+    ],
+    "imputer": "median fitted on train only",
+    "scaler": "StandardScaler fitted on train only",
+    "sequence_boundaries": "sequences created separately inside each split and dataset source"
+  },
+  "threshold": 0.5,
+  "validation": {
+    "samples": 154,
+    "normal": 45,
+    "attack": 109,
+    "accuracy": 0.8961038961038961,
+    "precision": 1.0,
+    "recall": 0.8532110091743119,
+    "f1": 0.9207920792079208,
+    "pr_auc": 0.9883686104055206,
+    "roc_auc": 0.9645259938837922,
+    "confusion_matrix_labels": [
+      "NORMAL",
+      "ATTACK"
+    ],
+    "confusion_matrix": [
+      [
+        45,
+        0
+      ],
+      [
+        16,
+        93
+      ]
+    ],
+    "tn": 45,
+    "fp": 0,
+    "fn": 16,
+    "tp": 93,
+    "threshold": 0.5
+  },
+  "test": {
+    "samples": 157,
+    "normal": 6,
+    "attack": 151,
+    "accuracy": 0.9617834394904459,
+    "precision": 0.9617834394904459,
+    "recall": 1.0,
+    "f1": 0.9805194805194806,
+    "pr_auc": 0.9877958561258352,
+    "roc_auc": 0.7328918322295805,
+    "confusion_matrix_labels": [
+      "NORMAL",
+      "ATTACK"
+    ],
+    "confusion_matrix": [
+      [
+        0,
+        6
+      ],
+      [
+        0,
+        151
+      ]
+    ],
+    "tn": 0,
+    "fp": 6,
+    "fn": 0,
+    "tp": 151,
+    "threshold": 0.5
+  },
+  "validation_by_dataset": {
+    "CIC": {
+      "samples": 103,
+      "normal": 45,
+      "attack": 58,
+      "accuracy": 0.8446601941747572,
+      "precision": 1.0,
+      "recall": 0.7241379310344828,
+      "f1": 0.84,
+      "pr_auc": 0.9650652440231249,
+      "roc_auc": 0.9333333333333332,
+      "confusion_matrix_labels": [
+        "NORMAL",
+        "ATTACK"
+      ],
+      "confusion_matrix": [
+        [
+          45,
+          0
+        ],
+        [
+          16,
+          42
+        ]
+      ],
+      "tn": 45,
+      "fp": 0,
+      "fn": 16,
+      "tp": 42,
+      "threshold": 0.5
+    },
+    "CTU13": {
+      "samples": 51,
+      "normal": 0,
+      "attack": 51,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "pr_auc": 1.0,
+      "roc_auc": null,
+      "confusion_matrix_labels": [
+        "NORMAL",
+        "ATTACK"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          51
+        ]
+      ],
+      "tn": 0,
+      "fp": 0,
+      "fn": 0,
+      "tp": 51,
+      "threshold": 0.5
+    }
+  },
+  "test_by_dataset": {
+    "CIC": {
+      "samples": 105,
+      "normal": 0,
+      "attack": 105,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "pr_auc": 1.0,
+      "roc_auc": null,
+      "confusion_matrix_labels": [
+        "NORMAL",
+        "ATTACK"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          105
+        ]
+      ],
+      "tn": 0,
+      "fp": 0,
+      "fn": 0,
+      "tp": 105,
+      "threshold": 0.5
+    },
+    "CTU13": {
+      "samples": 52,
+      "normal": 6,
+      "attack": 46,
+      "accuracy": 0.8846153846153846,
+      "precision": 0.8846153846153846,
+      "recall": 1.0,
+      "f1": 0.9387755102040817,
+      "pr_auc": 0.8753476226688486,
+      "roc_auc": 0.39855072463768115,
+      "confusion_matrix_labels": [
+        "NORMAL",
+        "ATTACK"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          46
+        ]
+      ],
+      "tn": 0,
+      "fp": 6,
+      "fn": 0,
+      "tp": 46,
+      "threshold": 0.5
+    }
+  },
+  "comparison_with_logistic_regression": {
+    "model": "Logistic Regression",
+    "validation": {
+      "rows": 162,
+      "normal": 49,
+      "attack": 113,
+      "threshold": 0.5,
+      "accuracy": 0.8518518518518519,
+      "precision": 1.0,
+      "recall": 0.7876106194690266,
+      "f1": 0.8811881188118812,
+      "pr_auc": 0.9800121362015861,
+      "confusion_matrix_labels": [
+        "NORMAL",
+        "ATTACK"
+      ],
+      "confusion_matrix": [
+        [
+          49,
+          0
+        ],
+        [
+          24,
+          89
+        ]
+      ],
+      "roc_auc": 0.9452772259346217
+    },
+    "test": {
+      "rows": 165,
+      "normal": 6,
+      "attack": 159,
+      "threshold": 0.5,
+      "accuracy": 0.9333333333333333,
+      "precision": 0.9625,
+      "recall": 0.9685534591194969,
+      "f1": 0.9655172413793104,
+      "pr_auc": 0.9860940824684604,
+      "confusion_matrix_labels": [
+        "NORMAL",
+        "ATTACK"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          6
+        ],
+        [
+          5,
+          154
+        ]
+      ],
+      "roc_auc": 0.7127882599580713
+    }
+  },
+  "sanity_checks": {
+    "passed": true,
+    "target_excluded": true,
+    "label_columns_excluded": true,
+    "dataset_source_excluded": true,
+    "next_window_target": true,
+    "sequence_length_exact": true,
+    "split_boundaries_isolated": true,
+    "imputer_fit_train_only": true,
+    "scaler_fit_train_only": true,
+    "class_weights_fit_train_only": true,
+    "test_unused_for_training_or_selection": true,
+    "temporal_order_preserved": true
+  }
+}

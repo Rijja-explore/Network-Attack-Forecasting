@@ -1,0 +1,137 @@
+{
+  "state_definition": [
+    "number_of_flows",
+    "total_packets",
+    "total_bytes",
+    "mean_flow_duration",
+    "mean_flow_pkts_s",
+    "mean_flow_byts_s",
+    "mean_flow_iat_mean",
+    "mean_flow_iat_std",
+    "mean_syn_flag_cnt",
+    "mean_ack_flag_cnt",
+    "mean_rst_flag_cnt",
+    "mean_down_up_ratio"
+  ],
+  "transition_sizes": {
+    "train": {
+      "X": [
+        755,
+        60
+      ],
+      "Y": [
+        755,
+        12
+      ]
+    },
+    "validation": {
+      "X": [
+        157,
+        60
+      ],
+      "Y": [
+        157,
+        12
+      ]
+    },
+    "test": {
+      "X": [
+        160,
+        60
+      ],
+      "Y": [
+        160,
+        12
+      ]
+    }
+  },
+  "performance_mean_across_states": [
+    {
+      "model": "LinearRegression",
+      "split": "test",
+      "mae": 4046861.736858236,
+      "rmse": 6978304.970553097,
+      "r2": -0.5873765643991042
+    },
+    {
+      "model": "LinearRegression",
+      "split": "validation",
+      "mae": 5414635.491649171,
+      "rmse": 10753412.480205318,
+      "r2": -0.4344085449233714
+    },
+    {
+      "model": "Persistence",
+      "split": "test",
+      "mae": 3806367.388591208,
+      "rmse": 9107619.081393769,
+      "r2": -0.34446586779184035
+    },
+    {
+      "model": "Persistence",
+      "split": "validation",
+      "mae": 6274233.13431855,
+      "rmse": 14947566.867114613,
+      "r2": -0.20675011996715567
+    },
+    {
+      "model": "RandomForest",
+      "split": "test",
+      "mae": 4993092.043526151,
+      "rmse": 8098556.151605171,
+      "r2": 0.00864937977495292
+    },
+    {
+      "model": "RandomForest",
+      "split": "validation",
+      "mae": 5619346.352132744,
+      "rmse": 11823929.815302037,
+      "r2": 0.2024199170153742
+    },
+    {
+      "model": "XGBoost",
+      "split": "test",
+      "mae": 4607120.551054956,
+      "rmse": 8413526.876685487,
+      "r2": -6.016062414311992
+    },
+    {
+      "model": "XGBoost",
+      "split": "validation",
+      "mae": 4820437.755460995,
+      "rmse": 10048562.795674602,
+      "r2": -0.18688417762948184
+    }
+  ],
+  "persistence_note": "State persistence baseline predicts S(t+1)=S(t).",
+  "state_change_note": "Zero-change baseline predicts delta S=0. XGBoost delta comparison is derivable from its state predictions; explicit delta model deferred for fast-track validity.",
+  "multi_step_status": "Not run: direct t+1 validity is evaluated first; no recursive claims made.",
+  "threat_trajectory_status": "BLOCKED: compact state omits required Stage-1 classifier input features, so applying the current classifier would be invalid.",
+  "leakage_audit": {
+    "target_excluded": true,
+    "future_state_excluded_from_X": true,
+    "split_crossing": false,
+    "shuffle": false,
+    "preprocessing_train_fitted": true,
+    "stage2_used": false
+  },
+  "binary_forecasting_context": "Binary attack label is highly persistent; persistence outperformed learned binary forecasting baseline.",
+  "limitation": "R2 may be unstable for low-variance state variables and capture-shifted splits.",
+  "key_result": {
+    "validation_best_mean_model": "RandomForest, mean R2=0.2024",
+    "variables_random_forest_mae_better_than_persistence": [
+      "mean_ack_flag_cnt",
+      "mean_flow_byts_s",
+      "mean_flow_duration",
+      "mean_flow_iat_mean",
+      "mean_flow_iat_std",
+      "mean_flow_pkts_s",
+      "mean_rst_flag_cnt",
+      "mean_syn_flag_cnt",
+      "number_of_flows",
+      "total_bytes",
+      "total_packets"
+    ],
+    "interpretation": "The learned Random Forest improves aggregate one-step state prediction over persistence on validation, but does not establish robust generalization because test mean R2 is only 0.0086 and state scale/capture shift is substantial."
+  }
+}

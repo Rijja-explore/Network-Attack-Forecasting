@@ -1,0 +1,252 @@
+{
+  "packet_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "byte_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packets_per_second": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "bytes_per_second": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_src_ips": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_dst_ips": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_src_ports": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_dst_ports": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "tcp_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "udp_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "icmp_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "other_protocol_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packet_size_mean": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packet_size_std": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packet_size_min": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packet_size_max": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packet_size_median": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packet_size_p25": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packet_size_p75": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "iat_mean": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "iat_std": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "iat_min": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "iat_max": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "iat_median": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "syn_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "ack_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "rst_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "fin_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "psh_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "urg_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "forward_packet_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "backward_packet_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "forward_byte_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "backward_byte_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_5tuple_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "flow_count": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "mean_flow_duration": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packets_per_flow_mean": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "bytes_per_flow_mean": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "forward_backward_packet_ratio": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "forward_backward_byte_ratio": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "syn_ack_ratio": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "tcp_fraction": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "udp_fraction": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "icmp_fraction": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_dst_ports_per_src_ip": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_dst_ips_per_src_ip": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_src_ips_per_dst_ip": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "port_diversity": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "destination_diversity": {
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  }
+}

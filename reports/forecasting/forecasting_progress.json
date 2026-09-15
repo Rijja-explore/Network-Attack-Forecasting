@@ -1,0 +1,13 @@
+{
+  "phase0": "PASS",
+  "phase1": "PASS",
+  "phase2_3": "PASS",
+  "phase4": "PASS WITH CAVEAT",
+  "phase5": "DEFERRED",
+  "leakage": "PASS",
+  "phase5_persistence": "PASS",
+  "phase5b_improvement": "PASS",
+  "phase6_gru": "DEFERRED",
+  "phase7_selection": "PASS",
+  "phase8_trajectory": "PASS"
+}

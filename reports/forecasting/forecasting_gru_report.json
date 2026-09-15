@@ -1,0 +1,4 @@
+{
+  "status": "DEFERRED",
+  "reason": "Fast-track execution retained CPU-friendly classical baseline; TensorFlow explicitly prohibited and PyTorch was not required to validate baseline."
+}

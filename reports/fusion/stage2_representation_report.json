@@ -1,0 +1,66 @@
+{
+  "purpose": "Stage-2 packet-behavior representation for later representation-level fusion; not an attack detector.",
+  "investigation_and_extraction_scope": "New derived artifact only; source v2 dataset and model were read-only.",
+  "source_dataset": "D:\\New folder\\processed_data\\stage2_pcap\\multi_scenario\\stage2_pcap_features_multi_v2.csv",
+  "model_path": "D:\\New folder\\models\\stage2\\stage2_family_best_model.joblib",
+  "model": "CatBoost pipeline selected by validation macro-F1 (0.768059)",
+  "rows": 4460,
+  "columns": 63,
+  "packet_behavior_feature_count": 50,
+  "family_probability_columns": [
+    "family_probability_neris",
+    "family_probability_rbot",
+    "family_probability_virut",
+    "family_probability_donbot",
+    "family_probability_sogou",
+    "family_probability_murlo",
+    "family_probability_nsis_agent"
+  ],
+  "family_probability_order": [
+    "Neris",
+    "RBot",
+    "Virut",
+    "DonBot",
+    "Sogou",
+    "Murlo",
+    "NSIS Agent"
+  ],
+  "family_probability_meaning": "CatBoost model-derived behavioral evidence, not ground-truth family labels. Values are class probabilities and each row sums to one.",
+  "metadata_columns": [
+    "source_row_index",
+    "scenario_id",
+    "window_start",
+    "window_end",
+    "split",
+    "family_probability_provenance"
+  ],
+  "target_columns_excluded_from_inputs": [
+    "attack_type",
+    "binary_label",
+    "scenario_family",
+    "scenario_id",
+    "window_end",
+    "window_start"
+  ],
+  "preprocessing": "Existing fitted Pipeline SimpleImputer and CatBoost model were used; no fitting occurred during extraction.",
+  "temporal_split": "Per-scenario chronological 70% train, 15% validation, 15% test; no shuffle.",
+  "split_counts": {
+    "train": 3118,
+    "test": 676,
+    "validation": 666
+  },
+  "leakage_checks": {
+    "attack_type_or_binary_label_used_as_input": false,
+    "scenario_or_capture_id_used_as_model_input": false,
+    "timestamps_used_as_model_input": false,
+    "source_dataset_modified": false,
+    "all_probability_rows_sum_to_one": true,
+    "invalid_output_values": 422,
+    "critical_caveat": "The frozen model was trained on chronological train rows; train-row probabilities are in-sample and are marked. Downstream supervised fusion must use out-of-fold train probabilities or raw packet features for train rows, and must never evaluate using in-sample prediction evidence."
+  },
+  "limitations": [
+    "Each family corresponds to one capture/scenario; probabilities may encode capture-specific behavior.",
+    "Stage-2 PCAP timelines are not automatically row-alignable with Stage-1 timelines."
+  ],
+  "output": "D:\\New folder\\processed_data\\fusion\\stage2_representation.csv"
+}

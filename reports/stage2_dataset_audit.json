@@ -1,0 +1,240 @@
+{
+  "rows": 4460,
+  "columns": 56,
+  "feature_columns": [
+    "packet_count",
+    "byte_count",
+    "packets_per_second",
+    "bytes_per_second",
+    "unique_src_ips",
+    "unique_dst_ips",
+    "unique_src_ports",
+    "unique_dst_ports",
+    "tcp_count",
+    "udp_count",
+    "icmp_count",
+    "other_protocol_count",
+    "packet_size_mean",
+    "packet_size_std",
+    "packet_size_min",
+    "packet_size_max",
+    "packet_size_median",
+    "packet_size_p25",
+    "packet_size_p75",
+    "iat_mean",
+    "iat_std",
+    "iat_min",
+    "iat_max",
+    "iat_median",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "fin_count",
+    "psh_count",
+    "urg_count",
+    "forward_packet_count",
+    "backward_packet_count",
+    "forward_byte_count",
+    "backward_byte_count",
+    "unique_5tuple_count",
+    "flow_count",
+    "mean_flow_duration",
+    "packets_per_flow_mean",
+    "bytes_per_flow_mean",
+    "forward_backward_packet_ratio",
+    "forward_backward_byte_ratio",
+    "syn_ack_ratio",
+    "tcp_fraction",
+    "udp_fraction",
+    "icmp_fraction",
+    "unique_dst_ports_per_src_ip",
+    "unique_dst_ips_per_src_ip",
+    "unique_src_ips_per_dst_ip",
+    "port_diversity",
+    "destination_diversity"
+  ],
+  "metadata_columns": [
+    "scenario_id",
+    "scenario_family",
+    "window_start",
+    "window_end"
+  ],
+  "target_columns": [
+    "binary_label",
+    "attack_type"
+  ],
+  "schema_check": {
+    "target_and_metadata_excluded_from_features": true
+  },
+  "missing_invalid_summary": {
+    "missing_total": 9342,
+    "infinite_total": 0,
+    "problematic_features": [
+      "forward_backward_packet_ratio",
+      "forward_backward_byte_ratio",
+      "syn_ack_ratio"
+    ]
+  },
+  "constant_features": [
+    "urg_count",
+    "backward_packet_count",
+    "backward_byte_count",
+    "forward_backward_packet_ratio",
+    "forward_backward_byte_ratio"
+  ],
+  "near_constant_features": [],
+  "high_correlation_pairs_0_95": 17,
+  "high_correlation_pairs_0_99": 9,
+  "correlation_interpretation": "Several high correlations are expected from deterministic feature relationships such as count/rate, flow_count/unique_5tuple_count, and directional totals. None were removed.",
+  "family_window_counts": {
+    "RBot": 2842,
+    "Murlo": 1118,
+    "Neris": 285,
+    "DonBot": 122,
+    "NSIS Agent": 64,
+    "Virut": 21,
+    "Sogou": 8
+  },
+  "binary_label_counts": {
+    "1": 4460
+  },
+  "temporal_audit": {
+    "CTU42": {
+      "windows": 285,
+      "chronological": true,
+      "duplicate_windows": 0,
+      "overlap_count": 0,
+      "window_duration_seconds": [
+        60.0
+      ],
+      "gap_seconds": {
+        "min": 60.0,
+        "median": 60.0,
+        "max": 120.0
+      }
+    },
+    "CTU44": {
+      "windows": 2842,
+      "chronological": true,
+      "duplicate_windows": 0,
+      "overlap_count": 0,
+      "window_duration_seconds": [
+        60.0
+      ],
+      "gap_seconds": {
+        "min": 60.0,
+        "median": 60.0,
+        "max": 180.0
+      }
+    },
+    "CTU46": {
+      "windows": 21,
+      "chronological": true,
+      "duplicate_windows": 0,
+      "overlap_count": 0,
+      "window_duration_seconds": [
+        60.0
+      ],
+      "gap_seconds": {
+        "min": 60.0,
+        "median": 60.0,
+        "max": 60.0
+      }
+    },
+    "CTU47": {
+      "windows": 122,
+      "chronological": true,
+      "duplicate_windows": 0,
+      "overlap_count": 0,
+      "window_duration_seconds": [
+        60.0
+      ],
+      "gap_seconds": {
+        "min": 60.0,
+        "median": 60.0,
+        "max": 60.0
+      }
+    },
+    "CTU48": {
+      "windows": 8,
+      "chronological": true,
+      "duplicate_windows": 0,
+      "overlap_count": 0,
+      "window_duration_seconds": [
+        60.0
+      ],
+      "gap_seconds": {
+        "min": 60.0,
+        "median": 60.0,
+        "max": 360.0
+      }
+    },
+    "CTU49": {
+      "windows": 1118,
+      "chronological": true,
+      "duplicate_windows": 0,
+      "overlap_count": 0,
+      "window_duration_seconds": [
+        60.0
+      ],
+      "gap_seconds": {
+        "min": 60.0,
+        "median": 60.0,
+        "max": 720.0
+      }
+    },
+    "CTU53": {
+      "windows": 64,
+      "chronological": true,
+      "duplicate_windows": 0,
+      "overlap_count": 0,
+      "window_duration_seconds": [
+        60.0
+      ],
+      "gap_seconds": {
+        "min": 60.0,
+        "median": 60.0,
+        "max": 60.0
+      }
+    }
+  },
+  "leakage_audit": {
+    "metadata_target_not_features": true,
+    "future_window_information_used": false,
+    "target_used_for_features": false,
+    "scenario_encoded_numerically": false,
+    "binetflow_label_used": false
+  },
+  "stage1_compatibility": {
+    "conceptual_overlap": [
+      "packet/byte volume",
+      "IP and port diversity",
+      "protocol counts",
+      "timing aggregates",
+      "TCP flags"
+    ],
+    "stage2_only": [
+      "packet-size quantiles",
+      "IAT quantiles",
+      "canonical-5tuple flow aggregates",
+      "directional packet/byte aggregates",
+      "port/destination diversity"
+    ],
+    "note": "Definitions may differ; no exact feature merge was attempted."
+  },
+  "modeling_readiness": {
+    "verdict": "C = Requires dataset redesign",
+    "binary_classification_ready": false,
+    "multi_family_modeling_ready": true,
+    "representation_learning_ready": true,
+    "temporal_forecasting_ready": "Partially: temporal order is valid within scenarios, but positive-only captures lack normal/transition states.",
+    "required_before_final_forecasting": "Rebuild only the new multi-scenario Stage-2 output with canonical bidirectional flow keys; then add temporally compatible benign/normal windows and define leakage-safe forecasting splits.",
+    "reason": "Directional features are invalid: backward packet/byte counts are constant zero and forward/backward ratios are entirely missing, consistent with directed rather than bidirectional flow reconstruction."
+  },
+  "critical_statement": "This dataset cannot currently train a binary normal-vs-attack classifier because all windows are attack-positive.",
+  "critical_findings": [
+    "backward_packet_count and backward_byte_count are constant zero across all 4,460 windows.",
+    "forward_backward_packet_ratio and forward_backward_byte_ratio are missing for all 4,460 windows.",
+    "These directional fields should not be used as currently extracted."
+  ]
+}

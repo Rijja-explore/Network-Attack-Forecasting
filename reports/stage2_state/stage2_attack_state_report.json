@@ -1,0 +1,72 @@
+{
+  "purpose": "Stage-2 attack-state characterization from frozen CatBoost family probabilities and packet behavior; not an attack detector or forecasting model.",
+  "input_representation": "processed_data\\fusion\\stage2_representation.csv",
+  "rows": 4460,
+  "columns": 41,
+  "state_feature_count": 33,
+  "scenarios": 7,
+  "state_feature_list": [
+    "family_probability_neris",
+    "family_probability_rbot",
+    "family_probability_virut",
+    "family_probability_donbot",
+    "family_probability_sogou",
+    "family_probability_murlo",
+    "family_probability_nsis_agent",
+    "top_family_confidence",
+    "second_family_probability",
+    "top1_top2_margin",
+    "family_entropy",
+    "state_packet_rate",
+    "state_byte_rate",
+    "state_syn_rate",
+    "state_ack_rate",
+    "state_rst_rate",
+    "state_fin_rate",
+    "state_iat",
+    "state_destination_diversity",
+    "state_port_diversity",
+    "state_directionality",
+    "state_top_probability_change",
+    "state_entropy_change",
+    "state_packet_rate_change",
+    "state_byte_rate_change",
+    "state_syn_rate_change",
+    "state_ack_rate_change",
+    "state_rst_rate_change",
+    "state_fin_rate_change",
+    "state_iat_change",
+    "state_destination_diversity_change",
+    "state_port_diversity_change",
+    "state_directionality_change"
+  ],
+  "probability_vector_columns": [
+    "family_probability_neris",
+    "family_probability_rbot",
+    "family_probability_virut",
+    "family_probability_donbot",
+    "family_probability_sogou",
+    "family_probability_murlo",
+    "family_probability_nsis_agent"
+  ],
+  "probability_sum_max_absolute_error": 8.881784197001252e-16,
+  "missing_values": 0,
+  "infinite_values": 0,
+  "constant_features": [],
+  "temporal_integrity": {
+    "chronological_within_scenario": true,
+    "cross_scenario_differences_prevented": true,
+    "first_window_change_convention": "0.0 for every per-scenario first window"
+  },
+  "leakage_status": {
+    "target_used_as_model_input": false,
+    "scenario_id_used_as_model_input": false,
+    "timestamps_used_as_model_input": false,
+    "family_probabilities_are_model_derived_not_ground_truth": true,
+    "no_stage1_fusion": true
+  },
+  "limitations": [
+    "Family probabilities for training rows may be in-sample model outputs; use OOF probabilities for future supervised state modeling.",
+    "Changes are per-scenario descriptive transitions, not validated future forecasts."
+  ]
+}

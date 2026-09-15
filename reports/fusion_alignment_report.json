@@ -1,0 +1,24 @@
+{
+  "classification": "C = representation-level fusion without row alignment",
+  "stage1": {
+    "source": "processed_data/temporal fixed chronological splits",
+    "temporal_resolution_seconds": 60,
+    "semantic_target": "next-window binary attack state",
+    "windows": 1087
+  },
+  "stage2": {
+    "source": "multi-scenario original botnet-only PCAP windows",
+    "temporal_resolution_seconds": 60,
+    "windows": 4460,
+    "captures": "seven separate CTU botnet scenario captures",
+    "semantic_target": "current attack family / attack-state characterization"
+  },
+  "finding": "No common capture identity or documented timestamp correspondence exists between the Stage-1 fixed temporal data and Stage-2 CTU scenario PCAP data. Direct row concatenation/alignment would fabricate correspondence.",
+  "permitted_future_experiment": "Fuse model-derived representations at scenario/state-distribution level only, with explicit domain-transfer assumptions; this cannot yet validate per-window future-attack forecasting across views.",
+  "blocked_items": [
+    "row-level fusion",
+    "direct Stage-1 + Stage-2 chronological sequence",
+    "claims that Stage-2 representation predicts Stage-1 future labels"
+  ],
+  "recommendation": "Use Stage-1 alone for validated future-attack forecasting. Use Stage-2 as independently trained attack-family/state encoder. Obtain a co-captured flow+packet dataset for real fused temporal forecasting."
+}

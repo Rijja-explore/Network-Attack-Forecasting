@@ -1,0 +1,8 @@
+scenario_id,family,pcap,packet_count,byte_count,duration_seconds,window_count,parser_errors
+CTU42,Neris,botnet-capture-20110810-neris.pcap,323154,53096018,17106.048591136932,285,0
+CTU44,RBot,botnet-capture-20110812-rbot.pcap,495056,120654271,241746.99202990532,2842,0
+CTU46,Virut,botnet-capture-20110815-fast-flux.pcap,45853,30208247,1213.3468849658966,21,0
+CTU47,DonBot,botnet-capture-20110816-donbot.pcap,24764,4887847,7217.540163993835,122,0
+CTU48,Sogou,botnet-capture-20110816-sogou.pcap,20663,18537581,873.322035074234,8,0
+CTU49,Murlo,botnet-capture-20110816-qvod.pcap,85735,19994408,69731.32533597946,1118,0
+CTU53,NSIS Agent,botnet-capture-20110819-bot.pcap,352266,289266098,3796.015743970871,64,0

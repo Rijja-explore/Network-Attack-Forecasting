@@ -1,0 +1,200 @@
+{
+  "family_probability_neris": {
+    "source": "Frozen CatBoost probability",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "family_probability_neris"
+  },
+  "family_probability_rbot": {
+    "source": "Frozen CatBoost probability",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "family_probability_rbot"
+  },
+  "family_probability_virut": {
+    "source": "Frozen CatBoost probability",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "family_probability_virut"
+  },
+  "family_probability_donbot": {
+    "source": "Frozen CatBoost probability",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "family_probability_donbot"
+  },
+  "family_probability_sogou": {
+    "source": "Frozen CatBoost probability",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "family_probability_sogou"
+  },
+  "family_probability_murlo": {
+    "source": "Frozen CatBoost probability",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "family_probability_murlo"
+  },
+  "family_probability_nsis_agent": {
+    "source": "Frozen CatBoost probability",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "family_probability_nsis_agent"
+  },
+  "top_family_confidence": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "top_family_confidence"
+  },
+  "second_family_probability": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "second_family_probability"
+  },
+  "top1_top2_margin": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "top1_top2_margin"
+  },
+  "family_entropy": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "family_entropy"
+  },
+  "state_packet_rate": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_packet_rate"
+  },
+  "state_byte_rate": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_byte_rate"
+  },
+  "state_syn_rate": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_syn_rate"
+  },
+  "state_ack_rate": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_ack_rate"
+  },
+  "state_rst_rate": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_rst_rate"
+  },
+  "state_fin_rate": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_fin_rate"
+  },
+  "state_iat": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_iat"
+  },
+  "state_destination_diversity": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_destination_diversity"
+  },
+  "state_port_diversity": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_port_diversity"
+  },
+  "state_directionality": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_directionality"
+  },
+  "state_top_probability_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_top_probability_change"
+  },
+  "state_entropy_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_entropy_change"
+  },
+  "state_packet_rate_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_packet_rate_change"
+  },
+  "state_byte_rate_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_byte_rate_change"
+  },
+  "state_syn_rate_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_syn_rate_change"
+  },
+  "state_ack_rate_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_ack_rate_change"
+  },
+  "state_rst_rate_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_rst_rate_change"
+  },
+  "state_fin_rate_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_fin_rate_change"
+  },
+  "state_iat_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_iat_change"
+  },
+  "state_destination_diversity_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_destination_diversity_change"
+  },
+  "state_port_diversity_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_port_diversity_change"
+  },
+  "state_directionality_change": {
+    "source": "Stage-2 packet behavior or within-scenario first difference",
+    "uses_target": false,
+    "uses_future_data": false,
+    "definition": "state_directionality_change"
+  }
+}

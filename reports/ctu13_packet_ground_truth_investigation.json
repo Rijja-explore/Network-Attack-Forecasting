@@ -1,0 +1,1166 @@
+{
+  "purpose": "Investigation of trustworthy packet/window ground truth for original CTU botnet PCAPs.",
+  "investigation_only": true,
+  "scenarios": [
+    {
+      "scenario_id": "CTU42",
+      "scenario_family": "Neris",
+      "pcap": "botnet-capture-20110810-neris.pcap",
+      "pcap_hosts": [
+        {
+          "ip": "147.32.84.165",
+          "source_packet_count": 0,
+          "source_byte_count": 28826758,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "65.55.196.251",
+          "source_packet_count": 0,
+          "source_byte_count": 3396650,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "212.117.171.138",
+          "source_packet_count": 0,
+          "source_byte_count": 2762450,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "78.129.163.119",
+          "source_packet_count": 0,
+          "source_byte_count": 1630178,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "65.55.16.187",
+          "source_packet_count": 0,
+          "source_byte_count": 1620833,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "78.129.227.128",
+          "source_packet_count": 0,
+          "source_byte_count": 1489463,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "213.246.53.125",
+          "source_packet_count": 0,
+          "source_byte_count": 1108687,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.80.9",
+          "source_packet_count": 0,
+          "source_byte_count": 1059840,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "184.154.132.106",
+          "source_packet_count": 0,
+          "source_byte_count": 1003562,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "208.73.210.29",
+          "source_packet_count": 0,
+          "source_byte_count": 846988,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "174.133.57.141",
+          "source_packet_count": 0,
+          "source_byte_count": 684640,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "222.88.205.195",
+          "source_packet_count": 0,
+          "source_byte_count": 681068,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.88.191.59",
+          "source_packet_count": 0,
+          "source_byte_count": 560291,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.113.232.82",
+          "source_packet_count": 0,
+          "source_byte_count": 481180,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "173.192.170.88",
+          "source_packet_count": 0,
+          "source_byte_count": 348797,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "174.36.246.56",
+          "source_packet_count": 0,
+          "source_byte_count": 302171,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "122.224.6.164",
+          "source_packet_count": 0,
+          "source_byte_count": 263704,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "60.190.223.75",
+          "source_packet_count": 0,
+          "source_byte_count": 180717,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "193.232.128.6",
+          "source_packet_count": 0,
+          "source_byte_count": 162539,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "194.85.105.17",
+          "source_packet_count": 0,
+          "source_byte_count": 158205,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        }
+      ],
+      "official_host_information": {
+        "botnet_hosts": [
+          "147.32.84.165"
+        ],
+        "normal_hosts": "See official scenario README; not reconstructed here",
+        "other_hosts": [],
+        "source": [
+          "https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-42/"
+        ],
+        "confidence": "high"
+      },
+      "packet_label_feasibility": {
+        "every_packet_attack": false,
+        "host_based_labeling": true,
+        "partial_labeling": true,
+        "no_reliable_packet_label": false,
+        "recommended_option": "B",
+        "reason": "Official infected host IPs support host-involvement labels; botnet-capture provenance does not prove every packet malicious."
+      },
+      "window_level_ground_truth": {
+        "attack_positive_window_possible": true,
+        "benign_window_possible": false,
+        "unknown_window_required": true,
+        "recommended_window_strategy": "Use host-based evidence; windows without documented infected-host traffic remain UNKNOWN."
+      },
+      "attack_family_mapping": {
+        "family": "Neris",
+        "safe_at_dataset_level": true,
+        "safe_at_window_level": true,
+        "safe_at_packet_level": false,
+        "reason": "Family comes from scenario metadata; host-involving windows can inherit it, but unrelated packets cannot."
+      }
+    },
+    {
+      "scenario_id": "CTU44",
+      "scenario_family": "RBot",
+      "pcap": "botnet-capture-20110812-rbot.pcap",
+      "pcap_hosts": [
+        {
+          "ip": "147.32.84.165",
+          "source_packet_count": 0,
+          "source_byte_count": 110080990,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "178.77.71.27",
+          "source_packet_count": 0,
+          "source_byte_count": 7007197,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "64.31.13.148",
+          "source_packet_count": 0,
+          "source_byte_count": 385894,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "38.229.70.20",
+          "source_packet_count": 0,
+          "source_byte_count": 284877,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "208.86.166.68",
+          "source_packet_count": 0,
+          "source_byte_count": 275608,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "109.74.55.27",
+          "source_packet_count": 0,
+          "source_byte_count": 272136,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.171",
+          "source_packet_count": 0,
+          "source_byte_count": 186751,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.113.235.89",
+          "source_packet_count": 0,
+          "source_byte_count": 53900,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.96.45",
+          "source_packet_count": 0,
+          "source_byte_count": 45584,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "74.207.254.18",
+          "source_packet_count": 0,
+          "source_byte_count": 26081,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.79",
+          "source_packet_count": 0,
+          "source_byte_count": 24136,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "130.239.18.172",
+          "source_packet_count": 0,
+          "source_byte_count": 16045,
+          "appears_in_binetflow": false,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "85.190.0.3",
+          "source_packet_count": 0,
+          "source_byte_count": 15318,
+          "appears_in_binetflow": false,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "210.139.61.102",
+          "source_packet_count": 0,
+          "source_byte_count": 14840,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "93.152.160.101",
+          "source_packet_count": 0,
+          "source_byte_count": 12875,
+          "appears_in_binetflow": false,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "208.100.127.34",
+          "source_packet_count": 0,
+          "source_byte_count": 7980,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "213.110.90.159",
+          "source_packet_count": 0,
+          "source_byte_count": 7910,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "91.202.61.172",
+          "source_packet_count": 0,
+          "source_byte_count": 7225,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "78.40.125.4",
+          "source_packet_count": 0,
+          "source_byte_count": 6902,
+          "appears_in_binetflow": false,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "211.139.211.217",
+          "source_packet_count": 0,
+          "source_byte_count": 6510,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        }
+      ],
+      "official_host_information": {
+        "botnet_hosts": [
+          "147.32.84.165"
+        ],
+        "normal_hosts": "See official scenario README; not reconstructed here",
+        "other_hosts": [],
+        "source": [
+          "https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-44/"
+        ],
+        "confidence": "high"
+      },
+      "packet_label_feasibility": {
+        "every_packet_attack": false,
+        "host_based_labeling": true,
+        "partial_labeling": true,
+        "no_reliable_packet_label": false,
+        "recommended_option": "B",
+        "reason": "Official infected host IPs support host-involvement labels; botnet-capture provenance does not prove every packet malicious."
+      },
+      "window_level_ground_truth": {
+        "attack_positive_window_possible": true,
+        "benign_window_possible": false,
+        "unknown_window_required": true,
+        "recommended_window_strategy": "Use host-based evidence; windows without documented infected-host traffic remain UNKNOWN."
+      },
+      "attack_family_mapping": {
+        "family": "RBot",
+        "safe_at_dataset_level": true,
+        "safe_at_window_level": true,
+        "safe_at_packet_level": false,
+        "reason": "Family comes from scenario metadata; host-involving windows can inherit it, but unrelated packets cannot."
+      }
+    },
+    {
+      "scenario_id": "CTU46",
+      "scenario_family": "Virut",
+      "pcap": "botnet-capture-20110815-fast-flux.pcap",
+      "pcap_hosts": [
+        {
+          "ip": "147.32.84.165",
+          "source_packet_count": 0,
+          "source_byte_count": 19760090,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "209.85.148.147",
+          "source_packet_count": 0,
+          "source_byte_count": 2324352,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "65.55.72.7",
+          "source_packet_count": 0,
+          "source_byte_count": 1287915,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "65.55.40.23",
+          "source_packet_count": 0,
+          "source_byte_count": 1275652,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "209.85.148.105",
+          "source_packet_count": 0,
+          "source_byte_count": 1032709,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "212.117.171.138",
+          "source_packet_count": 0,
+          "source_byte_count": 912797,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "64.4.2.109",
+          "source_packet_count": 0,
+          "source_byte_count": 831119,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "64.4.56.103",
+          "source_packet_count": 0,
+          "source_byte_count": 397545,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "65.55.75.231",
+          "source_packet_count": 0,
+          "source_byte_count": 307556,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "64.4.56.23",
+          "source_packet_count": 0,
+          "source_byte_count": 306253,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.88.191.59",
+          "source_packet_count": 0,
+          "source_byte_count": 290727,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "64.4.56.87",
+          "source_packet_count": 0,
+          "source_byte_count": 270858,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "65.54.186.10",
+          "source_packet_count": 0,
+          "source_byte_count": 193064,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "94.63.149.152",
+          "source_packet_count": 0,
+          "source_byte_count": 162722,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "65.55.16.187",
+          "source_packet_count": 0,
+          "source_byte_count": 134760,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "65.54.234.75",
+          "source_packet_count": 0,
+          "source_byte_count": 131226,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "74.3.164.224",
+          "source_packet_count": 0,
+          "source_byte_count": 111471,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "74.3.164.223",
+          "source_packet_count": 0,
+          "source_byte_count": 87874,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "74.3.164.222",
+          "source_packet_count": 0,
+          "source_byte_count": 62136,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "46.4.36.120",
+          "source_packet_count": 0,
+          "source_byte_count": 49380,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        }
+      ],
+      "official_host_information": {
+        "botnet_hosts": [
+          "147.32.84.165"
+        ],
+        "normal_hosts": "See official scenario README; not reconstructed here",
+        "other_hosts": [],
+        "source": [
+          "https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-46/"
+        ],
+        "confidence": "high"
+      },
+      "packet_label_feasibility": {
+        "every_packet_attack": false,
+        "host_based_labeling": true,
+        "partial_labeling": true,
+        "no_reliable_packet_label": false,
+        "recommended_option": "B",
+        "reason": "Official infected host IPs support host-involvement labels; botnet-capture provenance does not prove every packet malicious."
+      },
+      "window_level_ground_truth": {
+        "attack_positive_window_possible": true,
+        "benign_window_possible": false,
+        "unknown_window_required": true,
+        "recommended_window_strategy": "Use host-based evidence; windows without documented infected-host traffic remain UNKNOWN."
+      },
+      "attack_family_mapping": {
+        "family": "Virut",
+        "safe_at_dataset_level": true,
+        "safe_at_window_level": true,
+        "safe_at_packet_level": false,
+        "reason": "Family comes from scenario metadata; host-involving windows can inherit it, but unrelated packets cannot."
+      }
+    },
+    {
+      "scenario_id": "CTU47",
+      "scenario_family": "DonBot",
+      "pcap": "botnet-capture-20110816-donbot.pcap",
+      "pcap_hosts": [
+        {
+          "ip": "147.32.84.165",
+          "source_packet_count": 0,
+          "source_byte_count": 2764744,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "91.212.135.158",
+          "source_packet_count": 0,
+          "source_byte_count": 1980271,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "90.177.113.3",
+          "source_packet_count": 0,
+          "source_byte_count": 104848,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.171",
+          "source_packet_count": 0,
+          "source_byte_count": 6544,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.80.9",
+          "source_packet_count": 0,
+          "source_byte_count": 4417,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.96.45",
+          "source_packet_count": 0,
+          "source_byte_count": 3478,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.113.232.90",
+          "source_packet_count": 0,
+          "source_byte_count": 1187,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.79",
+          "source_packet_count": 0,
+          "source_byte_count": 818,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.113.232.73",
+          "source_packet_count": 0,
+          "source_byte_count": 60,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "203.106.50.35",
+          "source_packet_count": 0,
+          "source_byte_count": 60,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        }
+      ],
+      "official_host_information": {
+        "botnet_hosts": [
+          "147.32.84.165"
+        ],
+        "normal_hosts": "See official scenario README; not reconstructed here",
+        "other_hosts": [],
+        "source": [
+          "https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-47/"
+        ],
+        "confidence": "high"
+      },
+      "packet_label_feasibility": {
+        "every_packet_attack": false,
+        "host_based_labeling": true,
+        "partial_labeling": true,
+        "no_reliable_packet_label": false,
+        "recommended_option": "B",
+        "reason": "Official infected host IPs support host-involvement labels; botnet-capture provenance does not prove every packet malicious."
+      },
+      "window_level_ground_truth": {
+        "attack_positive_window_possible": true,
+        "benign_window_possible": false,
+        "unknown_window_required": true,
+        "recommended_window_strategy": "Use host-based evidence; windows without documented infected-host traffic remain UNKNOWN."
+      },
+      "attack_family_mapping": {
+        "family": "DonBot",
+        "safe_at_dataset_level": true,
+        "safe_at_window_level": true,
+        "safe_at_packet_level": false,
+        "reason": "Family comes from scenario metadata; host-involving windows can inherit it, but unrelated packets cannot."
+      }
+    },
+    {
+      "scenario_id": "CTU48",
+      "scenario_family": "Sogou",
+      "pcap": "botnet-capture-20110816-sogou.pcap",
+      "pcap_hosts": [
+        {
+          "ip": "218.29.42.137",
+          "source_packet_count": 0,
+          "source_byte_count": 16912146,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.165",
+          "source_packet_count": 0,
+          "source_byte_count": 897588,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "123.126.51.33",
+          "source_packet_count": 0,
+          "source_byte_count": 682480,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "123.126.51.65",
+          "source_packet_count": 0,
+          "source_byte_count": 20610,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.113.232.73",
+          "source_packet_count": 0,
+          "source_byte_count": 4859,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.80.9",
+          "source_packet_count": 0,
+          "source_byte_count": 4349,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "61.135.188.210",
+          "source_packet_count": 0,
+          "source_byte_count": 3377,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "123.126.51.64",
+          "source_packet_count": 0,
+          "source_byte_count": 3216,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "220.181.111.147",
+          "source_packet_count": 0,
+          "source_byte_count": 1974,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "209.85.149.160",
+          "source_packet_count": 0,
+          "source_byte_count": 1754,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "61.135.188.157",
+          "source_packet_count": 0,
+          "source_byte_count": 1108,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "61.135.188.212",
+          "source_packet_count": 0,
+          "source_byte_count": 442,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.79",
+          "source_packet_count": 0,
+          "source_byte_count": 409,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "123.126.51.57",
+          "source_packet_count": 0,
+          "source_byte_count": 329,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        }
+      ],
+      "official_host_information": {
+        "botnet_hosts": [
+          "147.32.84.165"
+        ],
+        "normal_hosts": "See official scenario README; not reconstructed here",
+        "other_hosts": [],
+        "source": [
+          "https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-48/"
+        ],
+        "confidence": "high"
+      },
+      "packet_label_feasibility": {
+        "every_packet_attack": false,
+        "host_based_labeling": true,
+        "partial_labeling": true,
+        "no_reliable_packet_label": false,
+        "recommended_option": "B",
+        "reason": "Official infected host IPs support host-involvement labels; botnet-capture provenance does not prove every packet malicious."
+      },
+      "window_level_ground_truth": {
+        "attack_positive_window_possible": true,
+        "benign_window_possible": false,
+        "unknown_window_required": true,
+        "recommended_window_strategy": "Use host-based evidence; windows without documented infected-host traffic remain UNKNOWN."
+      },
+      "attack_family_mapping": {
+        "family": "Sogou",
+        "safe_at_dataset_level": true,
+        "safe_at_window_level": true,
+        "safe_at_packet_level": false,
+        "reason": "Family comes from scenario metadata; host-involving windows can inherit it, but unrelated packets cannot."
+      }
+    },
+    {
+      "scenario_id": "CTU49",
+      "scenario_family": "Murlo",
+      "pcap": "botnet-capture-20110816-qvod.pcap",
+      "pcap_hosts": [
+        {
+          "ip": "147.32.84.165",
+          "source_packet_count": 0,
+          "source_byte_count": 12783582,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "222.73.45.106",
+          "source_packet_count": 0,
+          "source_byte_count": 1743851,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "174.128.235.237",
+          "source_packet_count": 0,
+          "source_byte_count": 959548,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "222.189.228.111",
+          "source_packet_count": 0,
+          "source_byte_count": 687135,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "90.177.113.3",
+          "source_packet_count": 0,
+          "source_byte_count": 413524,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.86.95",
+          "source_packet_count": 0,
+          "source_byte_count": 379178,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.86.33",
+          "source_packet_count": 0,
+          "source_byte_count": 249434,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "112.90.86.181",
+          "source_packet_count": 0,
+          "source_byte_count": 184586,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "183.60.48.103",
+          "source_packet_count": 0,
+          "source_byte_count": 158474,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "183.60.49.31",
+          "source_packet_count": 0,
+          "source_byte_count": 107650,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "112.90.86.182",
+          "source_packet_count": 0,
+          "source_byte_count": 106400,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.181",
+          "source_packet_count": 0,
+          "source_byte_count": 104090,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "119.147.45.253",
+          "source_packet_count": 0,
+          "source_byte_count": 98212,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "183.60.48.105",
+          "source_packet_count": 0,
+          "source_byte_count": 96968,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "183.60.49.30",
+          "source_packet_count": 0,
+          "source_byte_count": 95226,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "175.6.0.103",
+          "source_packet_count": 0,
+          "source_byte_count": 94497,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "112.90.86.184",
+          "source_packet_count": 0,
+          "source_byte_count": 87696,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "183.60.16.16",
+          "source_packet_count": 0,
+          "source_byte_count": 87596,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "183.60.48.104",
+          "source_packet_count": 0,
+          "source_byte_count": 81194,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "183.60.49.126",
+          "source_packet_count": 0,
+          "source_byte_count": 78978,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        }
+      ],
+      "official_host_information": {
+        "botnet_hosts": [
+          "147.32.84.165"
+        ],
+        "normal_hosts": "See official scenario README; not reconstructed here",
+        "other_hosts": [],
+        "source": [
+          "https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-49/"
+        ],
+        "confidence": "high"
+      },
+      "packet_label_feasibility": {
+        "every_packet_attack": false,
+        "host_based_labeling": true,
+        "partial_labeling": true,
+        "no_reliable_packet_label": false,
+        "recommended_option": "B",
+        "reason": "Official infected host IPs support host-involvement labels; botnet-capture provenance does not prove every packet malicious."
+      },
+      "window_level_ground_truth": {
+        "attack_positive_window_possible": true,
+        "benign_window_possible": false,
+        "unknown_window_required": true,
+        "recommended_window_strategy": "Use host-based evidence; windows without documented infected-host traffic remain UNKNOWN."
+      },
+      "attack_family_mapping": {
+        "family": "Murlo",
+        "safe_at_dataset_level": true,
+        "safe_at_window_level": true,
+        "safe_at_packet_level": false,
+        "reason": "Family comes from scenario metadata; host-involving windows can inherit it, but unrelated packets cannot."
+      }
+    },
+    {
+      "scenario_id": "CTU53",
+      "scenario_family": "NSIS Agent",
+      "pcap": "botnet-capture-20110819-bot.pcap",
+      "pcap_hosts": [
+        {
+          "ip": "147.32.84.165",
+          "source_packet_count": 0,
+          "source_byte_count": 93341622,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.191",
+          "source_packet_count": 0,
+          "source_byte_count": 81229353,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "147.32.84.192",
+          "source_packet_count": 0,
+          "source_byte_count": 50683008,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "58.215.240.7",
+          "source_packet_count": 0,
+          "source_byte_count": 22190648,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.113.232.90",
+          "source_packet_count": 0,
+          "source_byte_count": 3135318,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "195.113.232.81",
+          "source_packet_count": 0,
+          "source_byte_count": 3127135,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "125.39.78.235",
+          "source_packet_count": 0,
+          "source_byte_count": 2741120,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "219.153.76.26",
+          "source_packet_count": 0,
+          "source_byte_count": 1995266,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "173.194.1.21",
+          "source_packet_count": 0,
+          "source_byte_count": 1511182,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "218.28.77.140",
+          "source_packet_count": 0,
+          "source_byte_count": 1457178,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "123.124.139.240",
+          "source_packet_count": 0,
+          "source_byte_count": 1419026,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "221.202.225.87",
+          "source_packet_count": 0,
+          "source_byte_count": 1069862,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "61.163.195.84",
+          "source_packet_count": 0,
+          "source_byte_count": 887594,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "173.194.1.29",
+          "source_packet_count": 0,
+          "source_byte_count": 756131,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "1.64.135.207",
+          "source_packet_count": 0,
+          "source_byte_count": 702530,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "61.160.210.188",
+          "source_packet_count": 0,
+          "source_byte_count": 592650,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "221.2.61.194",
+          "source_packet_count": 0,
+          "source_byte_count": 568326,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "219.78.243.74",
+          "source_packet_count": 0,
+          "source_byte_count": 461570,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "58.215.107.250",
+          "source_packet_count": 0,
+          "source_byte_count": 426034,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        },
+        {
+          "ip": "123.156.246.123",
+          "source_packet_count": 0,
+          "source_byte_count": 411038,
+          "appears_in_binetflow": true,
+          "evidence": "PCAP source aggregate"
+        }
+      ],
+      "official_host_information": {
+        "botnet_hosts": [
+          "147.32.84.165",
+          "147.32.84.191",
+          "147.32.84.192"
+        ],
+        "normal_hosts": "See official scenario README; not reconstructed here",
+        "other_hosts": [],
+        "source": [
+          "https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-53/"
+        ],
+        "confidence": "high"
+      },
+      "packet_label_feasibility": {
+        "every_packet_attack": false,
+        "host_based_labeling": true,
+        "partial_labeling": true,
+        "no_reliable_packet_label": false,
+        "recommended_option": "B",
+        "reason": "Official infected host IPs support host-involvement labels; botnet-capture provenance does not prove every packet malicious."
+      },
+      "window_level_ground_truth": {
+        "attack_positive_window_possible": true,
+        "benign_window_possible": false,
+        "unknown_window_required": true,
+        "recommended_window_strategy": "Use host-based evidence; windows without documented infected-host traffic remain UNKNOWN."
+      },
+      "attack_family_mapping": {
+        "family": "NSIS Agent",
+        "safe_at_dataset_level": true,
+        "safe_at_window_level": true,
+        "safe_at_packet_level": false,
+        "reason": "Family comes from scenario metadata; host-involving windows can inherit it, but unrelated packets cannot."
+      }
+    }
+  ],
+  "overall_recommendation": {
+    "ranked_strategies": [
+      "STRATEGY 2: documented infected-host filtering",
+      "STRATEGY 3: explicit evidence with UNKNOWN otherwise",
+      "STRATEGY 4: unsupervised use",
+      "STRATEGY 1: label every PCAP window attack=1"
+    ],
+    "recommended_strategy": "STRATEGY 2 with UNKNOWN for windows lacking documented infected-host involvement.",
+    "justification": [
+      "Scenario identity is reliable dataset-level family provenance but not proof every packet is malicious.",
+      "The earlier audit showed timestamp-incompatible flow data, so no packet-flow labels are used."
+    ],
+    "critical_caveats": [
+      "No packet-to-flow join was performed.",
+      "A packet involving an infected host is evidence of botnet-capture participation, not necessarily proof of malicious behavior."
+    ]
+  }
+}

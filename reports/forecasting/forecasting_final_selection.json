@@ -1,0 +1,20 @@
+{
+  "selection_basis": "mean validation PR-AUC then F1 across horizons; test excluded",
+  "best_model": "Persistence",
+  "validation_model_means": {
+    "Persistence": {
+      "pr_auc": 0.9676763577077372,
+      "f1": 0.9748956821480407
+    },
+    "LaggedXGBoost": {
+      "pr_auc": 0.9466333706272521,
+      "f1": 0.9190830685512458
+    },
+    "LaggedLogisticRegression": {
+      "pr_auc": 0.8395513005655579,
+      "f1": 0.8477277876015636
+    }
+  },
+  "persistence_definition": "Predict each future horizon with the last observed attack state immediately before forecast origin.",
+  "test_warning": "Test normal support is low; FPR is unstable."
+}

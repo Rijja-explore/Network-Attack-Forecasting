@@ -1,0 +1,136 @@
+{
+  "phase": 0,
+  "stage1": {
+    "splits": {
+      "train": [
+        760,
+        55
+      ],
+      "validation": [
+        162,
+        55
+      ],
+      "test": [
+        165,
+        55
+      ]
+    },
+    "target": "target_next_window",
+    "feature_count": 54,
+    "temporal_resolution": "60 seconds",
+    "sequence_length": 5,
+    "best_tabular": "XGBoost validation F1=0.9406",
+    "gru": "existing validated GRU available; TensorFlow expansion stalled",
+    "preprocessing": "median imputation + StandardScaler fitted on train"
+  },
+  "stage2": {
+    "dataset_rows": 4460,
+    "feature_count": 50,
+    "families": [
+      "Neris",
+      "RBot",
+      "Virut",
+      "DonBot",
+      "Sogou",
+      "Murlo",
+      "NSIS Agent"
+    ],
+    "target": "attack_type; binary_label=1 provenance-only",
+    "temporal_resolution": "60 seconds",
+    "best_model": "CatBoost validation macro-F1=0.7681",
+    "source_csv_columns": [
+      "scenario_id",
+      "scenario_family",
+      "window_start",
+      "window_end",
+      "binary_label",
+      "attack_type",
+      "packet_count",
+      "byte_count",
+      "packets_per_second",
+      "bytes_per_second",
+      "unique_src_ips",
+      "unique_dst_ips",
+      "unique_src_ports",
+      "unique_dst_ports",
+      "tcp_count",
+      "udp_count",
+      "icmp_count",
+      "other_protocol_count",
+      "packet_size_mean",
+      "packet_size_std",
+      "packet_size_min",
+      "packet_size_max",
+      "packet_size_median",
+      "packet_size_p25",
+      "packet_size_p75",
+      "iat_mean",
+      "iat_std",
+      "iat_min",
+      "iat_max",
+      "iat_median",
+      "syn_count",
+      "ack_count",
+      "rst_count",
+      "fin_count",
+      "psh_count",
+      "urg_count",
+      "forward_packet_count",
+      "backward_packet_count",
+      "forward_byte_count",
+      "backward_byte_count",
+      "unique_5tuple_count",
+      "flow_count",
+      "mean_flow_duration",
+      "packets_per_flow_mean",
+      "bytes_per_flow_mean",
+      "forward_backward_packet_ratio",
+      "forward_backward_byte_ratio",
+      "syn_ack_ratio",
+      "tcp_fraction",
+      "udp_fraction",
+      "icmp_fraction",
+      "unique_dst_ports_per_src_ip",
+      "unique_dst_ips_per_src_ip",
+      "unique_src_ips_per_dst_ip",
+      "port_diversity",
+      "destination_diversity"
+    ]
+  },
+  "files": {
+    "processed_data\\temporal\\train.csv": {
+      "exists": true,
+      "bytes": 357667
+    },
+    "processed_data\\temporal\\validation.csv": {
+      "exists": true,
+      "bytes": 108865
+    },
+    "processed_data\\temporal\\test.csv": {
+      "exists": true,
+      "bytes": 111084
+    },
+    "processed_data\\stage2_pcap\\multi_scenario\\stage2_pcap_features_multi_v2.csv": {
+      "exists": true,
+      "bytes": 1979413
+    },
+    "models\\stage1\\XGBoost.pkl": {
+      "exists": true,
+      "bytes": 366333
+    },
+    "models\\stage2\\stage2_family_best_model.joblib": {
+      "exists": true,
+      "bytes": 1479162
+    },
+    "reports\\stage1_tabular_progress.json": {
+      "exists": true,
+      "bytes": 4219
+    },
+    "reports\\stage2\\stage2_family_model_report.json": {
+      "exists": true,
+      "bytes": 15931
+    }
+  },
+  "fusion_status": "READY WITH ALIGNMENT",
+  "reason": "Stage-1 and Stage-2 captures do not share defensible row-level temporal correspondence. Representation-level fusion may be designed only after alignment audit."
+}

@@ -1,0 +1,126 @@
+{
+  "method": "CatBoost native feature importance",
+  "top_features": [
+    {
+      "rank": 1,
+      "feature": "packet_size_max",
+      "importance": 22.89745176765862,
+      "method": "native"
+    },
+    {
+      "rank": 2,
+      "feature": "syn_ack_ratio",
+      "importance": 9.123617169757924,
+      "method": "native"
+    },
+    {
+      "rank": 3,
+      "feature": "iat_median",
+      "importance": 8.538503604837807,
+      "method": "native"
+    },
+    {
+      "rank": 4,
+      "feature": "packet_size_median",
+      "importance": 2.9252175406467877,
+      "method": "native"
+    },
+    {
+      "rank": 5,
+      "feature": "fin_count",
+      "importance": 2.872251804674736,
+      "method": "native"
+    },
+    {
+      "rank": 6,
+      "feature": "syn_count",
+      "importance": 2.7047019037270794,
+      "method": "native"
+    },
+    {
+      "rank": 7,
+      "feature": "forward_backward_packet_ratio",
+      "importance": 2.533249631906285,
+      "method": "native"
+    },
+    {
+      "rank": 8,
+      "feature": "destination_diversity",
+      "importance": 2.5324155431406807,
+      "method": "native"
+    },
+    {
+      "rank": 9,
+      "feature": "packet_size_std",
+      "importance": 2.390736317266506,
+      "method": "native"
+    },
+    {
+      "rank": 10,
+      "feature": "bytes_per_flow_mean",
+      "importance": 2.1142653034553995,
+      "method": "native"
+    },
+    {
+      "rank": 11,
+      "feature": "unique_dst_ips",
+      "importance": 2.0618220199943083,
+      "method": "native"
+    },
+    {
+      "rank": 12,
+      "feature": "mean_flow_duration",
+      "importance": 2.060838333768392,
+      "method": "native"
+    },
+    {
+      "rank": 13,
+      "feature": "psh_count",
+      "importance": 2.0216328617101054,
+      "method": "native"
+    },
+    {
+      "rank": 14,
+      "feature": "packet_size_mean",
+      "importance": 1.9539299296638408,
+      "method": "native"
+    },
+    {
+      "rank": 15,
+      "feature": "iat_max",
+      "importance": 1.6253277653348182,
+      "method": "native"
+    },
+    {
+      "rank": 16,
+      "feature": "unique_src_ips_per_dst_ip",
+      "importance": 1.624730526294288,
+      "method": "native"
+    },
+    {
+      "rank": 17,
+      "feature": "udp_count",
+      "importance": 1.5842744495867045,
+      "method": "native"
+    },
+    {
+      "rank": 18,
+      "feature": "packets_per_flow_mean",
+      "importance": 1.548936175408358,
+      "method": "native"
+    },
+    {
+      "rank": 19,
+      "feature": "packet_size_p25",
+      "importance": 1.4708859265640553,
+      "method": "native"
+    },
+    {
+      "rank": 20,
+      "feature": "udp_fraction",
+      "importance": 1.4628751267090163,
+      "method": "native"
+    }
+  ],
+  "limitation": "Global importance; per-family SHAP omitted to preserve fast-track compute."
+}

@@ -1,0 +1,70 @@
+{
+  "available_examples": [
+    {
+      "transition_type": "0->0",
+      "validation_row_index": 56,
+      "current_observed_attack_state": 0,
+      "t_plus_1_probability": 0.0,
+      "t_plus_2_probability": 0.0,
+      "t_plus_3_probability": 0.0,
+      "t_plus_4_probability": 0.0,
+      "t_plus_5_probability": 0.0,
+      "actual_t_plus_1": 0,
+      "actual_t_plus_2": 0,
+      "actual_t_plus_3": 0,
+      "actual_t_plus_4": 0,
+      "actual_t_plus_5": 0,
+      "trajectory": "STABLE"
+    },
+    {
+      "transition_type": "0->1",
+      "validation_row_index": 104,
+      "current_observed_attack_state": 0,
+      "t_plus_1_probability": 0.0,
+      "t_plus_2_probability": 0.0,
+      "t_plus_3_probability": 0.0,
+      "t_plus_4_probability": 0.0,
+      "t_plus_5_probability": 0.0,
+      "actual_t_plus_1": 1,
+      "actual_t_plus_2": 1,
+      "actual_t_plus_3": 1,
+      "actual_t_plus_4": 1,
+      "actual_t_plus_5": 1,
+      "trajectory": "STABLE"
+    },
+    {
+      "transition_type": "1->1",
+      "validation_row_index": 4,
+      "current_observed_attack_state": 1,
+      "t_plus_1_probability": 1.0,
+      "t_plus_2_probability": 1.0,
+      "t_plus_3_probability": 1.0,
+      "t_plus_4_probability": 1.0,
+      "t_plus_5_probability": 1.0,
+      "actual_t_plus_1": 1,
+      "actual_t_plus_2": 1,
+      "actual_t_plus_3": 1,
+      "actual_t_plus_4": 1,
+      "actual_t_plus_5": 1,
+      "trajectory": "STABLE"
+    },
+    {
+      "transition_type": "1->0",
+      "validation_row_index": 55,
+      "current_observed_attack_state": 1,
+      "t_plus_1_probability": 1.0,
+      "t_plus_2_probability": 1.0,
+      "t_plus_3_probability": 1.0,
+      "t_plus_4_probability": 1.0,
+      "t_plus_5_probability": 1.0,
+      "actual_t_plus_1": 0,
+      "actual_t_plus_2": 0,
+      "actual_t_plus_3": 0,
+      "actual_t_plus_4": 0,
+      "actual_t_plus_5": 0,
+      "trajectory": "STABLE"
+    }
+  ],
+  "unavailable": "Specific normal/attack transition types absent from validation are not fabricated.",
+  "provenance": "Stage1 trajectory examples and independently sampled Stage2 state summaries are separate evidence streams; no row alignment."
+}

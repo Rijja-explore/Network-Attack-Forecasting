@@ -1,0 +1,25 @@
+{
+  "data_layer": [
+    "Stage1 flow telemetry",
+    "Stage2 packet telemetry"
+  ],
+  "model_layer": [
+    "Stage1 persistence/lagged forecasting evidence",
+    "Stage2 CatBoost family characterization",
+    "Stage1 state transition model"
+  ],
+  "intelligence_layer": [
+    "forecast trajectory",
+    "family evidence",
+    "rule-based MITRE inference",
+    "native feature importance"
+  ],
+  "presentation_layer": [
+    "analyst alert",
+    "risk trajectory",
+    "evidence",
+    "confidence",
+    "provenance"
+  ],
+  "validity": "Decision-support architecture only; no supervised Stage1/Stage2 temporal fusion."
+}

@@ -1,0 +1,54 @@
+{
+  "metadata_files_found": {
+    "workspace": [
+      "botnet-capture-20110810-neris.pcap"
+    ],
+    "C:/CTU13": [],
+    "json_html_readme_available": false
+  },
+  "official_attack_description": "CTU-13 identifies Botnet-42 as a Neris botnet capture. Official CTU documentation states that each scenario PCAP is the botnet capture only; detailed bidirectional NetFlow files contain all traffic and labels.",
+  "available_annotation_fields": {
+    "pcap": [
+      "packet timestamp",
+      "IP addresses",
+      "ports",
+      "protocol",
+      "payload/packet fields"
+    ],
+    "local_json_html_readme": [],
+    "detailed_biargus_documented": [
+      "NetFlow labels for all traffic, including Background, Botnet, C&C Channels, and Normal"
+    ]
+  },
+  "ground_truth_source": "Official CTU-13 dataset documentation (Stratosphere Laboratory), section TYPE OF FILES AND DOWNLOAD.",
+  "ground_truth_labels": [
+    "BOTNET"
+  ],
+  "ground_truth_attack_types": [
+    "NERIS_BOTNET"
+  ],
+  "window_label_counts": {
+    "BOTNET": 285,
+    "NORMAL": 0,
+    "UNKNOWN": 0
+  },
+  "unknown_window_count": 0,
+  "ground_truth_coverage_percentage": 100.0,
+  "alignment_basis": "All 285 rows are consecutive windows from the supplied Botnet-42 PCAP; no packet-to-flow matching or behavioral inference was used.",
+  "current_stage2_comparison": {
+    "current_windows": 285,
+    "old_label_counts": {
+      "BOTNET": 161,
+      "NORMAL": 12,
+      "UNKNOWN": 112
+    },
+    "official_ground_truth_windows": 285,
+    "official_reliably_labelled_windows": 285
+  },
+  "limitations": [
+    "No local JSON, HTML, README, timestamped activity annotation, or detailed biargus file is available for inspection.",
+    "The official source supports the capture-level Neris botnet label, not finer timestamped attack categories such as DDoS, scanning, or brute force.",
+    "This ground truth is single-class BOTNET; it is reliable for botnet-capture identification but cannot support a multi-class attack-type classifier by itself."
+  ],
+  "final_verdict": "STAGE 2 GROUND TRUTH READY"
+}

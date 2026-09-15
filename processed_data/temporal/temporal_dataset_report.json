@@ -1,0 +1,788 @@
+{
+  "task_definition": "Current-window traffic features predict whether the next fixed window contains an attack.",
+  "window_size_seconds": 60,
+  "target_definition": "target_next_window is 1 if at least one flow in the next window is ATTACK; otherwise 0.",
+  "split_ratios": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "split_strategy": "Chronological per-dataset split; no random shuffling. CIC and CTU13 timelines are split independently because their years differ.",
+  "datasets": {
+    "CIC": {
+      "original_row_count": 1047074,
+      "number_of_temporal_windows": 720,
+      "discarded_final_windows": 1,
+      "feature_availability": {
+        "common": [
+          "number_of_flows",
+          "mean_flow_duration",
+          "mean_dst_port",
+          "total_packets",
+          "total_bytes",
+          "mean_iat_variance",
+          "mean_flow_byts_s",
+          "mean_flow_pkts_s",
+          "mean_down_up_ratio",
+          "mean_fin_flag_cnt",
+          "mean_syn_flag_cnt",
+          "mean_rst_flag_cnt",
+          "mean_psh_flag_cnt",
+          "mean_ack_flag_cnt",
+          "mean_urg_flag_cnt",
+          "mean_cwe_flag_count",
+          "mean_ece_flag_cnt",
+          "mean_init_fwd_win_byts",
+          "mean_init_bwd_win_byts"
+        ],
+        "cic_only": [
+          "mean_flow_iat_mean",
+          "mean_flow_iat_std",
+          "mean_flow_iat_max",
+          "mean_flow_iat_min"
+        ],
+        "ctu_only": []
+      }
+    },
+    "CTU13": {
+      "original_row_count": 2824636,
+      "number_of_temporal_windows": 369,
+      "discarded_final_windows": 1,
+      "feature_availability": {
+        "common": [
+          "number_of_flows",
+          "mean_flow_duration",
+          "mean_dst_port",
+          "total_packets",
+          "total_bytes",
+          "mean_iat_variance",
+          "mean_flow_byts_s",
+          "mean_flow_pkts_s",
+          "mean_down_up_ratio",
+          "mean_fin_flag_cnt",
+          "mean_syn_flag_cnt",
+          "mean_rst_flag_cnt",
+          "mean_psh_flag_cnt",
+          "mean_ack_flag_cnt",
+          "mean_urg_flag_cnt",
+          "mean_cwe_flag_count",
+          "mean_ece_flag_cnt",
+          "mean_init_fwd_win_byts",
+          "mean_init_bwd_win_byts"
+        ],
+        "cic_only": [],
+        "ctu_only": [
+          "mean_src_port",
+          "mean_s_tos",
+          "mean_d_tos",
+          "mean_total_packets",
+          "mean_total_bytes",
+          "mean_source_bytes"
+        ]
+      }
+    }
+  },
+  "splits": {
+    "train": {
+      "window_count": 760,
+      "normal_windows": 407,
+      "attack_windows": 353,
+      "time_start": "2011-08-10T09:46:00",
+      "time_end": "2018-02-03T09:23:00",
+      "missing_values": {
+        "number_of_flows": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_dst_port": {
+          "missing_count": 195,
+          "missing_percentage": 25.657895
+        },
+        "mean_flow_duration": {
+          "missing_count": 195,
+          "missing_percentage": 25.657895
+        },
+        "mean_total_packets": {
+          "missing_count": 195,
+          "missing_percentage": 25.657895
+        },
+        "total_packets": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_total_bytes": {
+          "missing_count": 195,
+          "missing_percentage": 25.657895
+        },
+        "total_bytes": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_source_bytes": {
+          "missing_count": 503,
+          "missing_percentage": 66.184211
+        },
+        "source_bytes": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_iat_variance": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_s_tos": {
+          "missing_count": 503,
+          "missing_percentage": 66.184211
+        },
+        "mean_d_tos": {
+          "missing_count": 503,
+          "missing_percentage": 66.184211
+        },
+        "mean_tot_fwd_pkts": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_tot_bwd_pkts": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_totlen_fwd_pkts": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_totlen_bwd_pkts": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_flow_byts_s": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_flow_pkts_s": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_flow_iat_mean": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_flow_iat_std": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_flow_iat_max": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_flow_iat_min": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_fwd_pkts_s": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_bwd_pkts_s": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_down_up_ratio": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_fin_flag_cnt": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_syn_flag_cnt": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_rst_flag_cnt": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_psh_flag_cnt": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_ack_flag_cnt": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_urg_flag_cnt": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_cwe_flag_count": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_ece_flag_cnt": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_init_fwd_win_byts": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_init_bwd_win_byts": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_fwd_pkt_len_max": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_fwd_pkt_len_min": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_fwd_pkt_len_mean": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_fwd_pkt_len_std": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_bwd_pkt_len_max": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_bwd_pkt_len_min": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_bwd_pkt_len_mean": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_bwd_pkt_len_std": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_pkt_len_min": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_pkt_len_max": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_pkt_len_mean": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_pkt_len_std": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_pkt_len_var": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_pkt_size_avg": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_fwd_seg_size_avg": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        },
+        "mean_bwd_seg_size_avg": {
+          "missing_count": 452,
+          "missing_percentage": 59.473684
+        }
+      },
+      "dataset_source_distribution": {
+        "CIC": 503,
+        "CTU13": 257
+      }
+    },
+    "validation": {
+      "window_count": 162,
+      "normal_windows": 49,
+      "attack_windows": 113,
+      "time_start": "2011-08-10T14:03:00",
+      "time_end": "2018-02-03T11:10:00",
+      "missing_values": {
+        "number_of_flows": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_dst_port": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_flow_duration": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_total_packets": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "total_packets": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_total_bytes": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "total_bytes": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_source_bytes": {
+          "missing_count": 107,
+          "missing_percentage": 66.049383
+        },
+        "source_bytes": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_iat_variance": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_s_tos": {
+          "missing_count": 107,
+          "missing_percentage": 66.049383
+        },
+        "mean_d_tos": {
+          "missing_count": 107,
+          "missing_percentage": 66.049383
+        },
+        "mean_tot_fwd_pkts": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_tot_bwd_pkts": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_totlen_fwd_pkts": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_totlen_bwd_pkts": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_flow_byts_s": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_flow_pkts_s": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_flow_iat_mean": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_flow_iat_std": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_flow_iat_max": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_flow_iat_min": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_fwd_pkts_s": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_bwd_pkts_s": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_down_up_ratio": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_fin_flag_cnt": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_syn_flag_cnt": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_rst_flag_cnt": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_psh_flag_cnt": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_ack_flag_cnt": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_urg_flag_cnt": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_cwe_flag_count": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_ece_flag_cnt": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_init_fwd_win_byts": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_init_bwd_win_byts": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_fwd_pkt_len_max": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_fwd_pkt_len_min": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_fwd_pkt_len_mean": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_fwd_pkt_len_std": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_bwd_pkt_len_max": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_bwd_pkt_len_min": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_bwd_pkt_len_mean": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_bwd_pkt_len_std": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_pkt_len_min": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_pkt_len_max": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_pkt_len_mean": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_pkt_len_std": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_pkt_len_var": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_pkt_size_avg": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_fwd_seg_size_avg": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        },
+        "mean_bwd_seg_size_avg": {
+          "missing_count": 55,
+          "missing_percentage": 33.950617
+        }
+      },
+      "dataset_source_distribution": {
+        "CIC": 107,
+        "CTU13": 55
+      }
+    },
+    "test": {
+      "window_count": 165,
+      "normal_windows": 6,
+      "attack_windows": 159,
+      "time_start": "2011-08-10T14:58:00",
+      "time_end": "2018-02-03T12:59:00",
+      "missing_values": {
+        "number_of_flows": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_dst_port": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_flow_duration": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_total_packets": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "total_packets": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_total_bytes": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "total_bytes": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_source_bytes": {
+          "missing_count": 109,
+          "missing_percentage": 66.060606
+        },
+        "source_bytes": {
+          "missing_count": 0,
+          "missing_percentage": 0.0
+        },
+        "mean_iat_variance": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_s_tos": {
+          "missing_count": 109,
+          "missing_percentage": 66.060606
+        },
+        "mean_d_tos": {
+          "missing_count": 109,
+          "missing_percentage": 66.060606
+        },
+        "mean_tot_fwd_pkts": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_tot_bwd_pkts": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_totlen_fwd_pkts": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_totlen_bwd_pkts": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_flow_byts_s": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_flow_pkts_s": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_flow_iat_mean": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_flow_iat_std": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_flow_iat_max": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_flow_iat_min": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_fwd_pkts_s": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_bwd_pkts_s": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_down_up_ratio": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_fin_flag_cnt": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_syn_flag_cnt": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_rst_flag_cnt": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_psh_flag_cnt": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_ack_flag_cnt": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_urg_flag_cnt": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_cwe_flag_count": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_ece_flag_cnt": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_init_fwd_win_byts": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_init_bwd_win_byts": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_fwd_pkt_len_max": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_fwd_pkt_len_min": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_fwd_pkt_len_mean": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_fwd_pkt_len_std": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_bwd_pkt_len_max": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_bwd_pkt_len_min": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_bwd_pkt_len_mean": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_bwd_pkt_len_std": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_pkt_len_min": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_pkt_len_max": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_pkt_len_mean": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_pkt_len_std": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_pkt_len_var": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_pkt_size_avg": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_fwd_seg_size_avg": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        },
+        "mean_bwd_seg_size_avg": {
+          "missing_count": 56,
+          "missing_percentage": 33.939394
+        }
+      },
+      "dataset_source_distribution": {
+        "CIC": 109,
+        "CTU13": 56
+      }
+    }
+  },
+  "feature_count": 51,
+  "feature_availability": {
+    "common": [
+      "number_of_flows",
+      "mean_flow_duration",
+      "mean_dst_port",
+      "total_packets",
+      "total_bytes",
+      "mean_iat_variance",
+      "mean_flow_byts_s",
+      "mean_flow_pkts_s",
+      "mean_down_up_ratio",
+      "mean_fin_flag_cnt",
+      "mean_syn_flag_cnt",
+      "mean_rst_flag_cnt",
+      "mean_psh_flag_cnt",
+      "mean_ack_flag_cnt",
+      "mean_urg_flag_cnt",
+      "mean_cwe_flag_count",
+      "mean_ece_flag_cnt",
+      "mean_init_fwd_win_byts",
+      "mean_init_bwd_win_byts"
+    ],
+    "CIC_only": [
+      "mean_flow_iat_mean",
+      "mean_flow_iat_std",
+      "mean_flow_iat_max",
+      "mean_flow_iat_min"
+    ],
+    "CTU13_only": [
+      "mean_src_port",
+      "mean_s_tos",
+      "mean_d_tos",
+      "mean_total_packets",
+      "mean_total_bytes",
+      "mean_source_bytes"
+    ]
+  },
+  "leakage_checks": {
+    "passed": true,
+    "checks": [
+      "per-source train timestamp precedes validation",
+      "per-source validation timestamp precedes test",
+      "no label-derived input columns",
+      "target is next-window label",
+      "no imputation or scaling fitted"
+    ]
+  },
+  "no_model_training": true,
+  "all_temporal_row_count": 1087
+}

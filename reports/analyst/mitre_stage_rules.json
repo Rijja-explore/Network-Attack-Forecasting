@@ -1,0 +1,55 @@
+{
+  "rules": [
+    {
+      "stage": "Reconnaissance",
+      "indicator": "elevated port/destination diversity",
+      "source_features": [
+        "state_port_diversity_change",
+        "state_destination_diversity_change"
+      ],
+      "condition": "positive standardized change",
+      "rationale": "Diversified destination/port behavior can be reconnaissance evidence, not proof.",
+      "confidence_contribution": "low-to-medium"
+    },
+    {
+      "stage": "Command & Control",
+      "indicator": "sustained packet/byte rate with regular timing",
+      "source_features": [
+        "state_packet_rate_change",
+        "state_byte_rate_change",
+        "state_iat_change"
+      ],
+      "condition": "combined rate/timing change",
+      "rationale": "Regular outbound communication patterns may be C2 evidence.",
+      "confidence_contribution": "low"
+    },
+    {
+      "stage": "Lateral Movement",
+      "indicator": "increased destination diversity plus SYN/RST changes",
+      "source_features": [
+        "state_destination_diversity_change",
+        "state_syn_rate_change",
+        "state_rst_rate_change"
+      ],
+      "condition": "combined positive change",
+      "rationale": "Connection exploration may be lateral movement evidence.",
+      "confidence_contribution": "low"
+    },
+    {
+      "stage": "Initial Access",
+      "indicator": "insufficient direct observable evidence",
+      "source_features": [],
+      "condition": "not scored",
+      "rationale": "No host/process/email/web-entry evidence available.",
+      "confidence_contribution": "insufficient evidence"
+    },
+    {
+      "stage": "Exfiltration",
+      "indicator": "insufficient direct observable evidence",
+      "source_features": [],
+      "condition": "not scored",
+      "rationale": "No payload direction/asset context supports reliable inference.",
+      "confidence_contribution": "insufficient evidence"
+    }
+  ]
+}

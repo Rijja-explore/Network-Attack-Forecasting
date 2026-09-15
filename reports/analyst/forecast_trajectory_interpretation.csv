@@ -1,0 +1,5 @@
+transition_type,validation_row_index,current_observed_attack_state,t_plus_1_probability,t_plus_2_probability,t_plus_3_probability,t_plus_4_probability,t_plus_5_probability,actual_t_plus_1,actual_t_plus_2,actual_t_plus_3,actual_t_plus_4,actual_t_plus_5,trajectory
+0->0,56,0,0.0,0.0,0.0,0.0,0.0,0,0,0,0,0,STABLE
+0->1,104,0,0.0,0.0,0.0,0.0,0.0,1,1,1,1,1,STABLE
+1->1,4,1,1.0,1.0,1.0,1.0,1.0,1,1,1,1,1,STABLE
+1->0,55,1,1.0,1.0,1.0,1.0,1.0,0,0,0,0,0,STABLE

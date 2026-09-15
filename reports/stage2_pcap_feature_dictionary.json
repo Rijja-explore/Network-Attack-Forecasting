@@ -1,0 +1,342 @@
+{
+  "packet_count": {
+    "feature_name": "packet_count",
+    "definition": "packet count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "byte_count": {
+    "feature_name": "byte_count",
+    "definition": "byte count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_src_ips": {
+    "feature_name": "unique_src_ips",
+    "definition": "unique src ips",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_dst_ips": {
+    "feature_name": "unique_dst_ips",
+    "definition": "unique dst ips",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_src_ports": {
+    "feature_name": "unique_src_ports",
+    "definition": "unique src ports",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_dst_ports": {
+    "feature_name": "unique_dst_ports",
+    "definition": "unique dst ports",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "tcp_packet_count": {
+    "feature_name": "tcp_packet_count",
+    "definition": "tcp packet count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "udp_packet_count": {
+    "feature_name": "udp_packet_count",
+    "definition": "udp packet count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "icmp_packet_count": {
+    "feature_name": "icmp_packet_count",
+    "definition": "icmp packet count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "mean_packet_size": {
+    "feature_name": "mean_packet_size",
+    "definition": "mean packet size",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "std_packet_size": {
+    "feature_name": "std_packet_size",
+    "definition": "std packet size",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "min_packet_size": {
+    "feature_name": "min_packet_size",
+    "definition": "min packet size",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "max_packet_size": {
+    "feature_name": "max_packet_size",
+    "definition": "max packet size",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "mean_inter_arrival_time": {
+    "feature_name": "mean_inter_arrival_time",
+    "definition": "mean inter arrival time",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "std_inter_arrival_time": {
+    "feature_name": "std_inter_arrival_time",
+    "definition": "std inter arrival time",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "syn_count": {
+    "feature_name": "syn_count",
+    "definition": "syn count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "ack_count": {
+    "feature_name": "ack_count",
+    "definition": "ack count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "rst_count": {
+    "feature_name": "rst_count",
+    "definition": "rst count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "fin_count": {
+    "feature_name": "fin_count",
+    "definition": "fin count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "psh_count": {
+    "feature_name": "psh_count",
+    "definition": "psh count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "forward_packets": {
+    "feature_name": "forward_packets",
+    "definition": "forward packets",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "backward_packets": {
+    "feature_name": "backward_packets",
+    "definition": "backward packets",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "forward_bytes": {
+    "feature_name": "forward_bytes",
+    "definition": "forward bytes",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "backward_bytes": {
+    "feature_name": "backward_bytes",
+    "definition": "backward bytes",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "flow_duration_mean": {
+    "feature_name": "flow_duration_mean",
+    "definition": "flow duration mean",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "tcp_syn_ack_ratio": {
+    "feature_name": "tcp_syn_ack_ratio",
+    "definition": "tcp syn ack ratio",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "tcp_rst_ratio": {
+    "feature_name": "tcp_rst_ratio",
+    "definition": "tcp rst ratio",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "tcp_fin_ratio": {
+    "feature_name": "tcp_fin_ratio",
+    "definition": "tcp fin ratio",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "packets_per_second": {
+    "feature_name": "packets_per_second",
+    "definition": "packets per second",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "bytes_per_second": {
+    "feature_name": "bytes_per_second",
+    "definition": "bytes per second",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_src_dst_pair_count": {
+    "feature_name": "unique_src_dst_pair_count",
+    "definition": "unique src dst pair count",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "unique_communication_pairs": {
+    "feature_name": "unique_communication_pairs",
+    "definition": "unique communication pairs",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "int64",
+    "unit": "count",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "mean_packets_per_flow": {
+    "feature_name": "mean_packets_per_flow",
+    "definition": "mean packets per flow",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  },
+  "mean_bytes_per_flow": {
+    "feature_name": "mean_bytes_per_flow",
+    "definition": "mean bytes per flow",
+    "calculation": "PCAP packets within this exact 60-second window only; target labels are not used.",
+    "data_type": "float64",
+    "unit": "ratio/value",
+    "source": "PCAP",
+    "uses_future_data": false,
+    "uses_target": false
+  }
+}

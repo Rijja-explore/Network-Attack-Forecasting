@@ -1,0 +1,36 @@
+{
+  "state_variables": [
+    "number_of_flows",
+    "total_packets",
+    "total_bytes",
+    "mean_flow_duration",
+    "mean_flow_pkts_s",
+    "mean_flow_byts_s",
+    "mean_flow_iat_mean",
+    "mean_flow_iat_std",
+    "mean_syn_flag_cnt",
+    "mean_ack_flag_cnt",
+    "mean_rst_flag_cnt",
+    "mean_down_up_ratio"
+  ],
+  "rationale": {
+    "number_of_flows": "flow volume",
+    "total_packets": "packet volume",
+    "total_bytes": "traffic volume",
+    "mean_flow_duration": "connection duration",
+    "mean_flow_pkts_s": "packet rate",
+    "mean_flow_byts_s": "byte rate",
+    "mean_flow_iat_mean": "temporal spacing",
+    "mean_flow_iat_std": "timing variability",
+    "mean_syn_flag_cnt": "TCP connection behavior",
+    "mean_ack_flag_cnt": "TCP response behavior",
+    "mean_rst_flag_cnt": "TCP reset behavior",
+    "mean_down_up_ratio": "directional behavior"
+  },
+  "excluded": [
+    "target_next_window",
+    "metadata",
+    "row index",
+    "future labels"
+  ]
+}

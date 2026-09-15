@@ -1,0 +1,32 @@
+{
+  "shape": [
+    1087,
+    16
+  ],
+  "model": "saved XGBoost from stage1 fast benchmark",
+  "features": [
+    "split",
+    "row_index",
+    "flow_state_number_of_flows",
+    "flow_state_mean_dst_port",
+    "flow_state_mean_flow_duration",
+    "flow_state_mean_total_packets",
+    "flow_state_total_packets",
+    "flow_state_mean_total_bytes",
+    "flow_state_total_bytes",
+    "flow_state_mean_source_bytes",
+    "flow_state_source_bytes",
+    "flow_state_mean_iat_variance",
+    "flow_state_mean_s_tos",
+    "flow_state_mean_d_tos",
+    "attack_probability",
+    "model_logit"
+  ],
+  "provenance": "Model outputs plus standardized selected flow-state features; source target excluded. Stage-1 inputs lack timestamp columns, so row_index and fixed split preserve available temporal order.",
+  "preprocessing": "Saved train-fitted median imputer and StandardScaler",
+  "leakage_checks": {
+    "target_excluded": true,
+    "train_fitted_preprocessing": true,
+    "future_information_used": false
+  }
+}

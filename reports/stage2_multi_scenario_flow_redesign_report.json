@@ -1,0 +1,77 @@
+{
+  "definition": "Canonical unordered TCP/UDP endpoint pair plus protocol; first observed packet in each window is forward. Ratios use forward/max(backward,1).",
+  "scenarios": [
+    {
+      "scenario": "CTU42",
+      "windows": 285,
+      "total_bidirectional_flows": 24190,
+      "mean_flows_window": 84.87719298245614,
+      "mean_forward_packets_window": 725.7543859649123,
+      "mean_backward_packets_window": 402.2701754385965,
+      "windows_backward_nonzero": 284,
+      "backward_percentage": 99.64912280701755
+    },
+    {
+      "scenario": "CTU44",
+      "windows": 2842,
+      "total_bidirectional_flows": 39240,
+      "mean_flows_window": 13.807178043631245,
+      "mean_forward_packets_window": 98.00316678395497,
+      "mean_backward_packets_window": 69.63265306122449,
+      "windows_backward_nonzero": 2465,
+      "backward_percentage": 86.73469387755102
+    },
+    {
+      "scenario": "CTU46",
+      "windows": 21,
+      "total_bidirectional_flows": 968,
+      "mean_flows_window": 46.095238095238095,
+      "mean_forward_packets_window": 1473.142857142857,
+      "mean_backward_packets_window": 706.1904761904761,
+      "windows_backward_nonzero": 21,
+      "backward_percentage": 100.0
+    },
+    {
+      "scenario": "CTU47",
+      "windows": 122,
+      "total_bidirectional_flows": 4786,
+      "mean_flows_window": 39.22950819672131,
+      "mean_forward_packets_window": 162.44262295081967,
+      "mean_backward_packets_window": 37.450819672131146,
+      "windows_backward_nonzero": 117,
+      "backward_percentage": 95.90163934426229
+    },
+    {
+      "scenario": "CTU48",
+      "windows": 8,
+      "total_bidirectional_flows": 81,
+      "mean_flows_window": 10.125,
+      "mean_forward_packets_window": 952.0,
+      "mean_backward_packets_window": 1623.5,
+      "windows_backward_nonzero": 6,
+      "backward_percentage": 75.0
+    },
+    {
+      "scenario": "CTU49",
+      "windows": 1118,
+      "total_bidirectional_flows": 10288,
+      "mean_flows_window": 9.202146690518784,
+      "mean_forward_packets_window": 47.93023255813954,
+      "mean_backward_packets_window": 24.476744186046513,
+      "windows_backward_nonzero": 1110,
+      "backward_percentage": 99.28443649373882
+    },
+    {
+      "scenario": "CTU53",
+      "windows": 64,
+      "total_bidirectional_flows": 8671,
+      "mean_flows_window": 135.484375,
+      "mean_forward_packets_window": 1552.734375,
+      "mean_backward_packets_window": 3935.21875,
+      "windows_backward_nonzero": 63,
+      "backward_percentage": 98.4375
+    }
+  ],
+  "ready_for_next_audit": true,
+  "no_binetflow_used": true
+}

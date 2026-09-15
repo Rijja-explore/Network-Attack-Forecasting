@@ -1,0 +1,21 @@
+{
+  "current_attack_risk": "Stage-1 current/observed risk when available",
+  "forecast": {
+    "t+1": "probability",
+    "t+2": "probability",
+    "t+3": "probability",
+    "t+4": "probability",
+    "t+5": "probability"
+  },
+  "trajectory": "STABLE/INCREASING_RISK/DECREASING_RISK/VOLATILE/INSUFFICIENT_EVIDENCE based only on predicted probabilities",
+  "attack_family_evidence": "seven Stage-2 CatBoost probabilities",
+  "attack_stage": "transparent rule-based inference, not trained MITRE classification",
+  "provenance": {
+    "temporal_alignment": "not performed"
+  },
+  "limitations": [
+    "No Stage1/Stage2 row alignment.",
+    "Binary forecasting persistence baseline outperforms learned model.",
+    "State forecasting weakly generalizes across chronological test."
+  ]
+}

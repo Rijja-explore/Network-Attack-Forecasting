@@ -1,0 +1,8 @@
+"Scenario","Family","PCAP","PCAPSize","BINETFLOW","BINETFLOWSize","Status"
+"CTU42","Neris","botnet-capture-20110810-neris.pcap","58266506","capture20110810.binetflow","386629271","verified"
+"CTU44","RBot","botnet-capture-20110812-rbot.pcap","128575191","capture20110812.binetflow","639643247","verified"
+"CTU46","Virut","botnet-capture-20110815-fast-flux.pcap","30941919","capture20110815-2.binetflow","17766203","verified"
+"CTU47","DonBot","botnet-capture-20110816-donbot.pcap","5284095","capture20110816.binetflow","76780048","verified"
+"CTU48","Sogou","botnet-capture-20110816-sogou.pcap","18868213","capture20110816-2.binetflow","15630512","verified"
+"CTU49","Murlo","botnet-capture-20110816-qvod.pcap","21366192","capture20110816-3.binetflow","403955463","verified"
+"CTU53","NSIS Agent","botnet-capture-20110819-bot.pcap","294902378","capture20110819.binetflow","44718958","verified"

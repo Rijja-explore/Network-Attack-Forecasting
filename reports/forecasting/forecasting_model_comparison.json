@@ -1,0 +1,1412 @@
+{
+  "records": [
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 1,
+      "split": "train",
+      "precision": 0.9943342776203966,
+      "recall": 0.9943342776203966,
+      "f1": 0.9943342776203966,
+      "pr_auc": 0.9913566981475559,
+      "roc_auc": 0.9946671388101984,
+      "fpr": 0.005,
+      "support": 753,
+      "normal_count": 400,
+      "confusion_matrix": [
+        [
+          398,
+          2
+        ],
+        [
+          2,
+          351
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 2,
+      "split": "train",
+      "precision": 0.9943342776203966,
+      "recall": 0.9943342776203966,
+      "f1": 0.9943342776203966,
+      "pr_auc": 0.9913566981475559,
+      "roc_auc": 0.9946671388101984,
+      "fpr": 0.005,
+      "support": 753,
+      "normal_count": 400,
+      "confusion_matrix": [
+        [
+          398,
+          2
+        ],
+        [
+          2,
+          351
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 3,
+      "split": "train",
+      "precision": 0.9915014164305949,
+      "recall": 0.9915014164305949,
+      "f1": 0.9915014164305949,
+      "pr_auc": 0.9870591225288958,
+      "roc_auc": 0.9920007082152975,
+      "fpr": 0.0075,
+      "support": 753,
+      "normal_count": 400,
+      "confusion_matrix": [
+        [
+          397,
+          3
+        ],
+        [
+          3,
+          350
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 1,
+      "split": "validation",
+      "precision": 0.9905660377358491,
+      "recall": 0.9905660377358491,
+      "f1": 0.9905660377358491,
+      "pr_auc": 0.9876726880189254,
+      "roc_auc": 0.9850789372352714,
+      "fpr": 0.02040816326530612,
+      "support": 155,
+      "normal_count": 49,
+      "confusion_matrix": [
+        [
+          48,
+          1
+        ],
+        [
+          1,
+          105
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 2,
+      "split": "validation",
+      "precision": 0.9811320754716981,
+      "recall": 0.9811320754716981,
+      "f1": 0.9811320754716981,
+      "pr_auc": 0.9755233753258535,
+      "roc_auc": 0.9701578744705429,
+      "fpr": 0.04081632653061224,
+      "support": 155,
+      "normal_count": 49,
+      "confusion_matrix": [
+        [
+          47,
+          2
+        ],
+        [
+          2,
+          104
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 3,
+      "split": "validation",
+      "precision": 0.9716981132075472,
+      "recall": 0.9716981132075472,
+      "f1": 0.9716981132075472,
+      "pr_auc": 0.9635520619207847,
+      "roc_auc": 0.9552368117058145,
+      "fpr": 0.061224489795918366,
+      "support": 155,
+      "normal_count": 49,
+      "confusion_matrix": [
+        [
+          46,
+          3
+        ],
+        [
+          3,
+          103
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 1,
+      "split": "test",
+      "precision": 0.993421052631579,
+      "recall": 0.993421052631579,
+      "f1": 0.993421052631579,
+      "pr_auc": 0.9932145017356849,
+      "roc_auc": 0.9133771929824562,
+      "fpr": 0.16666666666666666,
+      "support": 158,
+      "normal_count": 6,
+      "confusion_matrix": [
+        [
+          5,
+          1
+        ],
+        [
+          1,
+          151
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 2,
+      "split": "test",
+      "precision": 0.9868421052631579,
+      "recall": 0.9868421052631579,
+      "f1": 0.9868421052631579,
+      "pr_auc": 0.9865155685683229,
+      "roc_auc": 0.8267543859649124,
+      "fpr": 0.3333333333333333,
+      "support": 158,
+      "normal_count": 6,
+      "confusion_matrix": [
+        [
+          4,
+          2
+        ],
+        [
+          2,
+          150
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 3,
+      "horizon": 3,
+      "split": "test",
+      "precision": 0.9802631578947368,
+      "recall": 0.9802631578947368,
+      "f1": 0.9802631578947368,
+      "pr_auc": 0.9799032004979137,
+      "roc_auc": 0.7401315789473684,
+      "fpr": 0.5,
+      "support": 158,
+      "normal_count": 6,
+      "confusion_matrix": [
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          149
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 1,
+      "split": "train",
+      "precision": 0.9943342776203966,
+      "recall": 0.9943342776203966,
+      "f1": 0.9943342776203966,
+      "pr_auc": 0.9913637714964152,
+      "roc_auc": 0.994654575996128,
+      "fpr": 0.005025125628140704,
+      "support": 751,
+      "normal_count": 398,
+      "confusion_matrix": [
+        [
+          396,
+          2
+        ],
+        [
+          2,
+          351
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 2,
+      "split": "train",
+      "precision": 0.9943342776203966,
+      "recall": 0.9943342776203966,
+      "f1": 0.9943342776203966,
+      "pr_auc": 0.9913637714964152,
+      "roc_auc": 0.994654575996128,
+      "fpr": 0.005025125628140704,
+      "support": 751,
+      "normal_count": 398,
+      "confusion_matrix": [
+        [
+          396,
+          2
+        ],
+        [
+          2,
+          351
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 3,
+      "split": "train",
+      "precision": 0.9915014164305949,
+      "recall": 0.9915014164305949,
+      "f1": 0.9915014164305949,
+      "pr_auc": 0.9870697325521849,
+      "roc_auc": 0.9919818639941919,
+      "fpr": 0.007537688442211055,
+      "support": 751,
+      "normal_count": 398,
+      "confusion_matrix": [
+        [
+          395,
+          3
+        ],
+        [
+          3,
+          350
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 4,
+      "split": "train",
+      "precision": 0.9886685552407932,
+      "recall": 0.9886685552407932,
+      "f1": 0.9886685552407932,
+      "pr_auc": 0.9827917438129959,
+      "roc_auc": 0.9893091519922559,
+      "fpr": 0.010050251256281407,
+      "support": 751,
+      "normal_count": 398,
+      "confusion_matrix": [
+        [
+          394,
+          4
+        ],
+        [
+          4,
+          349
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 5,
+      "split": "train",
+      "precision": 0.9858356940509915,
+      "recall": 0.9858356940509915,
+      "f1": 0.9858356940509915,
+      "pr_auc": 0.9785298052788483,
+      "roc_auc": 0.9866364399903199,
+      "fpr": 0.01256281407035176,
+      "support": 751,
+      "normal_count": 398,
+      "confusion_matrix": [
+        [
+          393,
+          5
+        ],
+        [
+          5,
+          348
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 1,
+      "split": "validation",
+      "precision": 0.9903846153846154,
+      "recall": 0.9903846153846154,
+      "f1": 0.9903846153846154,
+      "pr_auc": 0.9873976341029509,
+      "roc_auc": 0.9849882260596545,
+      "fpr": 0.02040816326530612,
+      "support": 153,
+      "normal_count": 49,
+      "confusion_matrix": [
+        [
+          48,
+          1
+        ],
+        [
+          1,
+          103
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 2,
+      "split": "validation",
+      "precision": 0.9807692307692307,
+      "recall": 0.9807692307692307,
+      "f1": 0.9807692307692307,
+      "pr_auc": 0.9749801794485052,
+      "roc_auc": 0.9699764521193093,
+      "fpr": 0.04081632653061224,
+      "support": 153,
+      "normal_count": 49,
+      "confusion_matrix": [
+        [
+          47,
+          2
+        ],
+        [
+          2,
+          102
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 3,
+      "split": "validation",
+      "precision": 0.9711538461538461,
+      "recall": 0.9711538461538461,
+      "f1": 0.9711538461538461,
+      "pr_auc": 0.9627476360366632,
+      "roc_auc": 0.954964678178964,
+      "fpr": 0.061224489795918366,
+      "support": 153,
+      "normal_count": 49,
+      "confusion_matrix": [
+        [
+          46,
+          3
+        ],
+        [
+          3,
+          101
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 4,
+      "split": "validation",
+      "precision": 0.9615384615384616,
+      "recall": 0.9615384615384616,
+      "f1": 0.9615384615384616,
+      "pr_auc": 0.9507000038674247,
+      "roc_auc": 0.9399529042386187,
+      "fpr": 0.08163265306122448,
+      "support": 153,
+      "normal_count": 49,
+      "confusion_matrix": [
+        [
+          45,
+          4
+        ],
+        [
+          4,
+          100
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 5,
+      "split": "validation",
+      "precision": 0.9519230769230769,
+      "recall": 0.9519230769230769,
+      "f1": 0.9519230769230769,
+      "pr_auc": 0.9388372829407896,
+      "roc_auc": 0.9249411302982732,
+      "fpr": 0.10204081632653061,
+      "support": 153,
+      "normal_count": 49,
+      "confusion_matrix": [
+        [
+          44,
+          5
+        ],
+        [
+          5,
+          99
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 1,
+      "split": "test",
+      "precision": 0.9933333333333333,
+      "recall": 0.9933333333333333,
+      "f1": 0.9933333333333333,
+      "pr_auc": 0.9931213675213675,
+      "roc_auc": 0.9133333333333332,
+      "fpr": 0.16666666666666666,
+      "support": 156,
+      "normal_count": 6,
+      "confusion_matrix": [
+        [
+          5,
+          1
+        ],
+        [
+          1,
+          149
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 2,
+      "split": "test",
+      "precision": 0.9866666666666667,
+      "recall": 0.9866666666666667,
+      "f1": 0.9866666666666667,
+      "pr_auc": 0.986331623931624,
+      "roc_auc": 0.8266666666666669,
+      "fpr": 0.3333333333333333,
+      "support": 156,
+      "normal_count": 6,
+      "confusion_matrix": [
+        [
+          4,
+          2
+        ],
+        [
+          2,
+          148
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 3,
+      "split": "test",
+      "precision": 0.98,
+      "recall": 0.98,
+      "f1": 0.98,
+      "pr_auc": 0.9796307692307692,
+      "roc_auc": 0.74,
+      "fpr": 0.5,
+      "support": 156,
+      "normal_count": 6,
+      "confusion_matrix": [
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          147
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 4,
+      "split": "test",
+      "precision": 0.9733333333333334,
+      "recall": 0.9733333333333334,
+      "f1": 0.9733333333333334,
+      "pr_auc": 0.9730188034188034,
+      "roc_auc": 0.6533333333333333,
+      "fpr": 0.6666666666666666,
+      "support": 156,
+      "normal_count": 6,
+      "confusion_matrix": [
+        [
+          2,
+          4
+        ],
+        [
+          4,
+          146
+        ]
+      ]
+    },
+    {
+      "model": "Persistence",
+      "K": 5,
+      "horizon": 5,
+      "split": "test",
+      "precision": 0.9666666666666667,
+      "recall": 0.9666666666666667,
+      "f1": 0.9666666666666667,
+      "pr_auc": 0.9664957264957265,
+      "roc_auc": 0.5666666666666667,
+      "fpr": 0.8333333333333334,
+      "support": 156,
+      "normal_count": 6,
+      "confusion_matrix": [
+        [
+          1,
+          5
+        ],
+        [
+          5,
+          145
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 3,
+      "horizon": 1,
+      "split": "validation",
+      "threshold": 0.1,
+      "precision": 0.9139784946236559,
+      "recall": 0.8018867924528302,
+      "f1": 0.8542713567839196,
+      "pr_auc": 0.8853506171177031,
+      "roc_auc": 0.8365421640354255,
+      "fpr": 0.16326530612244897,
+      "support": 155,
+      "positive_rate": 0.6838709677419355,
+      "negative_count": 49,
+      "cm": [
+        [
+          41,
+          8
+        ],
+        [
+          21,
+          85
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 3,
+      "horizon": 1,
+      "split": "test",
+      "threshold": 0.1,
+      "precision": 0.9620253164556962,
+      "recall": 1.0,
+      "f1": 0.9806451612903225,
+      "pr_auc": 0.9854343270638922,
+      "roc_auc": 0.6831140350877194,
+      "fpr": 1.0,
+      "support": 158,
+      "positive_rate": 0.9620253164556962,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          152
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 3,
+      "horizon": 1,
+      "split": "validation",
+      "threshold": 0.2,
+      "precision": 0.97,
+      "recall": 0.9150943396226415,
+      "f1": 0.941747572815534,
+      "pr_auc": 0.9820962655054772,
+      "roc_auc": 0.9551405467847517,
+      "fpr": 0.061224489795918366,
+      "support": 155,
+      "positive_rate": 0.6838709677419355,
+      "negative_count": 49,
+      "cm": [
+        [
+          46,
+          3
+        ],
+        [
+          9,
+          97
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 3,
+      "horizon": 1,
+      "split": "test",
+      "threshold": 0.2,
+      "precision": 0.9612903225806452,
+      "recall": 0.9802631578947368,
+      "f1": 0.9706840390879479,
+      "pr_auc": 0.9966755080608374,
+      "roc_auc": 0.9166666666666666,
+      "fpr": 1.0,
+      "support": 158,
+      "positive_rate": 0.9620253164556962,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          3,
+          149
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 3,
+      "horizon": 2,
+      "split": "validation",
+      "threshold": 0.1,
+      "precision": 0.8958333333333334,
+      "recall": 0.8113207547169812,
+      "f1": 0.8514851485148515,
+      "pr_auc": 0.8528631245140255,
+      "roc_auc": 0.8130535232961109,
+      "fpr": 0.20408163265306123,
+      "support": 155,
+      "positive_rate": 0.6838709677419355,
+      "negative_count": 49,
+      "cm": [
+        [
+          39,
+          10
+        ],
+        [
+          20,
+          86
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 3,
+      "horizon": 2,
+      "split": "test",
+      "threshold": 0.1,
+      "precision": 0.9617834394904459,
+      "recall": 0.993421052631579,
+      "f1": 0.9773462783171522,
+      "pr_auc": 0.9843811505458749,
+      "roc_auc": 0.6600877192982457,
+      "fpr": 1.0,
+      "support": 158,
+      "positive_rate": 0.9620253164556962,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          151
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 3,
+      "horizon": 2,
+      "split": "validation",
+      "threshold": 0.2,
+      "precision": 0.9595959595959596,
+      "recall": 0.8962264150943396,
+      "f1": 0.926829268292683,
+      "pr_auc": 0.9631034810820592,
+      "roc_auc": 0.9293415479399307,
+      "fpr": 0.08163265306122448,
+      "support": 155,
+      "positive_rate": 0.6838709677419355,
+      "negative_count": 49,
+      "cm": [
+        [
+          45,
+          4
+        ],
+        [
+          11,
+          95
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 3,
+      "horizon": 2,
+      "split": "test",
+      "threshold": 0.2,
+      "precision": 0.9615384615384616,
+      "recall": 0.9868421052631579,
+      "f1": 0.974025974025974,
+      "pr_auc": 0.9965678083216688,
+      "roc_auc": 0.9144736842105263,
+      "fpr": 1.0,
+      "support": 158,
+      "positive_rate": 0.9620253164556962,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          150
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 3,
+      "horizon": 3,
+      "split": "validation",
+      "threshold": 0.1,
+      "precision": 0.8865979381443299,
+      "recall": 0.8113207547169812,
+      "f1": 0.8472906403940886,
+      "pr_auc": 0.8310666929472628,
+      "roc_auc": 0.790912591451675,
+      "fpr": 0.22448979591836735,
+      "support": 155,
+      "positive_rate": 0.6838709677419355,
+      "negative_count": 49,
+      "cm": [
+        [
+          38,
+          11
+        ],
+        [
+          20,
+          86
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 3,
+      "horizon": 3,
+      "split": "test",
+      "threshold": 0.1,
+      "precision": 0.9617834394904459,
+      "recall": 0.993421052631579,
+      "f1": 0.9773462783171522,
+      "pr_auc": 0.9856927222689477,
+      "roc_auc": 0.6885964912280702,
+      "fpr": 1.0,
+      "support": 158,
+      "positive_rate": 0.9620253164556962,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          151
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 3,
+      "horizon": 3,
+      "split": "validation",
+      "threshold": 0.2,
+      "precision": 0.95,
+      "recall": 0.8962264150943396,
+      "f1": 0.9223300970873787,
+      "pr_auc": 0.9443362071095944,
+      "roc_auc": 0.9085483249903735,
+      "fpr": 0.10204081632653061,
+      "support": 155,
+      "positive_rate": 0.6838709677419355,
+      "negative_count": 49,
+      "cm": [
+        [
+          44,
+          5
+        ],
+        [
+          11,
+          95
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 3,
+      "horizon": 3,
+      "split": "test",
+      "threshold": 0.2,
+      "precision": 0.9607843137254902,
+      "recall": 0.9671052631578947,
+      "f1": 0.9639344262295082,
+      "pr_auc": 0.9975276096305942,
+      "roc_auc": 0.9375,
+      "fpr": 1.0,
+      "support": 158,
+      "positive_rate": 0.9620253164556962,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          5,
+          147
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 1,
+      "split": "validation",
+      "threshold": 0.1,
+      "precision": 0.9222222222222223,
+      "recall": 0.7980769230769231,
+      "f1": 0.8556701030927835,
+      "pr_auc": 0.8801873458127403,
+      "roc_auc": 0.8343799058084772,
+      "fpr": 0.14285714285714285,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          42,
+          7
+        ],
+        [
+          21,
+          83
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 1,
+      "split": "test",
+      "threshold": 0.1,
+      "precision": 0.9615384615384616,
+      "recall": 1.0,
+      "f1": 0.9803921568627451,
+      "pr_auc": 0.9851371068402208,
+      "roc_auc": 0.6811111111111111,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          150
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 1,
+      "split": "validation",
+      "threshold": 0.2,
+      "precision": 0.9693877551020408,
+      "recall": 0.9134615384615384,
+      "f1": 0.9405940594059405,
+      "pr_auc": 0.9808724220388576,
+      "roc_auc": 0.9546703296703297,
+      "fpr": 0.061224489795918366,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          46,
+          3
+        ],
+        [
+          9,
+          95
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 1,
+      "split": "test",
+      "threshold": 0.2,
+      "precision": 0.9607843137254902,
+      "recall": 0.98,
+      "f1": 0.9702970297029703,
+      "pr_auc": 0.9966878165570443,
+      "roc_auc": 0.918888888888889,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          3,
+          147
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 2,
+      "split": "validation",
+      "threshold": 0.1,
+      "precision": 0.8924731182795699,
+      "recall": 0.7980769230769231,
+      "f1": 0.8426395939086294,
+      "pr_auc": 0.8486854282679668,
+      "roc_auc": 0.8112244897959184,
+      "fpr": 0.20408163265306123,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          39,
+          10
+        ],
+        [
+          21,
+          83
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 2,
+      "split": "test",
+      "threshold": 0.1,
+      "precision": 0.9612903225806452,
+      "recall": 0.9933333333333333,
+      "f1": 0.9770491803278688,
+      "pr_auc": 0.9839813929541821,
+      "roc_auc": 0.6566666666666667,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          149
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 2,
+      "split": "validation",
+      "threshold": 0.2,
+      "precision": 0.9587628865979382,
+      "recall": 0.8942307692307693,
+      "f1": 0.9253731343283582,
+      "pr_auc": 0.95914391283771,
+      "roc_auc": 0.9224882260596545,
+      "fpr": 0.08163265306122448,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          45,
+          4
+        ],
+        [
+          11,
+          93
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 2,
+      "split": "test",
+      "threshold": 0.2,
+      "precision": 0.9605263157894737,
+      "recall": 0.9733333333333334,
+      "f1": 0.9668874172185431,
+      "pr_auc": 0.9963224238590233,
+      "roc_auc": 0.9099999999999999,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          4,
+          146
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 3,
+      "split": "validation",
+      "threshold": 0.1,
+      "precision": 0.8842105263157894,
+      "recall": 0.8076923076923077,
+      "f1": 0.8442211055276382,
+      "pr_auc": 0.8264554008540062,
+      "roc_auc": 0.788265306122449,
+      "fpr": 0.22448979591836735,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          38,
+          11
+        ],
+        [
+          20,
+          84
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 3,
+      "split": "test",
+      "threshold": 0.1,
+      "precision": 0.9612903225806452,
+      "recall": 0.9933333333333333,
+      "f1": 0.9770491803278688,
+      "pr_auc": 0.9852726681040168,
+      "roc_auc": 0.6844444444444444,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          149
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 3,
+      "split": "validation",
+      "threshold": 0.3,
+      "precision": 0.9574468085106383,
+      "recall": 0.8653846153846154,
+      "f1": 0.9090909090909091,
+      "pr_auc": 0.939738069290483,
+      "roc_auc": 0.8977629513343799,
+      "fpr": 0.08163265306122448,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          45,
+          4
+        ],
+        [
+          14,
+          90
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 3,
+      "split": "test",
+      "threshold": 0.3,
+      "precision": 0.96,
+      "recall": 0.96,
+      "f1": 0.96,
+      "pr_auc": 0.9976009032792352,
+      "roc_auc": 0.94,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          6,
+          144
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 4,
+      "split": "validation",
+      "threshold": 0.1,
+      "precision": 0.8673469387755102,
+      "recall": 0.8173076923076923,
+      "f1": 0.8415841584158416,
+      "pr_auc": 0.798405381451737,
+      "roc_auc": 0.7574568288854003,
+      "fpr": 0.2653061224489796,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          36,
+          13
+        ],
+        [
+          19,
+          85
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 4,
+      "split": "test",
+      "threshold": 0.1,
+      "precision": 0.9612903225806452,
+      "recall": 0.9933333333333333,
+      "f1": 0.9770491803278688,
+      "pr_auc": 0.9860598885806642,
+      "roc_auc": 0.7011111111111111,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          149
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 4,
+      "split": "validation",
+      "threshold": 0.2,
+      "precision": 0.9375,
+      "recall": 0.8653846153846154,
+      "f1": 0.9,
+      "pr_auc": 0.9131629018725991,
+      "roc_auc": 0.8846153846153846,
+      "fpr": 0.12244897959183673,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          43,
+          6
+        ],
+        [
+          14,
+          90
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 4,
+      "split": "test",
+      "threshold": 0.2,
+      "precision": 0.9605263157894737,
+      "recall": 0.9733333333333334,
+      "f1": 0.9668874172185431,
+      "pr_auc": 0.9972218928042424,
+      "roc_auc": 0.9311111111111111,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          4,
+          146
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 5,
+      "split": "validation",
+      "threshold": 0.1,
+      "precision": 0.8529411764705882,
+      "recall": 0.8365384615384616,
+      "f1": 0.8446601941747572,
+      "pr_auc": 0.7933964135590224,
+      "roc_auc": 0.7386185243328101,
+      "fpr": 0.30612244897959184,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          34,
+          15
+        ],
+        [
+          17,
+          87
+        ]
+      ]
+    },
+    {
+      "model": "LaggedLogisticRegression",
+      "K": 5,
+      "horizon": 5,
+      "split": "test",
+      "threshold": 0.1,
+      "precision": 0.9612903225806452,
+      "recall": 0.9933333333333333,
+      "f1": 0.9770491803278688,
+      "pr_auc": 0.9870238202532619,
+      "roc_auc": 0.7188888888888889,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          149
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 5,
+      "split": "validation",
+      "threshold": 0.2,
+      "precision": 0.9090909090909091,
+      "recall": 0.8653846153846154,
+      "f1": 0.8866995073891626,
+      "pr_auc": 0.8906137052812356,
+      "roc_auc": 0.8577315541601256,
+      "fpr": 0.1836734693877551,
+      "support": 153,
+      "positive_rate": 0.6797385620915033,
+      "negative_count": 49,
+      "cm": [
+        [
+          40,
+          9
+        ],
+        [
+          14,
+          90
+        ]
+      ]
+    },
+    {
+      "model": "LaggedXGBoost",
+      "K": 5,
+      "horizon": 5,
+      "split": "test",
+      "threshold": 0.2,
+      "precision": 0.9605263157894737,
+      "recall": 0.9733333333333334,
+      "f1": 0.9668874172185431,
+      "pr_auc": 0.9979649765880275,
+      "roc_auc": 0.9488888888888888,
+      "fpr": 1.0,
+      "support": 156,
+      "positive_rate": 0.9615384615384616,
+      "negative_count": 6,
+      "cm": [
+        [
+          0,
+          6
+        ],
+        [
+          4,
+          146
+        ]
+      ]
+    }
+  ]
+}

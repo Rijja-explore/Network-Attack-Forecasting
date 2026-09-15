@@ -1,0 +1,30 @@
+{
+  "phase_0": {
+    "status": "PASS WITH CAVEAT",
+    "outputs": [
+      "reports/fusion_pipeline_inventory.json",
+      "reports/fusion_alignment_report.json"
+    ]
+  },
+  "phase_1a": {
+    "status": "PASS WITH CAVEAT",
+    "outputs": [
+      "processed_data/fusion/stage1_representation.csv",
+      "reports/fusion/stage1_representation_report.json"
+    ],
+    "caveat": "Input rows have no source timestamp column; fixed split plus row_index preserves available chronology."
+  },
+  "phase_1b": {
+    "status": "PASS WITH CAVEAT",
+    "outputs": [
+      "processed_data/fusion/stage2_representation.csv",
+      "reports/fusion/stage2_representation_report.json"
+    ],
+    "caveat": "Train probabilities are in-sample; any future supervised fusion must use OOF train predictions or raw features."
+  },
+  "phase_1c": {
+    "status": "PASS WITH CAVEAT",
+    "classification": "C representation-level fusion only; direct row alignment prohibited."
+  },
+  "next_dependency": "Few-shot fusion is BLOCKED for supervised forecasting: no scientifically valid Stage1-Stage2 row/capture alignment."
+}

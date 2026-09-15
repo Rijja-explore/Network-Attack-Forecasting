@@ -1,0 +1,5 @@
+{
+  "method": "saved XGBoost native feature importance/model report",
+  "top_features": "See stage1_tabular_progress.json; no SHAP rerun performed.",
+  "limitation": "Native importance is global, not causal local attribution."
+}
