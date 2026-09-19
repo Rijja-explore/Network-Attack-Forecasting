@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Shield, Activity, Zap, Upload, ArrowLeft, FileText, LayoutDashboard, History, Settings, Database, Server, Clock, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import clsx from 'clsx';
+import { 
+  Shield, Activity, Zap, Upload, ArrowLeft, FileText, LayoutDashboard, 
+  History, Settings, Database, Server, Clock, AlertTriangle, CheckCircle2, 
+  Radio, UserCheck, Users, Sliders, Layers, GitFork
+} from 'lucide-react';
 import { 
   UploadDropzone,
   TrafficSummary,
@@ -9,6 +14,21 @@ import {
   ExplainabilityPanel,
   AttackChainContext,
   RiskTrajectory,
+  CountermeasuresPanel,
+  ZeroDayAnalysisPanel,
+  ExecutiveBriefingPanel,
+  ScenarioSelector,
+  AuthModal,
+  FeatureAttributionWaterfall,
+  MitreMatrixNavigator,
+  BlastRadiusGraph,
+  WhatIfDefenseSimulator,
+  LiveCaptureStudio,
+  ThreatOriginWarMap,
+  LeadTimeThreatRadar,
+  SoarExecutionTerminal,
+  SocAiCopilot,
+  PacketHexDissector,
 } from './components';
 
 export default function App() {
@@ -17,11 +37,74 @@ export default function App() {
   const [error, setError] = useState(null);
   const [fileName, setFileName] = useState('');
   const [activeTab, setActiveTab] = useState('live');
+  const [activeScenarioId, setActiveScenarioId] = useState(null);
+  const [isStreaming, setIsStreaming] = useState(false);
+  const streamIntervalRef = React.useRef(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('netthreat_user');
+      return saved ? JSON.parse(saved) : {
+        username: 'analyst',
+        name: 'Sarah Chen',
+        role: 'SOC Analyst',
+        tier: 'Tier-1 Live Sensor Monitoring',
+        badge: 'L1 ANALYST',
+        avatar: 'SC',
+        color: '#30D158'
+      };
+    } catch (e) {
+      return null;
+    }
+  });
+
+  const handleSelectScenario = async (scenarioId) => {
+    setError(null);
+    setIsUploading(true);
+    setActiveScenarioId(scenarioId);
+    setFileName(`Scenario: ${scenarioId}`);
+    try {
+      const res = await fetch(`/api/scenarios/${scenarioId}/load`, { method: 'POST' });
+      if (!res.ok) throw new Error('Failed to load scenario');
+      const data = await res.json();
+      setReport(data);
+    } catch (err) {
+      setError(err.message || 'Failed to load scenario');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleToggleLiveStream = async () => {
+    if (isStreaming) {
+      if (streamIntervalRef.current) clearInterval(streamIntervalRef.current);
+      setIsStreaming(false);
+      return;
+    }
+
+    setIsStreaming(true);
+    const streamSequence = ['benign', 'recon', 'bruteforce', 'neris_c2', 'ddos'];
+    let stepIndex = 0;
+
+    await handleSelectScenario(streamSequence[0]);
+
+    streamIntervalRef.current = setInterval(async () => {
+      stepIndex = (stepIndex + 1) % streamSequence.length;
+      await handleSelectScenario(streamSequence[stepIndex]);
+    }, 4000);
+  };
+
+  React.useEffect(() => {
+    return () => {
+      if (streamIntervalRef.current) clearInterval(streamIntervalRef.current);
+    };
+  }, []);
 
   const handleFileSelected = async (file) => {
     setError(null);
     setIsUploading(true);
     setFileName(file.name);
+    setActiveScenarioId(null);
     setActiveTab('live'); // Force switch to live tab if not already
 
     const formData = new FormData();
@@ -49,6 +132,9 @@ export default function App() {
   };
 
   const handleReset = () => {
+    if (streamIntervalRef.current) clearInterval(streamIntervalRef.current);
+    setIsStreaming(false);
+    setActiveScenarioId(null);
     setReport(null);
     setError(null);
     setFileName('');
@@ -56,12 +142,27 @@ export default function App() {
 
   const navItems = [
     { id: 'live', label: 'Live Analysis', icon: LayoutDashboard },
+    { id: 'sniffer', label: 'Live Sniffer Studio', icon: Radio },
     { id: 'history', label: 'Historical Reports', icon: History },
     { id: 'models', label: 'Threat Models', icon: Database },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   const renderContent = () => {
+    if (activeTab === 'sniffer') {
+      return (
+        <div className="max-w-6xl mx-auto relative z-10 py-6">
+          <LiveCaptureStudio 
+            onSnapshotAnalyzed={(rep) => {
+              setReport(rep);
+              setFileName(`Live_Sensor_Snapshot_${new Date().toLocaleTimeString()}`);
+              setActiveTab('live');
+            }}
+            isUploading={isUploading}
+          />
+        </div>
+      );
+    }
     if (activeTab === 'history') {
       return (
         <div className="max-w-4xl mx-auto relative z-10 text-center py-24 flex flex-col items-center justify-center">
@@ -212,6 +313,17 @@ export default function App() {
             </div>
           </div>
 
+          {/* Quick-Load Test Mode & Live Sensor Streamer */}
+          <div className="bg-[#121214]/80 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 shadow-2xl">
+            <ScenarioSelector
+              onSelectScenario={handleSelectScenario}
+              isLoading={isUploading}
+              activeScenarioId={activeScenarioId}
+              onStartLiveStream={handleToggleLiveStream}
+              isStreaming={isStreaming}
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
             <div className="bg-[#121214]/80 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 flex items-center justify-between shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all">
               <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-[#30D158]/5 blur-[30px] rounded-full pointer-events-none group-hover:bg-[#30D158]/10 transition-all" />
@@ -241,10 +353,92 @@ export default function App() {
     } else {
       return (
         <div className="max-w-7xl mx-auto space-y-6 relative z-10 pb-10">
+          {/* Quick Scenario Switcher Bar */}
+          <div className="bg-[#121214]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <button
+                onClick={handleReset}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 text-white/80 hover:text-white text-[12px] font-medium border border-white/10 transition-all cursor-pointer"
+              >
+                <ArrowLeft size={14} />
+                <span>Reset View</span>
+              </button>
+
+              <label className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0A84FF]/20 hover:bg-[#0A84FF]/30 text-[#0A84FF] hover:text-white text-[12px] font-semibold border border-[#0A84FF]/40 transition-all cursor-pointer">
+                <Upload size={14} />
+                <span>Upload PCAP / CSV</span>
+                <input
+                  type="file"
+                  accept=".csv,.pcap,.pcapng,.cap,.binetflow,.log,.json,.tsv,.netflow"
+                  className="hidden"
+                  disabled={isUploading}
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files.length > 0) {
+                      const file = e.target.files[0];
+                      e.target.value = '';
+                      handleFileSelected(file);
+                    }
+                  }}
+                />
+              </label>
+
+              <div className="h-4 w-px bg-white/10 hidden sm:block" />
+              <div className="text-[12px] text-white/60 truncate font-mono">
+                Source: <span className="text-white font-semibold">{report.input_context?.filename || fileName}</span>
+              </div>
+            </div>
+
+            {/* Quick Switcher Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+              {[
+                { id: 'benign', label: '1. Benign', color: '#30D158' },
+                { id: 'recon', label: '2. Recon', color: '#FFD60A' },
+                { id: 'bruteforce', label: '3. BruteForce', color: '#FF9F0A' },
+                { id: 'neris_c2', label: '4. Neris C2', color: '#FF453A' },
+                { id: 'ddos', label: '5. DDoS', color: '#FF3B30' },
+                { id: 'zeroday', label: '6. Zero-Day', color: '#BF5AF2' },
+              ].map(s => (
+                <button
+                  key={s.id}
+                  onClick={() => handleSelectScenario(s.id)}
+                  disabled={isUploading}
+                  className={clsx(
+                    "px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium transition-all whitespace-nowrap cursor-pointer",
+                    activeScenarioId === s.id
+                      ? "bg-white/20 text-white border border-white/30"
+                      : "bg-white/5 text-white/60 hover:text-white hover:bg-white/10"
+                  )}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full inline-block mr-1.5" style={{ backgroundColor: s.color }} />
+                  {s.label}
+                </button>
+              ))}
+
+              <button
+                onClick={handleToggleLiveStream}
+                className={clsx(
+                  "px-3 py-1 rounded-lg text-[11px] font-bold font-mono transition-all ml-1 cursor-pointer flex items-center gap-1.5 shrink-0",
+                  isStreaming
+                    ? "bg-[#FF3B30] text-white animate-pulse"
+                    : "bg-[#0A84FF]/20 text-[#0A84FF] border border-[#0A84FF]/40 hover:bg-[#0A84FF]/30"
+                )}
+              >
+                <Activity size={12} className={clsx(isStreaming && "animate-spin")} />
+                <span>{isStreaming ? "STREAMING" : "STREAM DEMO"}</span>
+              </button>
+            </div>
+          </div>
+
           <TrafficSummary report={report} />
           <AssessmentHero report={report} />
           <RiskTrajectory report={report} />
           
+          {/* SIH-153 Showstopper 1 & 2: Preemptive Lead-Time Threat Radar & Ballistic Threat Origin War Map */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <LeadTimeThreatRadar timeToCompromise={report.time_to_compromise} probability={report.attack_probability} />
+            <ThreatOriginWarMap geoContext={report.geo_context} />
+          </div>
+
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
             <div className="xl:col-span-2">
               <div className="bg-[#121214] border border-white/10 rounded-[24px] p-6 h-[340px] flex flex-col shadow-xl">
@@ -283,6 +477,26 @@ export default function App() {
             <ExplainabilityPanel report={report} />
             <AttackChainContext report={report} />
           </div>
+
+          <ZeroDayAnalysisPanel report={report} />
+          
+          {/* SIH-153 Novel Cyber Intelligence & Forecasting Suite */}
+          <FeatureAttributionWaterfall attributions={report.feature_attributions} />
+          <MitreMatrixNavigator matrix={report.mitre_matrix} />
+          <BlastRadiusGraph blastRadius={report.blast_radius} />
+          <WhatIfDefenseSimulator report={report} />
+
+          {/* SIH-153 Showstopper 3 & 4: Autonomous SOC AI Forensic Co-Pilot & Live SOAR Playbook Remediation */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <SocAiCopilot report={report} />
+            <SoarExecutionTerminal countermeasures={report.countermeasures} report={report} />
+          </div>
+
+          {/* SIH-153 Showstopper 5: Wireshark-Grade Deep Packet Hex Dissector */}
+          <PacketHexDissector dissector={report.hex_dissector} />
+
+          <CountermeasuresPanel report={report} />
+          <ExecutiveBriefingPanel report={report} />
         </div>
       );
     }
@@ -365,14 +579,62 @@ export default function App() {
             )}
           </div>
           
-          {activeTab === 'live' && report && (
-            <div className="flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
-              <FileText size={14} className="text-[#0A84FF]" strokeWidth={2} />
-              <span className="text-[12px] text-white/70 font-medium">
-                <span className="text-white/90">{fileName}</span>
-              </span>
-            </div>
-          )}
+          <div className="flex items-center gap-3">
+            {activeTab === 'live' && report && (
+              <>
+                <label className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0A84FF]/20 hover:bg-[#0A84FF]/30 text-[#0A84FF] hover:text-white text-[12px] font-semibold border border-[#0A84FF]/40 transition-all cursor-pointer shadow-lg shadow-[#0A84FF]/10">
+                  <Upload size={13} />
+                  <span>Upload New File</span>
+                  <input
+                    type="file"
+                    accept=".csv,.pcap,.pcapng,.cap,.binetflow,.log,.json,.tsv,.netflow"
+                    className="hidden"
+                    disabled={isUploading}
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files.length > 0) {
+                        const file = e.target.files[0];
+                        e.target.value = '';
+                        handleFileSelected(file);
+                      }
+                    }}
+                  />
+                </label>
+                <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                  <FileText size={13} className="text-[#0A84FF]" strokeWidth={2} />
+                  <span className="text-[12px] text-white/70 font-medium font-mono truncate max-w-[140px]">
+                    <span className="text-white/90">{fileName}</span>
+                  </span>
+                </div>
+              </>
+            )}
+
+            {/* Persona Switcher / User Login Button */}
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
+              className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all cursor-pointer group shadow-sm"
+              title="Click to Switch SOC Persona / Login"
+            >
+              <div 
+                className="w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] border"
+                style={{ 
+                  color: currentUser?.color || '#30D158', 
+                  backgroundColor: `${currentUser?.color || '#30D158'}20`, 
+                  borderColor: `${currentUser?.color || '#30D158'}50` 
+                }}
+              >
+                {currentUser?.name ? currentUser.name.split(' ').map(n => n[0]).join('') : 'SC'}
+              </div>
+              <div className="flex flex-col text-left hidden sm:flex">
+                <span className="text-[11px] font-bold text-white leading-tight">
+                  {currentUser?.name || 'Sarah Chen'}
+                </span>
+                <span className="text-[9px] font-mono text-white/50">
+                  {currentUser?.badge || 'L1 ANALYST'}
+                </span>
+              </div>
+              <UserCheck size={13} className="text-white/40 group-hover:text-white transition-colors ml-0.5" />
+            </button>
+          </div>
         </div>
 
         {/* Scrollable View */}
@@ -384,6 +646,18 @@ export default function App() {
           
         </div>
       </div>
+
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+        onLoginSuccess={(u) => {
+          setCurrentUser(u);
+          try {
+            localStorage.setItem('netthreat_user', JSON.stringify(u));
+          } catch (e) {}
+        }} 
+        currentUser={currentUser} 
+      />
     </div>
   );
 }

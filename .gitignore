@@ -26,6 +26,11 @@ Thumbs.db
 # Models: Include all trained model artifacts and weights
 !/models/**
 
+# Test Data: Include evaluation PCAPs and CSVs
+!/test_data/**
+!/test_data/*.pcap
+!/test_data/*.csv
+
 # Processed Feature Data: Include all feature tables, temporal splits, and state data used for modeling
 !/processed_data/**
 

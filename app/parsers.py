@@ -200,15 +200,17 @@ def parse_pcap(filepath: str) -> list[dict]:
                 if protocol == 6 and len(pkt_data) >= transport_offset + 14:
                     tcp_flag_byte = pkt_data[transport_offset + 13]
             
-            # Aggregate into flows (5-tuple)
+            # Aggregate into flows (5-tuple: src_ip, dst_ip, src_port, dst_port, proto)
             proto_name = {6: 'TCP', 17: 'UDP', 1: 'ICMP'}.get(protocol, str(protocol))
-            flow_key = f"{src_ip}->{dst_ip}:{proto_name}"
+            flow_key = f"{src_ip}:{src_port}->{dst_ip}:{dst_port}:{proto_name}"
             
             flow = flows[flow_key]
             flow['packets'] += 1
             flow['bytes'] += orig_len
             flow['packet_sizes'].append(orig_len)
             flow['protocols'].add(proto_name)
+            flow['src_port'] = src_port
+            flow['dst_port'] = dst_port
             flow['src_ports'].add(src_port)
             flow['dst_ports'].add(dst_port)
             
@@ -228,10 +230,14 @@ def parse_pcap(filepath: str) -> list[dict]:
     records = []
     for flow_key, flow in flows.items():
         parts = flow_key.split('->')
-        src_ip = parts[0]
+        src_part = parts[0].split(':')
+        src_ip = src_part[0]
+        sport = int(src_part[1]) if len(src_part) > 1 and src_part[1].isdigit() else 0
+        
         dst_part = parts[1].split(':')
         dst_ip = dst_part[0]
-        proto = dst_part[1] if len(dst_part) > 1 else 'unknown'
+        dport = int(dst_part[1]) if len(dst_part) > 1 and dst_part[1].isdigit() else 0
+        proto = dst_part[2] if len(dst_part) > 2 else 'TCP'
         
         duration = (flow['end_time'] - flow['start_time']) if flow['start_time'] and flow['end_time'] else 0
         pkts = flow['packets']
@@ -241,6 +247,8 @@ def parse_pcap(filepath: str) -> list[dict]:
         record = {
             'srcaddr': src_ip,
             'dstaddr': dst_ip,
+            'sport': sport,
+            'dport': dport,
             'proto': proto,
             'totpkts': pkts,
             'totbytes': bytez,
