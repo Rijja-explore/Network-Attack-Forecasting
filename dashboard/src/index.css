@@ -3,12 +3,12 @@
 
 /* ═══ DESIGN TOKENS ═══ */
 :root {
-  --void: #000000;
-  --surface: #060608;
-  --card: #0d0d10;
-  --card-hover: #141418;
-  --border: rgba(255,255,255,0.07);
-  --border-bright: rgba(255,255,255,0.14);
+  --void: #06070a;
+  --surface: #0a0c14;
+  --card: #0f121d;
+  --card-hover: #161b2a;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-bright: rgba(0, 240, 255, 0.35);
   --cyan: #00F0FF;
   --blue: #0A84FF;
   --green: #30D158;
@@ -17,23 +17,23 @@
   --purple: #BF5AF2;
   --yellow: #FFD60A;
   --orange: #FF6B2B;
-  --text: rgba(255,255,255,0.90);
-  --text-dim: rgba(255,255,255,0.55);
-  --text-ghost: rgba(255,255,255,0.28);
+  --text: rgba(255, 255, 255, 0.95);
+  --text-dim: rgba(255, 255, 255, 0.65);
+  --text-ghost: rgba(255, 255, 255, 0.38);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body, #root { height: 100%; width: 100%; background: var(--void); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
+html, body, #root { height: 100%; width: 100%; background: var(--void); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; font-size: 14px; line-height: 1.5; }
 
 /* ═══ TYPOGRAPHY ═══ */
-.font-grostesk { font-family: 'Space Grotesk', sans-serif; }
-.font-mono { font-family: 'Space Mono', monospace; }
+.font-grostesk { font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; }
+.font-mono { font-family: 'Space Mono', 'Consolas', 'Fira Code', monospace; }
 
 /* ═══ SCROLLBAR ═══ */
-::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.20); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,240,255,0.35); }
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
@@ -41,21 +41,22 @@ html, body, #root { height: 100%; width: 100%; background: var(--void); color: v
    BACKGROUNDS
 ═══════════════════════════════════════════════ */
 .grid-bg {
-  background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 .hex-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66Z M28 100L0 84L0 66L28 50L56 66L56 84L28 100Z' fill='none' stroke='rgba(0,240,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66Z M28 100L0 84L0 66L28 50L56 66L56 84L28 100Z' fill='none' stroke='rgba(0,240,255,0.05)' stroke-width='1'/%3E%3C/svg%3E");
   background-size: 56px 100px;
 }
 
 /* ═══════════════════════════════════════════════
    GLASS CARDS
 ═══════════════════════════════════════════════ */
-.glass { background: var(--card); border: 1px solid var(--border); border-radius: 20px; backdrop-filter: blur(20px); }
-.glass:hover { border-color: var(--border-bright); }
-.glass-sm { background: var(--card); border: 1px solid var(--border); border-radius: 14px; }
-.glass-lg { background: var(--card); border: 1px solid var(--border); border-radius: 28px; }
+.glass { background: rgba(15, 18, 29, 0.85); border: 1px solid var(--border); border-radius: 20px; backdrop-filter: blur(24px); }
+.glass:hover { border-color: rgba(255,255,255,0.18); }
+.glass-sm { background: rgba(15, 18, 29, 0.75); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(16px); }
+.glass-lg { background: rgba(15, 18, 29, 0.90); border: 1px solid var(--border); border-radius: 28px; backdrop-filter: blur(30px); }
+.glass-card { background: rgba(15, 18, 29, 0.82); border: 1px solid var(--border); border-radius: 20px; backdrop-filter: blur(20px); }
 
 /* ═══════════════════════════════════════════════
    NEON GLOW UTILITIES
@@ -320,41 +321,41 @@ html, body, #root { height: 100%; width: 100%; background: var(--void); color: v
 ═══════════════════════════════════════════════ */
 .label {
   font-family: 'Space Mono', monospace;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.45);
 }
 
 /* ═══════════════════════════════════════════════
    TAGS / BADGES
 ═══════════════════════════════════════════════ */
-.tag { display:inline-flex; align-items:center; font-family:'Space Mono',monospace; font-weight:800; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; border-radius:6px; padding:2px 8px; border:1px solid; }
-.tag-red    { background:rgba(255,59,48,0.12);  border-color:rgba(255,59,48,0.35);  color:#FF3B30; }
-.tag-amber  { background:rgba(255,159,10,0.12); border-color:rgba(255,159,10,0.35); color:#FF9F0A; }
-.tag-green  { background:rgba(48,209,88,0.12);  border-color:rgba(48,209,88,0.35);  color:#30D158; }
-.tag-cyan   { background:rgba(0,240,255,0.10);  border-color:rgba(0,240,255,0.30);  color:#00F0FF; }
-.tag-purple { background:rgba(191,90,242,0.12); border-color:rgba(191,90,242,0.35); color:#BF5AF2; }
-.tag-white  { background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.15); color:rgba(255,255,255,0.7); }
+.tag { display:inline-flex; align-items:center; font-family:'Space Mono',monospace; font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; border-radius:8px; padding:3px 10px; border:1px solid; }
+.tag-red    { background:rgba(255,59,48,0.15);  border-color:rgba(255,59,48,0.45);  color:#FF453A; }
+.tag-amber  { background:rgba(255,159,10,0.15); border-color:rgba(255,159,10,0.45); color:#FF9F0A; }
+.tag-green  { background:rgba(48,209,88,0.15);  border-color:rgba(48,209,88,0.45);  color:#30D158; }
+.tag-cyan   { background:rgba(0,240,255,0.12);  border-color:rgba(0,240,255,0.40);  color:#00F0FF; }
+.tag-purple { background:rgba(191,90,242,0.15); border-color:rgba(191,90,242,0.45); color:#BF5AF2; }
+.tag-white  { background:rgba(255,255,255,0.09); border-color:rgba(255,255,255,0.22); color:rgba(255,255,255,0.85); }
 
 /* ═══════════════════════════════════════════════
    BUTTONS
 ═══════════════════════════════════════════════ */
-.btn { display:inline-flex; align-items:center; gap:6px; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; border-radius:10px; padding:7px 14px; cursor:pointer; border:1px solid; transition:all 0.2s ease; outline:none; }
+.btn { display:inline-flex; align-items:center; gap:8px; font-family:'Inter',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.02em; border-radius:12px; padding:8px 16px; cursor:pointer; border:1px solid; transition:all 0.2s ease; outline:none; }
 .btn:active { transform:scale(0.97); }
 
-.btn-cyan   { background:rgba(0,240,255,0.10); border-color:rgba(0,240,255,0.30); color:#00F0FF; }
-.btn-cyan:hover   { background:rgba(0,240,255,0.20); box-shadow:0 0 20px rgba(0,240,255,0.25); }
+.btn-cyan   { background:rgba(0,240,255,0.12); border-color:rgba(0,240,255,0.40); color:#00F0FF; }
+.btn-cyan:hover   { background:rgba(0,240,255,0.22); box-shadow:0 0 24px rgba(0,240,255,0.35); }
 
-.btn-red    { background:rgba(255,59,48,0.12); border-color:rgba(255,59,48,0.35); color:#FF3B30; }
-.btn-red:hover    { background:rgba(255,59,48,0.22); box-shadow:0 0 20px rgba(255,59,48,0.25); }
+.btn-red    { background:rgba(255,59,48,0.15); border-color:rgba(255,59,48,0.45); color:#FF453A; }
+.btn-red:hover    { background:rgba(255,59,48,0.25); box-shadow:0 0 24px rgba(255,59,48,0.35); }
 
-.btn-ghost  { background:rgba(255,255,255,0.05); border-color:rgba(255,255,255,0.10); color:rgba(255,255,255,0.60); }
-.btn-ghost:hover  { background:rgba(255,255,255,0.10); color:rgba(255,255,255,0.90); }
+.btn-ghost  { background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.14); color:rgba(255,255,255,0.75); }
+.btn-ghost:hover  { background:rgba(255,255,255,0.12); color:#ffffff; border-color:rgba(255,255,255,0.25); }
 
-.btn-green  { background:rgba(48,209,88,0.12); border-color:rgba(48,209,88,0.35); color:#30D158; }
-.btn-green:hover  { background:rgba(48,209,88,0.22); box-shadow:0 0 20px rgba(48,209,88,0.25); }
+.btn-green  { background:rgba(48,209,88,0.15); border-color:rgba(48,209,88,0.45); color:#30D158; }
+.btn-green:hover  { background:rgba(48,209,88,0.25); box-shadow:0 0 24px rgba(48,209,88,0.35); }
 
 /* ═══════════════════════════════════════════════
    CIRCUIT PATTERN (for hero section)
