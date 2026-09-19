@@ -9,6 +9,7 @@ import {
   GitFork, Lock, UserCheck, Eye, Terminal, Globe, MessageSquare, Send, Bot, 
   User, ChevronRight, ChevronDown, Copy, Sparkles, Flame
 } from 'lucide-react';
+import { API_BASE } from './config';
 
 /* ────────────────────────────────────────────────────────────
    APPLE-STYLE SQUIRCLE ICON WRAPPER
@@ -1357,7 +1358,7 @@ export function AuthModal({ isOpen, onClose, onLoginSuccess, currentUser }) {
   const handleQuickLogin = async (personaId) => {
     setIsSubmitting(true);
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: personaId, password: 'password' })
@@ -1712,7 +1713,7 @@ export function WhatIfDefenseSimulator({ report }) {
   const runSimulation = async (activeDefenses) => {
     setIsSimulating(true);
     try {
-      const res = await fetch('/api/simulate/countermeasures', {
+      const res = await fetch(`${API_BASE}/api/simulate/countermeasures`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1845,7 +1846,7 @@ export function LiveCaptureStudio({ onSnapshotAnalyzed, isUploading }) {
 
   const startSniffer = async () => {
     try {
-      await fetch('/api/capture/start', { method: 'POST' });
+      await fetch(`${API_BASE}/api/capture/start`, { method: 'POST' });
       setIsCapturing(true);
       startPolling();
     } catch (e) {
@@ -1855,7 +1856,7 @@ export function LiveCaptureStudio({ onSnapshotAnalyzed, isUploading }) {
 
   const stopSniffer = async () => {
     try {
-      await fetch('/api/capture/stop', { method: 'POST' });
+      await fetch(`${API_BASE}/api/capture/stop`, { method: 'POST' });
       setIsCapturing(false);
       if (pollIntervalRef.current) clearInterval(pollIntervalRef.current);
     } catch (e) {
@@ -1867,7 +1868,7 @@ export function LiveCaptureStudio({ onSnapshotAnalyzed, isUploading }) {
     if (pollIntervalRef.current) clearInterval(pollIntervalRef.current);
     pollIntervalRef.current = setInterval(async () => {
       try {
-        const res = await fetch('/api/capture/status');
+        const res = await fetch(`${API_BASE}/api/capture/status`);
         const data = await res.json();
         setCaptureStatus(data);
         if (!data.is_active) {
@@ -1887,7 +1888,7 @@ export function LiveCaptureStudio({ onSnapshotAnalyzed, isUploading }) {
 
   const handleAnalyzeSnapshot = async () => {
     try {
-      const res = await fetch('/api/capture/snapshot', { method: 'POST' });
+      const res = await fetch(`${API_BASE}/api/capture/snapshot`, { method: 'POST' });
       const report = await res.json();
       onSnapshotAnalyzed(report);
     } catch (e) {
@@ -2285,7 +2286,7 @@ export function SoarExecutionTerminal({ countermeasures, report }) {
     setIsExecuting(true);
     setIsDone(false);
     try {
-      const res = await fetch('/api/soar/execute', {
+      const res = await fetch(`${API_BASE}/api/soar/execute`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2423,7 +2424,7 @@ export function SocAiCopilot({ report }) {
     setIsLoading(true);
 
     try {
-      const res = await fetch('/api/copilot/chat', {
+      const res = await fetch(`${API_BASE}/api/copilot/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: q, report_context: report })

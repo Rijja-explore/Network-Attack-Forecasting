@@ -10,6 +10,8 @@ catboost>=1.2,<2
 
 # API server
 fastapi
+uvicorn[standard]
+python-multipart
 pydantic
 
 # Optional historical research dependency (not required by the demo):
