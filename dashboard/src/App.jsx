@@ -587,11 +587,11 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
   ];
 
   return (
-    <div className="w-[260px] border-r border-white/10 bg-[#070911] flex flex-col shrink-0 z-30 relative overflow-hidden shadow-2xl">
+    <div className="w-[260px] h-full max-h-screen border-r border-white/10 bg-[#070911] flex flex-col shrink-0 z-30 relative overflow-hidden shadow-2xl">
       <div className="absolute inset-0 hex-bg pointer-events-none opacity-50" />
 
       {/* Logo */}
-      <div className="h-16 flex items-center px-5 border-b border-white/10 relative z-10 gap-3.5 bg-white/[0.01]">
+      <div className="h-16 flex items-center px-5 border-b border-white/10 relative z-10 gap-3.5 bg-white/[0.01] shrink-0">
         <div className="relative w-9 h-9 shrink-0">
           <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/30 border border-cyan-400/40 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.25)]">
             <Shield size={18} className="text-cyan-400" />
@@ -608,15 +608,15 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
 
       {/* Threat Status Banner */}
       {report && (
-        <div className="px-3.5 pt-3 pb-3 shrink-0 relative z-20 border-b border-white/10 bg-black/25">
-          <div className="p-3.5 rounded-2xl border shadow-xl anim-scale-in"
+        <div className="px-3 pt-2.5 pb-2.5 shrink-0 relative z-20 border-b border-white/10 bg-black/25">
+          <div className="p-3 rounded-2xl border shadow-xl anim-scale-in"
             style={{ background:`linear-gradient(135deg, ${tc}24 0%, #0d1020 95%)`, borderColor:`${tc}45` }}>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-2.5 h-2.5 rounded-full shrink-0 pulse-threat" style={{ background: tc }} />
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className="w-2 h-2 rounded-full shrink-0 pulse-threat" style={{ background: tc }} />
               <div className="text-xs font-mono font-black tracking-wider" style={{ color: tc }}>{severity} RISK</div>
               <div className="ml-auto text-xs text-white/70 font-mono font-bold">{prob}%</div>
             </div>
-            <div className="h-1.5 bg-black/50 rounded-full overflow-hidden mb-2 border border-white/10">
+            <div className="h-1.5 bg-black/50 rounded-full overflow-hidden mb-1.5 border border-white/10">
               <div className="h-full bar-fill rounded-full" style={{ width:`${prob}%`, background:`linear-gradient(90deg, ${tc}80, ${tc})` }} />
             </div>
             <div className="text-xs text-white/80 font-mono truncate font-semibold">{report?.stage2_output?.dominant_family || 'N/A'}</div>
@@ -625,24 +625,24 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
       )}
 
       {/* Navigation items */}
-      <div className="flex-1 pt-5 pb-4 px-3.5 space-y-1 relative z-10 overflow-y-auto">
-        <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 pb-2.5 font-bold select-none">Navigation Center</div>
+      <div className="flex-1 min-h-0 pt-3.5 pb-2 px-3 space-y-1 relative z-10 overflow-y-auto">
+        <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-cyan-400/60 px-3 pb-2 font-bold select-none">Navigation Center</div>
         {nav.map(item => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
           return (
             <button key={item.id} onClick={() => onTabChange(item.id)}
               className={clsx(
-                'relative w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all text-left group cursor-pointer',
+                'relative w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all text-left group cursor-pointer',
                 isActive
                   ? 'text-cyan-300 bg-cyan-500/15 border border-cyan-400/40 shadow-[0_0_20px_rgba(0,240,255,0.15)]'
                   : 'text-white/60 hover:bg-white/[0.06] hover:text-white border border-transparent'
               )}>
               {isActive && <div className="nav-bar" />}
-              <Icon size={17} strokeWidth={isActive ? 2.5 : 1.8} className={clsx('shrink-0 transition-colors', isActive ? 'text-cyan-400' : 'text-white/40 group-hover:text-white/80')} />
+              <Icon size={16} strokeWidth={isActive ? 2.5 : 1.8} className={clsx('shrink-0 transition-colors', isActive ? 'text-cyan-400' : 'text-white/40 group-hover:text-white/80')} />
               <span className="truncate flex-1">{item.label}</span>
               {item.badge && (
-                <span className="text-[9px] font-mono font-black px-2 py-0.5 rounded-md shrink-0 leading-none ml-auto"
+                <span className="text-[9px] font-mono font-black px-1.5 py-0.5 rounded-md shrink-0 leading-none ml-auto"
                   style={{
                     background: item.badge==='AI' ? 'rgba(191,90,242,0.25)' : 'rgba(255,59,48,0.25)',
                     color:      item.badge==='AI' ? '#BF5AF2' : '#FF453A',
@@ -656,27 +656,26 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
 
       {/* Quick Telemetry Info */}
       {report && (
-        <div className="mx-3.5 mb-3 p-3.5 rounded-2xl relative z-10 border border-white/10 bg-white/[0.02]">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-white/40 mb-2 font-bold">Active Telemetry</div>
+        <div className="mx-3 mb-2 p-2.5 rounded-xl relative z-10 shrink-0 border border-white/10 bg-white/[0.02]">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-white/40 mb-1 font-bold">Active Telemetry</div>
           {[
             { k: 'Flows Analyzed', v: (report.traffic_summary?.total_flows||0).toLocaleString() },
             { k: 'MITRE Stage', v: report.mitre_kill_chain?.active_stage || 'N/A' },
             { k: 'Lead Time', v: report.time_to_compromise ? (typeof report.time_to_compromise === 'string' ? report.time_to_compromise.split(' until ')[0] : report.time_to_compromise) : 'N/A' },
           ].map(s => (
-            <div key={s.k} className="flex justify-between items-center gap-2 py-1 border-b border-white/5 last:border-0">
-              <span className="text-xs text-white/45 font-medium">{s.k}</span>
-              <span className="text-xs font-mono text-white/85 truncate text-right font-bold">{s.v}</span>
+            <div key={s.k} className="flex justify-between items-center gap-2 py-0.5 border-b border-white/5 last:border-0">
+              <span className="text-[10.5px] text-white/45 font-medium">{s.k}</span>
+              <span className="text-[10.5px] font-mono text-white/85 truncate text-right font-bold">{s.v}</span>
             </div>
           ))}
         </div>
       )}
 
       {/* User Status Profile */}
-      <div className="p-3.5 border-t border-white/10 relative z-10 bg-black/20">
+      <div className="p-2.5 pb-3 border-t border-white/10 relative z-10 shrink-0 bg-black/50 mt-auto">
         <button onClick={onOpenAuth}
-          className="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/[0.07] border border-white/10 transition-all group cursor-pointer"
-          style={{ background:'rgba(255,255,255,0.03)' }}>
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold border shrink-0 shadow-sm"
+          className="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl hover:bg-white/[0.08] border border-white/10 transition-all group cursor-pointer bg-white/[0.03]">
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold border shrink-0 shadow-sm"
             style={{ color:currentUser?.color||'#30D158', background:`${currentUser?.color||'#30D158'}20`, borderColor:`${currentUser?.color||'#30D158'}50` }}>
             {currentUser?.name ? currentUser.name.split(' ').map(n=>n[0]).join('') : 'SC'}
           </div>
@@ -684,7 +683,7 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
             <div className="text-xs font-bold text-white truncate">{currentUser?.name||'Sarah Chen'}</div>
             <div className="text-[10px] font-mono text-white/50 truncate font-semibold">{currentUser?.badge||'L1 ANALYST'}</div>
           </div>
-          <UserCheck size={14} className="text-white/40 group-hover:text-cyan-400 shrink-0 transition-colors" />
+          <UserCheck size={13} className="text-white/40 group-hover:text-cyan-400 shrink-0 transition-colors" />
         </button>
       </div>
     </div>
@@ -788,7 +787,7 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-7 pb-16 anim-fade-up">
+    <div className="max-w-7xl mx-auto space-y-5 pb-8 anim-fade-up">
 
       {/* ── Hero Container: Info left + Upload right ── */}
       <div className="relative rounded-3xl overflow-hidden circuit-bg border border-white/12 bg-[#0c0f1d]/95 shadow-2xl">
@@ -797,9 +796,9 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr]">
           {/* Left Column */}
-          <div className="p-8 sm:p-10 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between space-y-6">
+          <div className="p-6 sm:p-7 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between space-y-4">
             <div>
-              <div className="flex flex-wrap items-center gap-2.5 mb-5">
+              <div className="flex flex-wrap items-center gap-2.5 mb-3.5">
                 <span className="tag tag-cyan font-extrabold tracking-wider">SIH-26153 PROTOTYPE</span>
                 <span className="tag tag-green font-extrabold tracking-wider">WORLD MODEL AI</span>
                 <div className="flex items-center gap-2 ml-1 bg-green-500/15 border border-green-500/40 px-3 py-1 rounded-full shadow-sm">
@@ -808,11 +807,11 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
                 </div>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-black font-grostesk tracking-tight leading-[1.12] mb-4">
+              <h1 className="text-2xl sm:text-3xl lg:text-[38px] font-black font-grostesk tracking-tight leading-[1.12] mb-3">
                 <span className="grad-cyan-purple">Network Attack</span>{' '}
                 <span className="text-white">Forecasting System</span>
               </h1>
-              <p className="text-[15px] text-white/75 leading-relaxed mb-6 max-w-2xl font-normal">
+              <p className="text-[13.5px] text-white/75 leading-relaxed mb-4 max-w-2xl font-normal">
                 AI World Model that learns network state dynamics from live traffic telemetry, anticipates attacker kill-chain progression, and provides XAI-explainable decision support before compromise is complete.
               </p>
               
@@ -825,10 +824,10 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
             </div>
 
             {/* Mini World Model State Graph Preview */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/12 bg-black/60 h-[135px] mt-3 shadow-inner">
+            <div className="relative rounded-2xl overflow-hidden border border-white/12 bg-black/60 h-[115px] mt-2 shadow-inner">
               <WorldModelCanvas threatLevel={0.20} active={true} />
-              <div className="absolute top-3 left-3 pointer-events-none">
-                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/90 border border-cyan-400/40 px-3 py-1 rounded-lg font-bold shadow-md tracking-wider">
+              <div className="absolute top-2.5 left-2.5 pointer-events-none">
+                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/90 border border-cyan-400/40 px-2.5 py-0.5 rounded-lg font-bold shadow-md tracking-wider">
                   LATENT DYNAMICS TOPOLOGY SIMULATION
                 </span>
               </div>
@@ -836,20 +835,20 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
           </div>
 
           {/* Right Column: Upload */}
-          <div className="p-8 sm:p-10 flex flex-col justify-between bg-black/35 backdrop-blur-md">
+          <div className="p-6 sm:p-7 pr-7 sm:pr-9 flex flex-col justify-between bg-black/35 backdrop-blur-md">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="text-xs font-mono uppercase tracking-wider text-white/60 font-bold flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/70 font-bold flex items-center gap-2 truncate">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
                   Ingest Network Telemetry
                 </div>
-                <span className="text-[10px] font-mono text-cyan-400/90 bg-cyan-950/70 border border-cyan-400/30 px-2 py-0.5 rounded-md font-semibold">
+                <span className="text-[10px] font-mono text-cyan-400/90 bg-cyan-950/70 border border-cyan-400/30 px-2 py-0.5 rounded-md font-semibold shrink-0 mr-1">
                   LIVE PARSER
                 </span>
               </div>
               <UploadDropzone onFileSelected={onFileSelected} isUploading={isUploading} error={error} />
             </div>
-            <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-white/40">
+            <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-white/40">
               <span>Supports .pcap, .csv, .binetflow, .log, .json</span>
               <span className="text-cyan-400/80 font-semibold">Stage-1 & Stage-2 Automated</span>
             </div>
@@ -858,7 +857,7 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
       </div>
 
       {/* ── Scenario Selector ── */}
-      <div className="rounded-3xl border border-white/12 p-7 bg-[#0c0f1d]/95 shadow-xl">
+      <div className="rounded-3xl border border-white/12 p-5 sm:p-6 bg-[#0c0f1d]/95 shadow-xl">
         <ScenarioSelector
           onSelectScenario={onSelectScenario}
           isLoading={isUploading}
@@ -869,15 +868,15 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
       </div>
 
       {/* ── Key Performance Stats ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
         {stats.map((s, i) => (
-          <div key={s.label} className={`rounded-2xl p-6 lift anim-fade-up d-${(i+1)*100} border border-white/10 bg-[#0e1120] shadow-lg`}>
-            <div className="flex items-center justify-between mb-3">
-              <div className="text-xs font-mono uppercase tracking-wider text-white/50 font-bold">{s.label}</div>
-              <div className="w-2.5 h-2.5 rounded-full pulse-safe" style={{ background: s.color }} />
+          <div key={s.label} className={`rounded-2xl p-4 sm:p-5 lift anim-fade-up d-${(i+1)*100} border border-white/10 bg-[#0e1120] shadow-lg`}>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-xs font-mono uppercase tracking-wider text-white/50 font-bold truncate">{s.label}</div>
+              <div className="w-2 h-2 rounded-full pulse-safe shrink-0" style={{ background: s.color }} />
             </div>
-            <div className="text-3xl font-black font-mono leading-none mb-2" style={{ color: s.color, textShadow:`0 0 20px ${s.color}50` }}>{s.value}</div>
-            <div className="text-xs text-white/50 font-mono">{s.sub}</div>
+            <div className="text-2xl font-black font-mono leading-none mb-1.5" style={{ color: s.color, textShadow:`0 0 20px ${s.color}50` }}>{s.value}</div>
+            <div className="text-[11px] text-white/50 font-mono truncate">{s.sub}</div>
           </div>
         ))}
       </div>

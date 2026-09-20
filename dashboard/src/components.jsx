@@ -1315,7 +1315,7 @@ export function ScenarioSelector({ onSelectScenario, isLoading, activeScenarioId
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
         {scenarios.map((sc) => {
           const isActive = activeScenarioId === sc.id;
           return (
@@ -1323,15 +1323,15 @@ export function ScenarioSelector({ onSelectScenario, isLoading, activeScenarioId
               key={sc.id}
               onClick={() => !isLoading && onSelectScenario(sc.id)}
               className={clsx(
-                "p-5 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between group relative overflow-hidden min-h-[140px]",
+                "p-4 sm:p-4.5 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between group relative min-h-[155px]",
                 isActive
                   ? "bg-white/10 border-cyan-400 shadow-[0_0_30px_rgba(0,240,255,0.15)] ring-1 ring-cyan-400"
                   : "bg-[#111420]/80 hover:bg-[#161a2b] border-white/10 hover:border-cyan-500/40 hover:-translate-y-0.5 shadow-md"
               )}
             >
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center justify-between gap-2 mb-2 shrink-0">
                 <span
-                  className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border shrink-0 tracking-wide"
+                  className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-md border shrink-0 tracking-wide"
                   style={{ color: sc.color, backgroundColor: `${sc.color}15`, borderColor: `${sc.color}40` }}
                 >
                   {sc.badge}
@@ -1340,11 +1340,13 @@ export function ScenarioSelector({ onSelectScenario, isLoading, activeScenarioId
                   {isActive ? "Active" : "Load"} <ChevronRight size={14} />
                 </span>
               </div>
-              <div className="text-[15px] font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors">
-                {sc.title}
-              </div>
-              <div className="text-xs text-white/60 leading-relaxed">
-                {sc.desc}
+              <div className="flex-1 flex flex-col justify-center">
+                <div className="text-[14px] sm:text-[15px] font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors leading-tight">
+                  {sc.title}
+                </div>
+                <div className="text-xs text-white/65 leading-snug">
+                  {sc.desc}
+                </div>
               </div>
             </div>
           );
