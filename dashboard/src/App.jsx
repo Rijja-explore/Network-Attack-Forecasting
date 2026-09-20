@@ -1378,7 +1378,7 @@ export default function App() {
       <Sidebar activeTab={activeTab} onTabChange={setActiveTab} report={report} currentUser={currentUser} onOpenAuth={() => setIsAuthOpen(true)} />
 
       {/* Main */}
-      <div className="flex-1 flex flex-col min-w-0 relative" style={{ zIndex: 1 }}>
+      <div className="flex-1 flex flex-col min-w-0 min-h-0 relative" style={{ zIndex: 1 }}>
 
         {/* Top Bar */}
         <div className="h-14 px-5 flex items-center gap-3 shrink-0 border-b border-white/5 backdrop-blur-2xl sticky top-0 z-20" style={{ background:'rgba(3,3,10,0.88)' }}>
@@ -1411,7 +1411,7 @@ export default function App() {
 
         {/* Content */}
         <div className={clsx(
-          'flex-1 relative',
+          'flex-1 min-h-0 relative',
           activeTab==='worldmodel' ? 'overflow-hidden' : 'overflow-y-auto px-5 py-5'
         )}>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_-10%,rgba(0,240,255,0.04),transparent)] pointer-events-none" />

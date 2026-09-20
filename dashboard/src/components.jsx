@@ -1323,7 +1323,7 @@ export function ScenarioSelector({ onSelectScenario, isLoading, activeScenarioId
               key={sc.id}
               onClick={() => !isLoading && onSelectScenario(sc.id)}
               className={clsx(
-                "p-4 sm:p-4.5 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between group relative min-h-[155px]",
+                "p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between group relative min-h-[155px]",
                 isActive
                   ? "bg-white/10 border-cyan-400 shadow-[0_0_30px_rgba(0,240,255,0.15)] ring-1 ring-cyan-400"
                   : "bg-[#111420]/80 hover:bg-[#161a2b] border-white/10 hover:border-cyan-500/40 hover:-translate-y-0.5 shadow-md"
