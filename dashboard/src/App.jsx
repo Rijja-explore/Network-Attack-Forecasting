@@ -608,23 +608,25 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
 
       {/* Threat Status Banner */}
       {report && (
-        <div className="mx-3.5 mt-3 mb-2 p-3.5 rounded-2xl border relative z-20 shrink-0 shadow-xl anim-scale-in"
-          style={{ background:`linear-gradient(135deg, ${tc}24 0%, #0d1020 95%)`, borderColor:`${tc}45` }}>
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-2.5 h-2.5 rounded-full shrink-0 pulse-threat" style={{ background: tc }} />
-            <div className="text-xs font-mono font-black tracking-wider" style={{ color: tc }}>{severity} RISK</div>
-            <div className="ml-auto text-xs text-white/70 font-mono font-bold">{prob}%</div>
+        <div className="px-3.5 pt-3 pb-3 shrink-0 relative z-20 border-b border-white/10 bg-black/25">
+          <div className="p-3.5 rounded-2xl border shadow-xl anim-scale-in"
+            style={{ background:`linear-gradient(135deg, ${tc}24 0%, #0d1020 95%)`, borderColor:`${tc}45` }}>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2.5 h-2.5 rounded-full shrink-0 pulse-threat" style={{ background: tc }} />
+              <div className="text-xs font-mono font-black tracking-wider" style={{ color: tc }}>{severity} RISK</div>
+              <div className="ml-auto text-xs text-white/70 font-mono font-bold">{prob}%</div>
+            </div>
+            <div className="h-1.5 bg-black/50 rounded-full overflow-hidden mb-2 border border-white/10">
+              <div className="h-full bar-fill rounded-full" style={{ width:`${prob}%`, background:`linear-gradient(90deg, ${tc}80, ${tc})` }} />
+            </div>
+            <div className="text-xs text-white/80 font-mono truncate font-semibold">{report?.stage2_output?.dominant_family || 'N/A'}</div>
           </div>
-          <div className="h-1.5 bg-black/50 rounded-full overflow-hidden mb-2 border border-white/10">
-            <div className="h-full bar-fill rounded-full" style={{ width:`${prob}%`, background:`linear-gradient(90deg, ${tc}80, ${tc})` }} />
-          </div>
-          <div className="text-xs text-white/80 font-mono truncate font-semibold">{report?.stage2_output?.dominant_family || 'N/A'}</div>
         </div>
       )}
 
       {/* Navigation items */}
-      <div className="flex-1 pt-1 pb-4 px-3.5 space-y-1 relative z-10 overflow-y-auto">
-        <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 pt-2 pb-2 font-bold select-none">Navigation Center</div>
+      <div className="flex-1 py-3 px-3.5 space-y-1 relative z-10 overflow-y-auto">
+        <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 pb-2 font-bold select-none">Navigation Center</div>
         {nav.map(item => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
