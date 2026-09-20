@@ -1,0 +1,9 @@
+{
+  "name": "network-attack-forecasting",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix dashboard install && npm --prefix dashboard run build",
+    "dev": "npm --prefix dashboard run dev"
+  }
+}
