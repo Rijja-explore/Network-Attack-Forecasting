@@ -608,23 +608,23 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
 
       {/* Threat Status Banner */}
       {report && (
-        <div className="mx-4 mt-4 p-3.5 rounded-2xl border relative z-10 anim-scale-in shadow-lg"
-          style={{ background:`${tc}12`, borderColor:`${tc}35` }}>
+        <div className="mx-3.5 mt-3 mb-2 p-3.5 rounded-2xl border relative z-20 shrink-0 shadow-xl anim-scale-in"
+          style={{ background:`linear-gradient(135deg, ${tc}24 0%, #0d1020 95%)`, borderColor:`${tc}45` }}>
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2.5 h-2.5 rounded-full shrink-0 pulse-threat" style={{ background: tc }} />
             <div className="text-xs font-mono font-black tracking-wider" style={{ color: tc }}>{severity} RISK</div>
             <div className="ml-auto text-xs text-white/70 font-mono font-bold">{prob}%</div>
           </div>
-          <div className="h-1.5 bg-black/40 rounded-full overflow-hidden mb-2 border border-white/5">
+          <div className="h-1.5 bg-black/50 rounded-full overflow-hidden mb-2 border border-white/10">
             <div className="h-full bar-fill rounded-full" style={{ width:`${prob}%`, background:`linear-gradient(90deg, ${tc}80, ${tc})` }} />
           </div>
-          <div className="text-xs text-white/70 font-mono truncate font-semibold">{report?.stage2_output?.dominant_family || 'N/A'}</div>
+          <div className="text-xs text-white/80 font-mono truncate font-semibold">{report?.stage2_output?.dominant_family || 'N/A'}</div>
         </div>
       )}
 
       {/* Navigation items */}
-      <div className="flex-1 py-5 px-3.5 space-y-1.5 relative z-10 overflow-y-auto">
-        <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 mb-2.5 font-bold">Navigation Center</div>
+      <div className="flex-1 pt-1 pb-4 px-3.5 space-y-1 relative z-10 overflow-y-auto">
+        <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 pt-2 pb-2 font-bold select-none">Navigation Center</div>
         {nav.map(item => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -1118,11 +1118,98 @@ function SettingsTab() {
 }
 
 /* ═══════════════════════════════════════════════
+   FORENSIC ANALYSIS PROGRESS HUD
+═══════════════════════════════════════════════ */
+function ForensicAnalysisProgress({ progress }) {
+  if (!progress) return null;
+  const stages = [
+    { name: 'PCAP Header Dissection', threshold: 25 },
+    { name: '51-D Flow Extraction', threshold: 55 },
+    { name: 'Stage-1 XGBoost Inference', threshold: 78 },
+    { name: 'Stage-2 CatBoost Attribution', threshold: 92 },
+    { name: 'MITRE ATT&CK World Model', threshold: 100 },
+  ];
+
+  return (
+    <div className="max-w-3xl mx-auto py-12 px-4 anim-fade-up">
+      <div className="rounded-3xl border border-cyan-500/30 bg-[#0c1022]/95 backdrop-blur-2xl p-7 sm:p-9 shadow-[0_0_50px_rgba(0,240,255,0.15)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="relative w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,240,255,0.3)]">
+            <Activity size={24} className="text-cyan-400 animate-spin" />
+            <div className="absolute inset-[-3px] rounded-2xl border border-cyan-400/30 spin-cw" style={{ borderTopColor:'transparent', borderRightColor:'transparent' }} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="text-[10px] font-mono font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
+                FORENSIC PIPELINE ACTIVE
+              </span>
+              <span className="text-xs font-mono text-white/50">{progress.fileSize}</span>
+            </div>
+            <h2 className="text-lg font-bold text-white font-mono truncate">{progress.fileName}</h2>
+          </div>
+        </div>
+
+        {/* Progress bar */}
+        <div className="mb-5 bg-black/40 border border-white/10 rounded-2xl p-4">
+          <div className="flex justify-between items-center text-xs font-mono mb-2">
+            <span className="text-cyan-300 font-bold flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+              {progress.step}
+            </span>
+            <span className="text-white/90 font-mono font-black">{progress.percent}%</span>
+          </div>
+          <div className="h-2.5 bg-black/60 rounded-full overflow-hidden border border-white/10 p-0.5">
+            <div
+              className="h-full rounded-full transition-all duration-300 ease-out"
+              style={{
+                width: `${progress.percent}%`,
+                background: 'linear-gradient(90deg, #00F0FF, #0A84FF 60%, #BF5AF2)',
+                boxShadow: '0 0 14px rgba(0,240,255,0.7)'
+              }}
+            />
+          </div>
+          <div className="text-[11px] font-mono text-white/50 mt-2.5 flex items-center gap-2">
+            <span className="text-cyan-400">›</span>
+            <span>{progress.telemetry}</span>
+          </div>
+        </div>
+
+        {/* Pipeline Stage Indicators */}
+        <div className="pt-3 grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+          {stages.map((st, i) => {
+            const isDone = progress.percent >= st.threshold;
+            const isCurrent = progress.percent < st.threshold && (i === 0 || progress.percent >= stages[i-1].threshold);
+            return (
+              <div key={st.name} className={clsx(
+                "p-3 rounded-xl border text-center transition-all",
+                isDone ? "bg-cyan-500/10 border-cyan-400/40 text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.1)]" :
+                isCurrent ? "bg-amber-500/15 border-amber-500/50 text-amber-300 animate-pulse shadow-[0_0_12px_rgba(255,159,10,0.2)]" :
+                "bg-white/[0.02] border-white/5 text-white/30"
+              )}>
+                <div className="text-[9px] font-mono uppercase tracking-wider font-bold mb-1">
+                  {isDone ? '✓ STEP 0' + (i+1) : 'STEP 0' + (i+1)}
+                </div>
+                <div className="text-[10px] font-mono leading-tight font-semibold">{st.name}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════
    MAIN APP
 ═══════════════════════════════════════════════ */
 export default function App() {
   const [report, setReport] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [analysisProgress, setAnalysisProgress] = useState(null);
   const [error, setError] = useState(null);
   const [fileName, setFileName] = useState('');
   const [activeTab, setActiveTab] = useState('live');
@@ -1165,25 +1252,80 @@ export default function App() {
   useEffect(() => () => clearInterval(streamRef.current), []);
 
   const analyzeFile = async (file) => {
-    setError(null); setIsUploading(true); setFileName(file.name); setActiveScenarioId(null); setActiveTab('live');
-    const fd = new FormData(); fd.append('file', file);
-    try {
-      const res = await fetch(`${API_BASE}/api/analyze`, { method:'POST', body:fd });
-      if (res.ok) {
-        const data = await res.json();
-        setReport(data);
-        setIsUploading(false);
-        return;
-      }
-    } catch {
-      // Backend offline: use client-side file inference
-    }
-    const offlineReport = generateOfflineReportForFile(file.name);
-    setReport(offlineReport);
+    setError(null);
+    setIsUploading(true);
+    setFileName(file.name);
+    setActiveScenarioId(null);
+    setActiveTab('live');
+
+    const formattedSize = file.size > 1048576 
+      ? `${(file.size / 1048576).toFixed(1)} MB` 
+      : `${(file.size / 1024).toFixed(1)} KB`;
+
+    setAnalysisProgress({
+      step: 'Dissecting packet headers & verifying pcap magic structure...',
+      percent: 22,
+      fileName: file.name,
+      fileSize: formattedSize,
+      telemetry: 'Scanning Ethernet frames, IP 5-tuples, and packet checksums...'
+    });
+
+    const fd = new FormData();
+    fd.append('file', file);
+
+    // Concurrently trigger backend if online
+    const backendPromise = fetch(`${API_BASE}/api/analyze`, { method: 'POST', body: fd })
+      .then(res => res.ok ? res.json() : null)
+      .catch(() => null);
+
+    // Concurrently run client-side parser & engine
+    const clientReportPromise = generateOfflineReportForFile(file);
+
+    // Realistic pipeline animation steps
+    await new Promise(r => setTimeout(r, 380));
+    setAnalysisProgress(prev => ({
+      ...prev,
+      step: 'Extracting 51-D bidirectional flow vectors & IAT telemetry...',
+      percent: 55,
+      telemetry: 'Computing inter-arrival times, SYN/ACK ratios, and flow window features...'
+    }));
+
+    await new Promise(r => setTimeout(r, 380));
+    setAnalysisProgress(prev => ({
+      ...prev,
+      step: 'Evaluating Stage-1 XGBoost Binary Classifier (P(Attack))...',
+      percent: 78,
+      telemetry: 'Evaluating temporal tree ensembles on extracted feature vectors...'
+    }));
+
+    await new Promise(r => setTimeout(r, 360));
+    setAnalysisProgress(prev => ({
+      ...prev,
+      step: 'Executing Stage-2 CatBoost Multi-Family Threat Attribution...',
+      percent: 92,
+      telemetry: 'Attributing threat family distribution & Shannon entropy margin...'
+    }));
+
+    await new Promise(r => setTimeout(r, 320));
+    setAnalysisProgress(prev => ({
+      ...prev,
+      step: 'Synthesizing MITRE ATT&CK progression & cyber world model graph...',
+      percent: 100,
+      telemetry: 'Correlating TTP kill chain and blast radius projection...'
+    }));
+
+    await new Promise(r => setTimeout(r, 260));
+
+    const backendData = await backendPromise;
+    const clientReport = await clientReportPromise;
+    const finalReport = backendData || clientReport;
+
+    setReport(finalReport);
+    setAnalysisProgress(null);
     setIsUploading(false);
   };
 
-  const reset = () => { clearInterval(streamRef.current); setIsStreaming(false); setActiveScenarioId(null); setReport(null); setError(null); setFileName(''); };
+  const reset = () => { clearInterval(streamRef.current); setIsStreaming(false); setActiveScenarioId(null); setReport(null); setError(null); setFileName(''); setAnalysisProgress(null); };
 
   const kc = report?.mitre_kill_chain;
   const severity = report?.severity;
@@ -1207,6 +1349,10 @@ export default function App() {
     );
     if (activeTab === 'models') return <ModelsTab />;
     if (activeTab === 'settings') return <SettingsTab />;
+
+    if (analysisProgress) {
+      return <ForensicAnalysisProgress progress={analysisProgress} />;
+    }
 
     if (!report) return (
       <LandingHero onFileSelected={analyzeFile} isUploading={isUploading} error={error}

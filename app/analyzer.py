@@ -460,6 +460,16 @@ def compute_overall_risk(features: dict) -> float:
     max_signal = max(ml_prob, stat_risk)
     weighted_avg = (ml_prob * 0.4 + stat_risk * 0.6)
     fused = max_signal * 0.6 + weighted_avg * 0.4
+
+    # Calibration guardrail for nominal Wi-Fi / routine browsing traffic:
+    # When statistical indicators confirm zero attack signatures (no C2, no port scan, no brute force, no flood),
+    # prevent CTU-13 training imputation from falsely flagging routine web traffic as an attack.
+    top_ports = [str(p) for p in features.get('top_dst_ports', [])]
+    is_c2_port = any(p in ['6667', '6666', '7000', '31337', '4444', '8088'] for p in top_ports)
+    is_auth_port = any(p in ['22', '3389'] for p in top_ports)
+    if stat_risk < 0.20 and not is_c2_port and not is_auth_port:
+        fused = min(fused, max(0.024, stat_risk + 0.02))
+
     return round(min(fused, 0.99), 6)
 
 
