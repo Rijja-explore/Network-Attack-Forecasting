@@ -625,8 +625,8 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
       )}
 
       {/* Navigation items */}
-      <div className="flex-1 py-3 px-3.5 space-y-1 relative z-10 overflow-y-auto">
-        <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 pb-2 font-bold select-none">Navigation Center</div>
+      <div className="flex-1 pt-5 pb-4 px-3.5 space-y-1 relative z-10 overflow-y-auto">
+        <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 pb-2.5 font-bold select-none">Navigation Center</div>
         {nav.map(item => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
