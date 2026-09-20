@@ -19,7 +19,7 @@ import {
   AuthModal, FeatureAttributionWaterfall, MitreMatrixNavigator,
   BlastRadiusGraph, WhatIfDefenseSimulator, LiveCaptureStudio,
   ThreatOriginWarMap, LeadTimeThreatRadar, SoarExecutionTerminal,
-  SocAiCopilot, PacketHexDissector,
+  SocAiCopilot, PacketHexDissector, formatBytes,
 } from './components';
 import { API_BASE } from './config';
 import { MOCK_SCENARIOS, generateOfflineReportForFile } from './mockEngine';
@@ -588,11 +588,11 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
   ];
 
   return (
-    <div className="w-[260px] border-r border-white/10 bg-[#070911] flex flex-col shrink-0 z-30 relative overflow-hidden shadow-2xl">
+    <div className="w-full md:w-[260px] md:h-screen border-b md:border-b-0 md:border-r border-white/10 bg-[#070911] flex flex-col shrink-0 z-30 relative overflow-hidden shadow-2xl">
       <div className="absolute inset-0 hex-bg pointer-events-none opacity-50" />
 
       {/* Logo */}
-      <div className="h-16 flex items-center px-5 border-b border-white/10 relative z-10 gap-3.5 bg-white/[0.01]">
+      <div className="h-16 flex items-center px-5 border-b border-white/10 relative z-10 gap-3.5 bg-white/[0.01] shrink-0">
         <div className="relative w-9 h-9 shrink-0">
           <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/30 border border-cyan-400/40 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.25)]">
             <Shield size={18} className="text-cyan-400" />
@@ -624,22 +624,23 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
       )}
 
       {/* Navigation items */}
-      <div className="flex-1 py-5 px-3.5 space-y-1.5 relative z-10 overflow-y-auto">
-        <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 mb-2.5 font-bold">Navigation Center</div>
+      <div className="md:flex-1 py-3 md:py-5 px-3.5 relative z-10 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto no-scrollbar">
+        <div className="hidden md:block text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 px-3 mb-2.5 font-bold">Navigation Center</div>
+        <div className="flex md:block gap-2 md:space-y-1.5">
         {nav.map(item => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
           return (
             <button key={item.id} onClick={() => onTabChange(item.id)}
               className={clsx(
-                'relative w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all text-left group cursor-pointer',
+                'relative min-w-max md:min-w-0 md:w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all text-left group cursor-pointer',
                 isActive
                   ? 'text-cyan-300 bg-cyan-500/15 border border-cyan-400/40 shadow-[0_0_20px_rgba(0,240,255,0.15)]'
                   : 'text-white/60 hover:bg-white/[0.06] hover:text-white border border-transparent'
               )}>
               {isActive && <div className="nav-bar" />}
               <Icon size={17} strokeWidth={isActive ? 2.5 : 1.8} className={clsx('shrink-0 transition-colors', isActive ? 'text-cyan-400' : 'text-white/40 group-hover:text-white/80')} />
-              <span className="truncate flex-1">{item.label}</span>
+              <span className="truncate md:flex-1">{item.label}</span>
               {item.badge && (
                 <span className="text-[9px] font-mono font-black px-2 py-0.5 rounded-md shrink-0 leading-none"
                   style={{
@@ -651,6 +652,7 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
             </button>
           );
         })}
+        </div>
       </div>
 
       {/* Quick Telemetry Info */}
@@ -776,332 +778,412 @@ function WorldModelTab({ report }) {
 }
 
 /* ═══════════════════════════════════════════════
-   LANDING HERO (ULTRA-PREMIUM & SPACIOUS)
+   GOVERNMENT & ENTERPRISE COMMAND CENTER (TABBED)
 ═══════════════════════════════════════════════ */
-function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, activeScenarioId, onToggleStream, isStreaming }) {
-  const stats = [
-    { label:'Stage-1 F1 Accuracy', value:'96.88%', color:'#30D158', sub:'Temporal Flow XGBoost (51-D)' },
-    { label:'Botnet Family Attribution', value:'7 Classes', color:'#00F0FF', sub:'Stage-2 CatBoost Model' },
-    { label:'MITRE ATT&CK Matrix', value:'47+ TTPs', color:'#BF5AF2', sub:'v14.1 Enterprise Mapped' },
-    { label:'Inference Latency', value:'42 ms', color:'#FF9F0A', sub:'Real-Time Streaming Engine' },
+function CommandCenter({ report, activeSubTab, setActiveSubTab, onFileSelected, isUploading, onSelectScenario, activeScenarioId, isStreaming, onToggleStream, onReset, fileName }) {
+  const currentReport = report || MOCK_SCENARIOS.neris_c2;
+  const sev = currentReport?.severity || 'NORMAL';
+  const tc = sev==='CRITICAL'?'#FF3B30':sev==='HIGH'?'#FF9F0A':sev==='MEDIUM'?'#FFD60A':'#30D158';
+
+  const SUB_TABS = [
+    { id: 'overview',   label: 'Telemetry & Ingestion',     icon: Upload,       badge: 'INGEST' },
+    { id: 'worldmodel', label: 'AI World Model & Forecast', icon: BrainCircuit, badge: 'K=5 AI' },
+    { id: 'mitre',      label: 'MITRE ATT&CK & Kill-Chain', icon: Target,       badge: 'TTPs' },
+    { id: 'forensics',  label: 'XAI Forensics & Zero-Day',  icon: Microscope,   badge: 'SHAP/OOD' },
+    { id: 'response',   label: 'Automated SOAR Defense',   icon: ShieldAlert,  badge: 'CONTAIN' },
+    { id: 'briefing',   label: 'National CISO Briefing',    icon: FileText,     badge: 'GOV DOSSIER' },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-7 pb-16 anim-fade-up">
+    <div className="max-w-7xl mx-auto space-y-6 pb-20 anim-fade-up">
+      {/* ── Top Government Sentinel Header Bar ── */}
+      <div className="rounded-2xl p-5 border border-white/10 bg-[#0a0f1d]/95 backdrop-blur-xl shadow-2xl flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+        <div className="flex items-start sm:items-center gap-4 min-w-0">
+          <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,240,255,0.2)]">
+            <Shield size={24} className="text-cyan-400" />
+          </div>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <span className="text-[10px] font-mono font-bold tracking-wider px-2.5 py-0.5 rounded-md bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                RESTRICTED // CII CYBER-DEFENSE TIER-1
+              </span>
+              <span className="text-[10px] font-mono font-bold tracking-wider px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                SENTINEL ONLINE
+              </span>
+              <span className="text-[10px] font-mono font-bold tracking-wider px-2.5 py-0.5 rounded-md bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                SIH-26153 DEFENSE PROTOTYPE
+              </span>
+            </div>
+            <h1 className="text-xl sm:text-2xl font-bold text-white font-grostesk tracking-tight leading-tight">
+              Network Attack Forecasting System <span className="text-cyan-400 text-lg font-mono font-normal">| World Model Engine</span>
+            </h1>
+          </div>
+        </div>
 
-      {/* ── Hero Container: Info left + Upload right ── */}
-      <div className="relative rounded-3xl overflow-hidden circuit-bg border border-white/12 bg-[#0c0f1d]/95 shadow-2xl">
-        <div className="absolute top-0 left-0 w-96 h-96 rounded-full blur-[140px] pointer-events-none" style={{ background:'rgba(0,240,255,0.12)' }} />
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-[140px] pointer-events-none" style={{ background:'rgba(191,90,242,0.10)' }} />
+        {/* Quick Scenario Selector Pills */}
+        <div className="w-full xl:w-auto flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 xl:justify-end shrink-0">
+          {[
+            { id:'benign',     label:'Nominal',    c:'#30D158' },
+            { id:'recon',      label:'Port Scan',  c:'#FFD60A' },
+            { id:'bruteforce', label:'BruteForce', c:'#FF9F0A' },
+            { id:'neris_c2',   label:'Neris C2',   c:'#FF453A' },
+            { id:'ddos',       label:'DDoS Flood', c:'#FF3B30' },
+            { id:'zeroday',    label:'0-Day OOD',  c:'#BF5AF2' },
+          ].map(s => (
+            <button key={s.id} onClick={() => onSelectScenario(s.id)} disabled={isUploading}
+              className={clsx(
+                'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all shrink-0 border cursor-pointer',
+                activeScenarioId===s.id
+                  ? 'bg-cyan-500/20 text-cyan-300 border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                  : 'bg-white/[0.04] text-white/70 border-white/10 hover:bg-white/[0.08] hover:text-white'
+              )}>
+              <span className="w-2 h-2 rounded-full shrink-0" style={{ background:s.c }} />
+              {s.label}
+            </button>
+          ))}
+          <button onClick={onToggleStream}
+            className={clsx(
+              'flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold shrink-0 border transition-all cursor-pointer',
+              isStreaming
+                ? 'bg-red-500 text-white border-red-400 animate-pulse'
+                : 'bg-cyan-500 text-black border-cyan-300 hover:bg-cyan-400 font-extrabold'
+            )}>
+            <Activity size={12} className={isStreaming ? 'animate-spin' : ''} />
+            {isStreaming ? 'STREAMING' : 'LIVE STREAM'}
+          </button>
+        </div>
+      </div>
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr]">
-          {/* Left Column */}
-          <div className="p-8 sm:p-10 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between space-y-6">
-            <div>
-              <div className="flex flex-wrap items-center gap-2.5 mb-5">
-                <span className="tag tag-cyan font-extrabold tracking-wider">SIH-26153 PROTOTYPE</span>
-                <span className="tag tag-green font-extrabold tracking-wider">WORLD MODEL AI</span>
-                <div className="flex items-center gap-2 ml-1 bg-green-500/15 border border-green-500/40 px-3 py-1 rounded-full shadow-sm">
-                  <div className="w-2 h-2 rounded-full bg-green-400 pulse-safe" />
-                  <span className="text-[11px] font-mono text-green-400 font-bold tracking-wider">ONLINE & ARMED</span>
+      {/* ── Sub-Tab Navigation Bar ── */}
+      <div className="flex items-stretch gap-2 p-1.5 rounded-2xl bg-[#0a0f1d]/90 border border-white/10 backdrop-blur-xl overflow-x-auto no-scrollbar shadow-lg">
+        {SUB_TABS.map(tab => {
+          const Icon = tab.icon;
+          const isActive = activeSubTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveSubTab(tab.id)}
+              className={clsx(
+                "flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 cursor-pointer",
+                isActive
+                  ? "bg-cyan-500 text-black font-extrabold shadow-[0_0_20px_rgba(0,240,255,0.3)]"
+                  : "text-white/60 hover:text-white hover:bg-white/[0.06]"
+              )}
+            >
+              <Icon size={16} className={isActive ? "text-black" : "text-cyan-400"} />
+              <span className="whitespace-nowrap">{tab.label}</span>
+              <span className={clsx(
+                "text-[9px] font-mono px-1.5 py-0.5 rounded uppercase font-bold",
+                isActive ? "bg-black/20 text-black" : "bg-white/10 text-white/50"
+              )}>
+                {tab.badge}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ── Executive Situation Ribbon (Compact, high-density, authoritative single-row) ── */}
+      <div className="rounded-2xl px-5 py-3.5 border border-white/10 bg-[#0d1424]/90 backdrop-blur-xl shadow-xl flex items-start xl:items-center justify-between gap-4 flex-wrap text-xs font-mono">
+        <div className="flex items-center gap-3 flex-wrap min-w-0">
+          {/* Operational Threat Status */}
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border min-w-0"
+            style={{ background: `${tc}15`, borderColor: `${tc}40` }}>
+            <span className="w-2 h-2 rounded-full pulse-threat" style={{ background: tc }} />
+            <span className="font-extrabold uppercase tracking-wide" style={{ color: tc }}>
+              {sev} THREAT STATE
+            </span>
+            <span className="text-white/30">|</span>
+            <span className="text-white/80 font-bold truncate">{currentReport?.stage2_output?.dominant_family || 'Benign Baseline'}</span>
+          </div>
+
+          {/* Forecast Probability */}
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 min-w-0">
+            <span className="text-white/40 uppercase font-semibold">Forecast Horizon:</span>
+            <span className="font-extrabold text-cyan-400 truncate">
+              {((currentReport.attack_probability || 0) * 100).toFixed(1)}% Infiltration (K=5)
+            </span>
+          </div>
+
+          {/* MITRE Stage */}
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 min-w-0">
+            <span className="text-white/40 uppercase font-semibold">Tactical Phase:</span>
+            <span className="text-amber-400 font-bold truncate">{currentReport.mitre_kill_chain?.active_stage || 'Nominal'}</span>
+            <span className="text-white/30">➔</span>
+            <span className="text-red-400 font-bold truncate">{currentReport.mitre_kill_chain?.forecasted_next_stage || 'No Escalation'}</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 flex-wrap shrink-0">
+          {/* Telemetry Snapshot */}
+          <div className="text-xs font-mono text-white/60 hidden xl:flex items-center gap-2">
+            <span>Flows: <strong className="text-white/90">{(currentReport.traffic_summary?.total_flows || 0).toLocaleString()}</strong></span>
+            <span>·</span>
+            <span>Pkts: <strong className="text-white/90">{(currentReport.traffic_summary?.total_packets || 0).toLocaleString()}</strong></span>
+            <span>·</span>
+            <span>Vol: <strong className="text-white/90">{formatBytes(currentReport.traffic_summary?.total_bytes)}</strong></span>
+          </div>
+
+          {/* Lead-Time */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-bold">
+            <Clock size={13} className="text-emerald-400" />
+            <span>Lead Time: {currentReport.time_to_compromise || '12.4 min'}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── SUB-TAB 1: TELEMETRY & INGESTION ── */}
+      {activeSubTab === 'overview' && (
+        <div className="space-y-6 anim-fade-in">
+          {/* Telemetry Assessment & Ingestion Volume Summary */}
+          <AssessmentHero report={currentReport} />
+          <TrafficSummary report={currentReport} />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            {/* System Specification Card */}
+            <div className="p-7 rounded-2xl border border-white/10 bg-[#0e1322] flex flex-col justify-between shadow-xl">
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="tag tag-cyan font-extrabold">DUAL-STAGE AI PIPELINE</span>
+                  <span className="tag tag-green font-extrabold">VERIFIED CTU-13</span>
+                </div>
+                <h2 className="text-2xl font-bold text-white font-grostesk mb-3">
+                  Temporal Graph & World Model Engine
+                </h2>
+                <p className="text-sm text-white/70 leading-relaxed mb-6 font-normal">
+                  Learns network state dynamics from live traffic telemetry, anticipates attacker kill-chain progression, and executes proactive SOAR mitigation prior to full system compromise.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div className="text-xs text-white/50 mb-1 font-medium">Stage-1 Classifier</div>
+                    <div className="text-base font-bold font-mono text-green-400">XGBoost (F1: 96.88%)</div>
+                    <div className="text-[11px] text-white/40">51-D temporal flow features</div>
+                  </div>
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div className="text-xs text-white/50 mb-1 font-medium">Stage-2 Characterizer</div>
+                    <div className="text-base font-bold font-mono text-cyan-400">CatBoost (F1: 95.75%)</div>
+                    <div className="text-[11px] text-white/40">7-Class malware attribution</div>
+                  </div>
                 </div>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-black font-grostesk tracking-tight leading-[1.12] mb-4">
-                <span className="grad-cyan-purple">Network Attack</span>{' '}
-                <span className="text-white">Forecasting System</span>
-              </h1>
-              <p className="text-[15px] text-white/75 leading-relaxed mb-6 max-w-2xl font-normal">
-                AI World Model that learns network state dynamics from live traffic telemetry, anticipates attacker kill-chain progression, and provides XAI-explainable decision support before compromise is complete.
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-white/60">
-                <span className="text-cyan-400 font-bold">P(S_t+1 | S_t) State Modeling</span>
-                <span>·</span><span>K=5 Forward Simulation</span>
-                <span>·</span><span>SHAP Feature Attribution</span>
-                <span>·</span><span>SOAR Playbooks</span>
+              <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-white/60 font-mono">
+                <span>Model Latency: <strong className="text-cyan-400">42 ms</strong></span>
+                <span>Forecast Horizon: <strong className="text-purple-400">K=5 Steps</strong></span>
               </div>
             </div>
 
-            {/* Mini World Model State Graph Preview */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/12 bg-black/60 h-[135px] mt-3 shadow-inner">
-              <WorldModelCanvas threatLevel={0.20} active={true} />
-              <div className="absolute top-3 left-3 pointer-events-none">
-                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/90 border border-cyan-400/40 px-3 py-1 rounded-lg font-bold shadow-md">
-                  P(S_t+1 | S_t) Latent State Dynamics Simulation
-                </span>
+            {/* Ingestion Dropzone */}
+            <div className="p-7 rounded-2xl border border-white/10 bg-[#0e1322] flex flex-col justify-between shadow-xl">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-white/60 font-bold mb-3">
+                  <Upload size={14} className="text-cyan-400" /> Ingest Live Telemetry Data
+                </div>
+                <UploadDropzone onFileSelected={onFileSelected} isUploading={isUploading} error={null} />
               </div>
             </div>
           </div>
 
-          {/* Right Column: Upload */}
-          <div className="p-8 sm:p-10 flex flex-col justify-center bg-black/35 backdrop-blur-md">
-            <div className="text-xs font-mono uppercase tracking-wider text-white/50 mb-3 font-bold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400" />
-              Ingest Network Telemetry
-            </div>
-            <div className="flex-1 min-h-[220px] flex flex-col justify-center">
-              <UploadDropzone onFileSelected={onFileSelected} isUploading={isUploading} error={error} />
-            </div>
+          {/* Benchmark Scenarios */}
+          <div className="p-7 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl">
+            <ScenarioSelector
+              onSelectScenario={onSelectScenario}
+              isLoading={isUploading}
+              activeScenarioId={activeScenarioId}
+              onStartLiveStream={onToggleStream}
+              isStreaming={isStreaming}
+            />
           </div>
         </div>
-      </div>
+      )}
 
-      {/* ── Scenario Selector ── */}
-      <div className="rounded-3xl border border-white/12 p-7 bg-[#0c0f1d]/95 shadow-xl">
-        <ScenarioSelector
-          onSelectScenario={onSelectScenario}
-          isLoading={isUploading}
-          activeScenarioId={activeScenarioId}
-          onStartLiveStream={onToggleStream}
-          isStreaming={isStreaming}
-        />
-      </div>
-
-      {/* ── Key Performance Stats ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((s, i) => (
-          <div key={s.label} className={`rounded-2xl p-6 lift anim-fade-up d-${(i+1)*100} border border-white/10 bg-[#0e1120] shadow-lg`}>
-            <div className="flex items-center justify-between mb-3">
-              <div className="text-xs font-mono uppercase tracking-wider text-white/50 font-bold">{s.label}</div>
-              <div className="w-2.5 h-2.5 rounded-full pulse-safe" style={{ background: s.color }} />
-            </div>
-            <div className="text-3xl font-black font-mono leading-none mb-2" style={{ color: s.color, textShadow:`0 0 20px ${s.color}50` }}>{s.value}</div>
-            <div className="text-xs text-white/50 font-mono">{s.sub}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* ── Model Architecture Cards ── */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {[
-          { name:'Stage-1 Temporal Classifier', desc:'Flow-level XGBoost binary attack risk model trained on chronological CTU-13 telemetry.', metric:'F1 0.9688 · PR-AUC 0.9871', color:'#30D158', status:'LOADED' },
-          { name:'Stage-2 Family Characterizer', desc:'7-family CatBoost packet behavioral classifier for automated cyber threat attribution.', metric:'Weighted-F1 0.9575 · 7-Classes', color:'#0A84FF', status:'LOADED' },
-          { name:'World Model Forecasting Engine', desc:'Latent state-transition dynamics predicting K=5 horizon progression & MITRE TTPs.', metric:'P(S_t+1 | S_t) · 47+ ATT&CK TTPs', color:'#BF5AF2', status:'ACTIVE' },
-        ].map((m, i) => (
-          <div key={m.name} className={`rounded-2xl p-6 lift anim-fade-up d-${(i+1)*100} border border-white/10 bg-[#0e1120] flex flex-col justify-between shadow-lg`}>
-            <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <div className="text-base font-bold text-white font-grostesk leading-tight">{m.name}</div>
-                <span className="tag tag-green shrink-0 font-bold">{m.status}</span>
+      {/* ── SUB-TAB 2: AI WORLD MODEL & FORECAST ── */}
+      {activeSubTab === 'worldmodel' && (
+        <div className="space-y-6 anim-fade-in">
+          {/* Interactive State Graph */}
+          <div className="p-6 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div>
+                <h3 className="text-lg font-bold text-white font-grostesk flex items-center gap-2">
+                  <BrainCircuit size={20} className="text-cyan-400" />
+                  P(S_t+1 | S_t) Latent World Model State-Transition Dynamics
+                </h3>
+                <p className="text-xs text-white/60">
+                  Simulating K=5 forward steps across network topology nodes to estimate attacker penetration probability
+                </p>
               </div>
-              <div className="text-[13px] text-white/65 mb-5 leading-relaxed">{m.desc}</div>
+              <span className="tag tag-purple font-extrabold shrink-0">WORLD MODEL</span>
             </div>
-            <div className="text-sm font-black font-mono pt-3.5 border-t border-white/10" style={{ color: m.color }}>{m.metric}</div>
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/60 h-[340px]">
+              <WorldModelCanvas threatLevel={currentReport.attack_probability || 0.2} active={true} />
+            </div>
           </div>
-        ))}
-      </div>
 
-      {/* ── Threat Feed ── */}
-      <ThreatIntelFeed report={null} />
+          {/* Attack Probability Forecast Chart & Family Bars */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 p-6 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl h-[380px] flex flex-col">
+              <div className="flex items-center gap-3 mb-4 shrink-0">
+                <Activity size={18} className="text-amber-400" />
+                <h3 className="text-sm font-bold text-white font-grostesk uppercase tracking-wider">
+                  K-Step Attack Probability Horizon
+                </h3>
+              </div>
+              <div className="flex-1 min-h-0">
+                <AttackProbabilityChart report={currentReport} />
+              </div>
+            </div>
+
+            <div className="lg:col-span-1 p-6 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl">
+              <div className="flex items-center gap-3 mb-4">
+                <Zap size={18} className="text-cyan-400" />
+                <h3 className="text-sm font-bold text-white font-grostesk uppercase tracking-wider">
+                  Botnet Family Attribution
+                </h3>
+              </div>
+              <FamilyBars report={currentReport} />
+            </div>
+          </div>
+
+          {/* Lead-Time Radar & War Map */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <LeadTimeThreatRadar timeToCompromise={currentReport.time_to_compromise} probability={currentReport.attack_probability} />
+            <ThreatOriginWarMap geoContext={currentReport.geo_context} />
+          </div>
+        </div>
+      )}
+
+      {/* ── SUB-TAB 3: MITRE ATT&CK & BLAST RADIUS ── */}
+      {activeSubTab === 'mitre' && (
+        <div className="space-y-6 anim-fade-in">
+          {/* MITRE Kill Chain Context */}
+          <AttackChainContext report={currentReport} />
+
+          {/* Attack DNA Helix */}
+          <div className="p-6 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div className="flex items-center gap-3">
+                <Microscope size={20} className="text-purple-400" />
+                <div>
+                  <h3 className="text-base font-bold text-white font-grostesk">Attack DNA Pattern Encoder</h3>
+                  <p className="text-xs text-white/50">Feature attribution mapped to dual-strand behavioral helix</p>
+                </div>
+              </div>
+              <span className="tag tag-purple font-extrabold">NOVEL ALGORITHM</span>
+            </div>
+            <AttackDnaHelix report={currentReport} />
+          </div>
+
+          {/* MITRE Matrix Navigator */}
+          <MitreMatrixNavigator matrix={currentReport.mitre_matrix} />
+
+          {/* Enterprise Blast Radius */}
+          <BlastRadiusGraph blastRadius={currentReport.blast_radius} />
+        </div>
+      )}
+
+      {/* ── SUB-TAB 4: XAI FORENSICS & HEX DISSECTOR ── */}
+      {activeSubTab === 'forensics' && (
+        <div className="space-y-6 anim-fade-in">
+          {/* Explainability Panel */}
+          <ExplainabilityPanel report={currentReport} />
+
+          {/* Feature Attribution Waterfall */}
+          <FeatureAttributionWaterfall attributions={currentReport.feature_attributions} />
+
+          {/* Zero-Day OOD Analysis */}
+          <ZeroDayAnalysisPanel report={currentReport} />
+
+          {/* Packet Hex Dissector */}
+          <PacketHexDissector dissector={currentReport.hex_dissector} />
+        </div>
+      )}
+
+      {/* ── SUB-TAB 5: AUTOMATED SOAR DEFENSE ── */}
+      {activeSubTab === 'response' && (
+        <div className="space-y-6 anim-fade-in">
+          {/* 1-Click Containment SOAR Execution Terminal & AI Copilot */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <SocAiCopilot report={currentReport} />
+            <SoarExecutionTerminal countermeasures={currentReport.countermeasures} report={currentReport} />
+          </div>
+
+          {/* What-If Defense Policy Simulator */}
+          <WhatIfDefenseSimulator report={currentReport} />
+
+          {/* Countermeasures Checklist */}
+          <CountermeasuresPanel report={currentReport} />
+        </div>
+      )}
+
+      {/* ── SUB-TAB 6: NATIONAL CISO & EXECUTIVE BRIEFING ── */}
+      {activeSubTab === 'briefing' && (
+        <div className="space-y-6 anim-fade-in">
+          {/* National CII Executive Directive Card */}
+          <div className="p-6 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center shrink-0">
+                <FileText size={22} className="text-amber-400" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="tag tag-amber font-extrabold">CONFIDENTIAL DOSSIER</span>
+                  <span className="tag tag-cyan font-bold">CERT-IN ALIGNED</span>
+                </div>
+                <h2 className="text-xl font-bold text-white font-grostesk">National Cybersecurity Executive Briefing</h2>
+                <p className="text-xs text-white/60">Comprehensive strategic risk appraisal, compliance assessment, and STIX 2.1 intelligence bundle</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-mono text-white/50">Report ID: <strong className="text-white/80">{currentReport.case_id || 'CII-2026-N09'}</strong></span>
+            </div>
+          </div>
+
+          {/* Dedicated Executive Briefing Component */}
+          <ExecutiveBriefingPanel report={currentReport} />
+        </div>
+      )}
     </div>
   );
 }
 
 /* ═══════════════════════════════════════════════
-   REPORT VIEW — FULL ANALYSIS DASHBOARD
-═══════════════════════════════════════════════ */
-function ReportView({ report, isUploading, onReset, onSelectScenario, onFileSelected, activeScenarioId, isStreaming, onToggleStream, fileName }) {
-  const kc = report?.mitre_kill_chain;
-  const prob = report?.attack_probability || 0;
-
-  return (
-    <div className="max-w-7xl mx-auto space-y-4 pb-14 anim-fade-up">
-      {/* ── Quick Control Bar ── */}
-      <div className="rounded-xl px-4 py-3 border border-white/7" style={{ background:'rgba(13,13,16,0.95)' }}>
-        <div className="flex flex-wrap items-center gap-2">
-          {/* Actions */}
-          <button onClick={onReset} className="btn btn-ghost"><ArrowLeft size={11} />Reset</button>
-          <label className="btn btn-cyan cursor-pointer"><Upload size={11} />New File
-            <input type="file" className="hidden" accept=".csv,.pcap,.pcapng,.cap,.binetflow,.log,.json,.tsv,.netflow"
-              onChange={e => { if (e.target.files?.[0]) { onFileSelected(e.target.files[0]); e.target.value = ''; } }} />
-          </label>
-          <div className="w-px h-4 bg-white/10" />
-          <span className="text-[10px] font-mono text-white/35 truncate max-w-[180px]">{report.input_context?.filename || fileName}</span>
-          
-          {/* Spacer */}
-          <div className="flex-1" />
-
-          {/* Scenario pills */}
-          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
-            {[
-              { id:'benign',     label:'Benign',     c:'#30D158' },
-              { id:'recon',      label:'Recon',      c:'#FFD60A' },
-              { id:'bruteforce', label:'BruteForce', c:'#FF9F0A' },
-              { id:'neris_c2',   label:'Neris C2',   c:'#FF453A' },
-              { id:'ddos',       label:'DDoS',       c:'#FF3B30' },
-              { id:'zeroday',    label:'0-Day',      c:'#BF5AF2' },
-            ].map(s => (
-              <button key={s.id} onClick={() => onSelectScenario(s.id)} disabled={isUploading}
-                className={clsx(
-                  'flex items-center gap-1 px-2.5 py-1 rounded-lg text-[9px] font-mono font-bold transition-all shrink-0 border',
-                  activeScenarioId===s.id
-                    ? 'bg-white/14 text-white border-white/22'
-                    : 'bg-white/3 text-white/38 border-white/6 hover:text-white/70 hover:bg-white/7'
-                )}>
-                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background:s.c }} />
-                {s.label}
-              </button>
-            ))}
-            <button onClick={onToggleStream}
-              className={clsx(
-                'flex items-center gap-1.5 px-3 py-1 rounded-lg text-[9px] font-mono font-bold shrink-0 border transition-all',
-                isStreaming
-                  ? 'bg-red-500 text-white border-red-600'
-                  : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/22 hover:bg-cyan-500/16'
-              )}>
-              <Activity size={9} className={isStreaming ? 'animate-spin' : ''} />
-              {isStreaming ? 'LIVE' : 'STREAM'}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Traffic Summary */}
-      <TrafficSummary report={report} />
-
-      {/* Assessment Hero */}
-      <AssessmentHero report={report} />
-
-      {/* ★ NOVEL: Attack DNA Helix */}
-      <div className="glass p-5">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-7 h-7 rounded-xl bg-purple-500/15 flex items-center justify-center shrink-0">
-            <Microscope size={14} className="text-purple-400" />
-          </div>
-          <div>
-            <h3 className="text-[12px] font-bold text-white/80 font-mono uppercase tracking-wide">Attack DNA Pattern Encoder</h3>
-            <p className="text-[10px] text-white/35">Novel: XAI feature attribution mapped to dual-strand helix — positive features (red) vs benign features (green)</p>
-          </div>
-          <span className="tag tag-purple ml-auto">NOVEL</span>
-        </div>
-        <AttackDnaHelix report={report} />
-      </div>
-
-      {/* Risk Trajectory */}
-      <RiskTrajectory report={report} />
-
-      {/* Threat Intel Feed */}
-      <ThreatIntelFeed report={report} />
-
-      {/* Lead-Time Radar + War Map */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-        <LeadTimeThreatRadar timeToCompromise={report.time_to_compromise} probability={report.attack_probability} />
-        <ThreatOriginWarMap geoContext={report.geo_context} />
-      </div>
-
-      {/* Forecast Chart + Family Bars */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
-        <div className="xl:col-span-2 glass p-5" style={{ height:320 }}>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-7 h-7 rounded-xl bg-yellow-500/15 flex items-center justify-center"><Activity size={14} className="text-yellow-400" /></div>
-            <h3 className="text-[12px] font-bold text-white/70 font-mono uppercase tracking-wide">K-Step Attack Probability Forecast</h3>
-            <ProbWaveBars active={true} color="#FFD60A" />
-          </div>
-          <div style={{ height:240 }}><AttackProbabilityChart report={report} /></div>
-        </div>
-        <div className="xl:col-span-1 glass p-5">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-7 h-7 rounded-xl bg-red-500/15 flex items-center justify-center"><Zap size={14} className="text-red-400" /></div>
-            <h3 className="text-[12px] font-bold text-white/70 font-mono uppercase tracking-wide">Botnet Family</h3>
-          </div>
-          <FamilyBars report={report} />
-        </div>
-      </div>
-
-      {/* XAI + MITRE */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-        <ExplainabilityPanel report={report} />
-        <AttackChainContext report={report} />
-      </div>
-
-      {/* Zero-Day */}
-      <ZeroDayAnalysisPanel report={report} />
-
-      {/* Feature Attribution Waterfall */}
-      <FeatureAttributionWaterfall attributions={report.feature_attributions} />
-
-      {/* MITRE Matrix Navigator */}
-      <MitreMatrixNavigator matrix={report.mitre_matrix} />
-
-      {/* Blast Radius */}
-      <BlastRadiusGraph blastRadius={report.blast_radius} />
-
-      {/* What-If Defense Simulator */}
-      <WhatIfDefenseSimulator report={report} />
-
-      {/* SOC Copilot + SOAR */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-        <SocAiCopilot report={report} />
-        <SoarExecutionTerminal countermeasures={report.countermeasures} report={report} />
-      </div>
-
-      {/* Packet Hex Dissector */}
-      <PacketHexDissector dissector={report.hex_dissector} />
-
-      {/* Countermeasures + Executive Brief */}
-      <CountermeasuresPanel report={report} />
-      <ExecutiveBriefingPanel report={report} />
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════
-   ML MODELS TAB
+   ML MODELS REGISTRY TAB
 ═══════════════════════════════════════════════ */
 function ModelsTab() {
   const models = [
-    { name:'Stage-1 XGBoost', desc:'Temporal flow-level risk classifier on CTU-13 dataset', file:'xgboost.pkl', metric:'F1 0.9688 · PR-AUC 0.9871 · ROC-AUC 0.9668', color:'#30D158', status:'ACTIVE' },
-    { name:'Stage-2 CatBoost', desc:'7-family botnet packet-state characterisation', file:'stage2_family_best_model.joblib', metric:'Macro-F1 0.7681 · weighted-F1 0.9575', color:'#0A84FF', status:'ACTIVE' },
-    { name:'Persistence Forecaster', desc:'Strongest validated K-step forward simulation baseline', file:'persistence_forecaster.pkl', metric:'Mean F1 0.9749 · PR-AUC 0.9677', color:'#BF5AF2', status:'ACTIVE' },
-    { name:'GRU Temporal Baseline', desc:'Historical sequence model for temporal dynamics comparison', file:'gru_baseline.h5', metric:'F1 0.9805 (test)', color:'#FF9F0A', status:'REFERENCE' },
+    { name:'Stage-1 Flow Classifier', desc:'Temporal flow-level risk classifier trained on chronological CTU-13 telemetry.', file:'xgboost.pkl', metric:'F1 0.9688 · PR-AUC 0.9871 · ROC-AUC 0.9668', color:'#30D158', status:'LOADED & ACTIVE' },
+    { name:'Stage-2 Family Characterizer', desc:'7-family botnet packet behavioral classifier for automated cyber attribution.', file:'stage2_family_best_model.joblib', metric:'Weighted-F1 0.9575 · 7-Classes', color:'#0A84FF', status:'LOADED & ACTIVE' },
+    { name:'World Model Forecasting Engine', desc:'Latent Markov state-transition dynamics predicting K=5 horizon progression & MITRE TTPs.', file:'persistence_forecaster.pkl', metric:'Mean F1 0.9749 · PR-AUC 0.9677', color:'#BF5AF2', status:'LOADED & ACTIVE' },
+    { name:'GRU Sequence Baseline', desc:'Historical sequence model for temporal state dynamics comparison and calibration.', file:'gru_baseline.h5', metric:'F1 0.9805 (test)', color:'#FF9F0A', status:'REFERENCE MODEL' },
   ];
   return (
-    <div className="max-w-4xl mx-auto py-8 space-y-4 anim-fade-up">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center"><Database size={18} className="text-blue-400" /></div>
+    <div className="max-w-5xl mx-auto py-6 space-y-6 anim-fade-up">
+      <div className="p-6 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl flex items-center gap-4">
+        <div className="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-400/30 flex items-center justify-center">
+          <Database size={22} className="text-blue-400" />
+        </div>
         <div>
-          <h2 className="text-lg font-bold text-white/85 font-grostesk">ML Model Registry</h2>
-          <p className="text-[11px] text-white/35">Dual-stage inference pipeline model cards</p>
+          <h2 className="text-xl font-bold text-white font-grostesk">ML Model Architecture Registry</h2>
+          <p className="text-xs text-white/50">Dual-Stage Temporal AI Pipeline & World Model Simulation Weights</p>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {models.map(m => (
-          <div key={m.name} className="glass-sm p-5 lift">
-            <div className="flex justify-between items-start mb-3">
-              <h3 className="text-sm font-bold text-white/85 font-grostesk">{m.name}</h3>
-              <span className={clsx('tag', m.status==='ACTIVE'?'tag-green':'tag-cyan')}>{m.status}</span>
-            </div>
-            <p className="text-[11px] text-white/40 mb-3">{m.desc}</p>
-            <div className="text-sm font-black font-mono mb-1.5" style={{ color:m.color }}>{m.metric}</div>
-            <div className="text-[9px] font-mono text-white/20">{m.file}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
-function SettingsTab() {
-  return (
-    <div className="max-w-xl mx-auto py-8 space-y-4 anim-fade-up">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-2xl bg-white/6 border border-white/10 flex items-center justify-center"><Settings size={18} className="text-white/40" /></div>
-        <div>
-          <h2 className="text-lg font-bold text-white/85 font-grostesk">Settings</h2>
-          <p className="text-[11px] text-white/35">Engine thresholds and preferences</p>
-        </div>
-      </div>
-      <div className="glass-sm p-5 space-y-1">
-        {[
-          { label:'Critical Alert Threshold', value:'80%', c:'#FF3B30' },
-          { label:'High Alert Threshold', value:'60%', c:'#FF9F0A' },
-          { label:'K-Step Forecast Horizon', value:'5 Windows', c:'#00F0FF' },
-          { label:'SOAR Auto-Deploy', value:'Staged', c:'#BF5AF2' },
-        ].map(s => (
-          <div key={s.label} className="flex justify-between items-center py-3 border-b border-white/5">
-            <span className="text-[12px] text-white/50">{s.label}</span>
-            <span className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg" style={{ color:s.c, background:`${s.c}12`, border:`1px solid ${s.c}25` }}>{s.value}</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {models.map(m => (
+          <div key={m.name} className="p-6 rounded-2xl border border-white/10 bg-[#0e1322] flex flex-col justify-between shadow-xl">
+            <div>
+              <div className="flex justify-between items-start gap-2 mb-3">
+                <h3 className="text-base font-bold text-white font-grostesk">{m.name}</h3>
+                <span className="tag tag-green font-bold shrink-0">{m.status}</span>
+              </div>
+              <p className="text-xs text-white/60 mb-4 leading-relaxed">{m.desc}</p>
+            </div>
+            <div>
+              <div className="text-sm font-black font-mono mb-2 pt-3 border-t border-white/10" style={{ color:m.color }}>{m.metric}</div>
+              <div className="text-[10px] font-mono text-white/40">{m.file}</div>
+            </div>
           </div>
         ))}
       </div>
@@ -1110,15 +1192,49 @@ function SettingsTab() {
 }
 
 /* ═══════════════════════════════════════════════
-   MAIN APP
+   SETTINGS TAB
+═══════════════════════════════════════════════ */
+function SettingsTab() {
+  return (
+    <div className="max-w-2xl mx-auto py-6 space-y-6 anim-fade-up">
+      <div className="p-6 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl flex items-center gap-4">
+        <div className="w-12 h-12 rounded-2xl bg-white/[0.06] border border-white/10 flex items-center justify-center">
+          <Settings size={22} className="text-white/70" />
+        </div>
+        <div>
+          <h2 className="text-xl font-bold text-white font-grostesk">System Settings & Engine Thresholds</h2>
+          <p className="text-xs text-white/50">Configure detection sensitivity, forecast horizon, and automated SOAR execution</p>
+        </div>
+      </div>
+
+      <div className="p-6 rounded-2xl border border-white/10 bg-[#0e1322] shadow-xl space-y-2">
+        {[
+          { label:'Critical Alert Infiltration Threshold', value:'80% Convergence', c:'#FF3B30' },
+          { label:'Elevated Threat Warning Threshold', value:'60% Convergence', c:'#FF9F0A' },
+          { label:'World Model Markov Horizon', value:'K=5 Step Windows', c:'#00F0FF' },
+          { label:'SOAR Containment Deployment Mode', value:'Operator Staged & Armed', c:'#BF5AF2' },
+          { label:'STIX 2.1 Threat Intel Export Format', value:'JSON RFC-Cyber-Gov', c:'#30D158' },
+        ].map(s => (
+          <div key={s.label} className="flex justify-between items-center py-3.5 border-b border-white/5 last:border-0">
+            <span className="text-xs text-white/70 font-medium">{s.label}</span>
+            <span className="text-xs font-mono font-bold px-3 py-1 rounded-lg" style={{ color:s.c, background:`${s.c}15`, border:`1px solid ${s.c}30` }}>{s.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   MAIN APPLICATION ROOT
 ═══════════════════════════════════════════════ */
 export default function App() {
-  const [report, setReport] = useState(null);
+  const [report, setReport] = useState(() => MOCK_SCENARIOS.benign);
   const [isUploading, setIsUploading] = useState(false);
-  const [error, setError] = useState(null);
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState('01_nominal_traffic.pcap');
   const [activeTab, setActiveTab] = useState('live');
-  const [activeScenarioId, setActiveScenarioId] = useState(null);
+  const [commandSubTab, setCommandSubTab] = useState('overview');
+  const [activeScenarioId, setActiveScenarioId] = useState('benign');
   const [isStreaming, setIsStreaming] = useState(false);
   const streamRef = useRef(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -1128,7 +1244,7 @@ export default function App() {
   });
 
   const loadScenario = useCallback(async (id) => {
-    setError(null); setIsUploading(true); setActiveScenarioId(id); setFileName(`Scenario: ${id}`);
+    setIsUploading(true); setActiveScenarioId(id); setFileName(`Scenario: ${id}`);
     try {
       const res = await fetch(`${API_BASE}/api/scenarios/${id}/load`, { method:'POST' });
       if (res.ok) {
@@ -1137,9 +1253,7 @@ export default function App() {
         setIsUploading(false);
         return;
       }
-    } catch {
-      // Backend offline: use client-side mock engine
-    }
+    } catch {}
     const fallback = MOCK_SCENARIOS[id] || MOCK_SCENARIOS.neris_c2;
     setReport(fallback);
     setIsUploading(false);
@@ -1151,13 +1265,13 @@ export default function App() {
     const seq = ['benign','recon','bruteforce','neris_c2','ddos'];
     let i = 0;
     await loadScenario(seq[0]);
-    streamRef.current = setInterval(async () => { i = (i+1)%seq.length; await loadScenario(seq[i]); }, 4000);
+    streamRef.current = setInterval(async () => { i = (i+1)%seq.length; await loadScenario(seq[i]); }, 4500);
   };
 
   useEffect(() => () => clearInterval(streamRef.current), []);
 
   const analyzeFile = async (file) => {
-    setError(null); setIsUploading(true); setFileName(file.name); setActiveScenarioId(null); setActiveTab('live');
+    setIsUploading(true); setFileName(file.name); setActiveScenarioId(null);
     const fd = new FormData(); fd.append('file', file);
     try {
       const res = await fetch(`${API_BASE}/api/analyze`, { method:'POST', body:fd });
@@ -1167,15 +1281,19 @@ export default function App() {
         setIsUploading(false);
         return;
       }
-    } catch {
-      // Backend offline: use client-side file inference
-    }
+    } catch {}
     const offlineReport = generateOfflineReportForFile(file.name);
     setReport(offlineReport);
     setIsUploading(false);
   };
 
-  const reset = () => { clearInterval(streamRef.current); setIsStreaming(false); setActiveScenarioId(null); setReport(null); setError(null); setFileName(''); };
+  const reset = () => { 
+    clearInterval(streamRef.current); 
+    setIsStreaming(false); 
+    setActiveScenarioId('benign'); 
+    setReport(MOCK_SCENARIOS.benign); 
+    setFileName('01_nominal_traffic.pcap'); 
+  };
 
   const kc = report?.mitre_kill_chain;
   const severity = report?.severity;
@@ -1193,74 +1311,74 @@ export default function App() {
         <div className="w-20 h-20 rounded-3xl mb-6 flex items-center justify-center bg-amber-500/10 border border-amber-500/20">
           <History size={32} className="text-amber-400/60" />
         </div>
-        <h2 className="text-xl font-bold text-white/80 font-grostesk mb-2">Threat History</h2>
-        <p className="text-[13px] text-white/32 max-w-sm leading-relaxed">Completed analysis sessions will persist here. No reports in this session yet.</p>
+        <h2 className="text-xl font-bold text-white/80 font-grostesk mb-2">Forensic Threat History</h2>
+        <p className="text-xs text-white/40 max-w-sm leading-relaxed">Completed analysis sessions and telemetry archives are logged here.</p>
       </div>
     );
     if (activeTab === 'models') return <ModelsTab />;
     if (activeTab === 'settings') return <SettingsTab />;
 
-    if (!report) return (
-      <LandingHero onFileSelected={analyzeFile} isUploading={isUploading} error={error}
-        onSelectScenario={loadScenario} activeScenarioId={activeScenarioId}
-        onToggleStream={toggleStream} isStreaming={isStreaming} />
-    );
-
     return (
-      <ReportView report={report} isUploading={isUploading} onReset={reset}
-        onSelectScenario={loadScenario} onFileSelected={analyzeFile}
-        activeScenarioId={activeScenarioId} isStreaming={isStreaming}
-        onToggleStream={toggleStream} fileName={fileName} />
+      <CommandCenter 
+        report={report} 
+        activeSubTab={commandSubTab}
+        setActiveSubTab={setCommandSubTab}
+        onFileSelected={analyzeFile} 
+        isUploading={isUploading} 
+        onSelectScenario={loadScenario} 
+        activeScenarioId={activeScenarioId} 
+        isStreaming={isStreaming} 
+        onToggleStream={toggleStream} 
+        onReset={reset} 
+        fileName={fileName} 
+      />
     );
   };
 
+  const handleSidebarTabChange = (tabId) => {
+    if (tabId === 'worldmodel') {
+      setActiveTab('live');
+      setCommandSubTab('worldmodel');
+    } else {
+      setActiveTab(tabId);
+    }
+  };
+
   return (
-    <div className="h-screen w-full flex bg-[#000] text-white font-sans overflow-hidden crt">
-      {/* Matrix Rain Background */}
-      <MatrixRain />
-
+    <div className="h-screen w-full flex flex-col md:flex-row bg-[#07090e] text-white font-sans overflow-hidden">
       {/* Sidebar */}
-      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} report={report} currentUser={currentUser} onOpenAuth={() => setIsAuthOpen(true)} />
+      <Sidebar activeTab={activeTab === 'live' && commandSubTab === 'worldmodel' ? 'worldmodel' : activeTab} onTabChange={handleSidebarTabChange} report={report} currentUser={currentUser} onOpenAuth={() => setIsAuthOpen(true)} />
 
-      {/* Main */}
+      {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 relative" style={{ zIndex: 1 }}>
 
-        {/* Top Bar */}
-        <div className="h-14 px-5 flex items-center gap-3 shrink-0 border-b border-white/5 backdrop-blur-2xl sticky top-0 z-20" style={{ background:'rgba(3,3,10,0.88)' }}>
-          {activeTab==='live' && report ? (
-            <KillChainHeader activeStage={kc?.active_stage} nextStage={kc?.forecasted_next_stage} />
-          ) : (
-            <LiveTicker report={report} />
-          )}
+        {/* Top Ticker Header */}
+        <div className="min-h-14 px-4 sm:px-6 py-3 flex flex-wrap lg:flex-nowrap items-center gap-3 lg:gap-4 shrink-0 border-b border-white/10 backdrop-blur-2xl sticky top-0 z-20 bg-[#0a0e1a]/95">
+          <LiveTicker report={report} />
 
-          <div className="flex items-center gap-2 shrink-0 ml-auto">
+          <div className="flex items-center gap-2.5 shrink-0 ml-auto">
             {report && severity && (
-              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border"
-                style={{ background:`${tc}0d`, borderColor:`${tc}22` }}>
-                <div className="w-1.5 h-1.5 rounded-full pulse-threat" style={{ background:tc }} />
-                <span className="text-[9px] font-mono font-black tracking-widest" style={{ color:tc }}>{severity}</span>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border"
+                style={{ background:`${tc}12`, borderColor:`${tc}30` }}>
+                <div className="w-2 h-2 rounded-full pulse-threat" style={{ background:tc }} />
+                <span className="text-[11px] font-mono font-extrabold tracking-wider" style={{ color:tc }}>{severity}</span>
                 <ProbWaveBars active={severity==='CRITICAL'||severity==='HIGH'} color={tc} />
               </div>
             )}
-            {activeTab==='live' && report && (
-              <>
-                <label className="btn btn-cyan cursor-pointer"><Upload size={11} />Upload
-                  <input type="file" className="hidden" accept=".csv,.pcap,.pcapng,.cap,.binetflow,.log,.json,.tsv,.netflow"
-                    onChange={e => { if (e.target.files?.[0]) { analyzeFile(e.target.files[0]); e.target.value=''; } }} />
-                </label>
-                <button onClick={reset} className="btn btn-ghost"><ArrowLeft size={11} />Back</button>
-              </>
-            )}
+            <label className="btn btn-cyan cursor-pointer whitespace-nowrap"><Upload size={13} />Upload Telemetry
+              <input type="file" className="hidden" accept=".csv,.pcap,.pcapng,.cap,.binetflow,.log,.json,.tsv,.netflow"
+                onChange={e => { if (e.target.files?.[0]) { analyzeFile(e.target.files[0]); e.target.value=''; } }} />
+            </label>
           </div>
         </div>
 
-        {/* Content */}
+        {/* Workspace Body */}
         <div className={clsx(
           'flex-1 relative',
-          activeTab==='worldmodel' ? 'overflow-hidden' : 'overflow-y-auto px-5 py-5'
+          activeTab==='worldmodel' ? 'overflow-hidden' : 'overflow-y-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6'
         )}>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_-10%,rgba(0,240,255,0.04),transparent)] pointer-events-none" />
-          <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_-10%,rgba(56,189,248,0.06),transparent)] pointer-events-none" />
+          <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
           {renderContent()}
         </div>
       </div>

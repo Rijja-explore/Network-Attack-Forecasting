@@ -151,15 +151,15 @@ export function TrafficSummary({ report }) {
   ];
 
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
       {cards.map(c => (
-        <div key={c.label} className="glass-card p-4 flex items-center gap-4">
+        <div key={c.label} className="glass-card p-4 flex items-center gap-4 min-w-0">
           <div className={clsx("w-10 h-10 rounded-[28%] flex items-center justify-center shrink-0", c.color)}>
             <c.icon size={20} className="text-white" strokeWidth={2} />
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="text-[11px] font-semibold text-white/40 uppercase tracking-wider">{c.label}</div>
-            <div className="text-[18px] font-bold text-white/90 font-mono">{c.value}</div>
+            <div className="text-[18px] font-bold text-white/90 font-mono truncate">{c.value}</div>
           </div>
         </div>
       ))}
@@ -167,7 +167,7 @@ export function TrafficSummary({ report }) {
   );
 }
 
-function formatBytes(bytes) {
+export function formatBytes(bytes) {
   if (!bytes || bytes === 0) return '0 B';
   const k = 1024;
   const sizes = ['B', 'KB', 'MB', 'GB'];
@@ -540,7 +540,7 @@ export function AssessmentHero({ report }) {
     <div className="glass-card p-6 overflow-hidden relative">
       <div className={clsx("absolute -top-20 -left-20 w-64 h-64 rounded-full blur-[80px] opacity-20 pointer-events-none", severityConfig.bg)} />
       
-      <div className="flex flex-col xl:flex-row gap-8 relative z-10">
+      <div className="flex flex-col xl:flex-row gap-6 xl:gap-8 relative z-10">
         
         <div className="flex flex-col gap-5 shrink-0 xl:w-64">
           <div className="flex items-center gap-4">
@@ -573,7 +573,7 @@ export function AssessmentHero({ report }) {
 
         <div className="hidden xl:block w-px bg-white/10" />
 
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex-1 flex flex-col justify-between min-w-0">
           <div>
             <div className="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-1.5">Recommended Action</div>
             <div className="text-white/80 text-[14px] font-medium leading-relaxed">
@@ -625,7 +625,7 @@ export function AttackProbabilityChart({ report }) {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <AreaChart data={data} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
+      <AreaChart data={data} margin={{ top: 10, right: 12, left: -12, bottom: 0 }}>
         <defs>
           <linearGradient id="probGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%"  stopColor={strokeColor} stopOpacity={0.3} />
@@ -688,11 +688,11 @@ export function FamilyBars({ report }) {
   const sortedFamilies = Object.entries(distribution).sort(([, a], [, b]) => b - a);
 
   return (
-    <div className="flex flex-col h-full gap-4">
+    <div className="flex flex-col h-full gap-4 min-w-0">
       {/* Primary threat */}
       <div>
-        <div className="flex justify-between items-baseline mb-2">
-          <span className="text-[14px] font-semibold text-white/90">{s2.dominant_family}</span>
+        <div className="flex justify-between items-baseline gap-3 mb-2">
+          <span className="text-[14px] font-semibold text-white/90 truncate">{s2.dominant_family}</span>
           <span className="text-[16px] text-[#FF453A] font-bold font-mono">
             {(s2.dominant_family_probability * 100).toFixed(1)}%
           </span>
@@ -706,8 +706,8 @@ export function FamilyBars({ report }) {
       <div className="space-y-2.5">
         {sortedFamilies.slice(1).map(([family, prob]) => (
           <div key={family}>
-            <div className="flex justify-between items-baseline mb-1">
-              <span className="text-[12px] font-medium text-white/50">{family}</span>
+            <div className="flex justify-between items-baseline gap-3 mb-1">
+              <span className="text-[12px] font-medium text-white/50 truncate">{family}</span>
               <span className="text-[11px] text-white/40 font-semibold font-mono">
                 {(prob * 100).toFixed(1)}%
               </span>
@@ -1257,11 +1257,11 @@ export function ScenarioSelector({ onSelectScenario, isLoading, activeScenarioId
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-4 pb-1">
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 min-w-0">
           <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center">
             <Zap size={16} className="text-amber-400" />
           </div>
-          <div>
+          <div className="min-w-0">
             <h3 className="text-sm font-bold text-white uppercase tracking-wider font-grostesk">One-Click Test Scenarios & Live Telemetry</h3>
             <p className="text-xs text-white/50">Select any pre-configured attack vector to run the full forecasting pipeline</p>
           </div>
@@ -1282,7 +1282,7 @@ export function ScenarioSelector({ onSelectScenario, isLoading, activeScenarioId
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch">
         {scenarios.map((sc) => {
           const isActive = activeScenarioId === sc.id;
           return (
@@ -1290,13 +1290,13 @@ export function ScenarioSelector({ onSelectScenario, isLoading, activeScenarioId
               key={sc.id}
               onClick={() => !isLoading && onSelectScenario(sc.id)}
               className={clsx(
-                "p-5 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between group relative overflow-hidden min-h-[140px]",
+                "p-5 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between group relative overflow-hidden min-h-[150px]",
                 isActive
                   ? "bg-white/10 border-cyan-400 shadow-[0_0_30px_rgba(0,240,255,0.15)] ring-1 ring-cyan-400"
                   : "bg-[#111420]/80 hover:bg-[#161a2b] border-white/10 hover:border-cyan-500/40 hover:-translate-y-0.5 shadow-md"
               )}
             >
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center justify-between gap-2 mb-3 min-w-0">
                 <span
                   className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border shrink-0 tracking-wide"
                   style={{ color: sc.color, backgroundColor: `${sc.color}15`, borderColor: `${sc.color}40` }}
@@ -1307,7 +1307,7 @@ export function ScenarioSelector({ onSelectScenario, isLoading, activeScenarioId
                   {isActive ? "Active" : "Load"} <ChevronRight size={14} />
                 </span>
               </div>
-              <div className="text-[15px] font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors">
+              <div className="text-[15px] font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors leading-snug">
                 {sc.title}
               </div>
               <div className="text-xs text-white/60 leading-relaxed">
@@ -1782,11 +1782,11 @@ export function WhatIfDefenseSimulator({ report }) {
 
     const baseProb = report?.stage1_output?.forecast ? Object.values(report.stage1_output.forecast)[0] : (report?.attack_probability || 0.85);
     const defenseWeights = {
-      block_ip: 0.45,
-      c2_dns: 0.35,
-      smb_contain: 0.30,
-      rate_limit: 0.25,
-      isolate_host: 0.55
+      quarantine_ip: 0.45,
+      syn_shield: 0.25,
+      sever_c2: 0.35,
+      isolate_host: 0.60,
+      port_lockdown: 0.20
     };
     let totalReduction = 0;
     activeDefenses.forEach(d => {
@@ -1797,13 +1797,27 @@ export function WhatIfDefenseSimulator({ report }) {
     const redPct = Math.round(((baseProb - mitigatedProb) / baseProb) * 100);
     setSimResult({
       baseline_probability: Number(baseProb.toFixed(3)),
+      original_probability: Number(baseProb.toFixed(3)),
       mitigated_probability: Number(mitigatedProb.toFixed(3)),
       reduction_percentage: redPct,
+      original_severity: baseProb > 0.8 ? 'CRITICAL' : baseProb > 0.5 ? 'HIGH' : 'MEDIUM',
+      mitigated_severity: mitigatedProb > 0.5 ? 'HIGH' : mitigatedProb > 0.25 ? 'MEDIUM' : 'LOW',
+      mitigated_forecast: {
+        't+1': Number((mitigatedProb * 0.95).toFixed(2)),
+        't+2': Number((mitigatedProb * 0.80).toFixed(2)),
+        't+3': Number((mitigatedProb * 0.60).toFixed(2)),
+        't+4': Number((mitigatedProb * 0.40).toFixed(2)),
+        't+5': Number((mitigatedProb * 0.22).toFixed(2)),
+      },
       active_interventions: activeDefenses,
       residual_threat_state: mitigatedProb < 0.25 ? "SUPPRESSED" : mitigatedProb < 0.5 ? "CONTAINED" : "ELEVATED"
     });
     setIsSimulating(false);
   };
+
+  React.useEffect(() => {
+    runSimulation(defenses);
+  }, [report]);
 
   return (
     <div className="bg-[#161618] border border-white/10 rounded-3xl p-6 shadow-lg mb-6">
@@ -1816,7 +1830,7 @@ export function WhatIfDefenseSimulator({ report }) {
           </div>
         </div>
         <span className="text-[11px] font-mono text-[#30D158] bg-[#30D158]/15 px-2.5 py-1 rounded-lg border border-[#30D158]/30 font-bold">
-          {simResult ? `-${simResult.reduction_percentage}% Mitigated` : 'Active'}
+          {simResult?.reduction_percentage != null ? `-${simResult.reduction_percentage}% Mitigated` : 'Simulating Defenses...'}
         </span>
       </div>
 
@@ -1868,7 +1882,7 @@ export function WhatIfDefenseSimulator({ report }) {
               <div className="bg-white/5 border border-white/10 rounded-xl p-3">
                 <span className="text-[10px] font-mono text-white/40 block">Current Attack Prob</span>
                 <span className="text-lg font-bold text-[#FF453A]">
-                  {simResult ? `${(simResult.original_probability * 100).toFixed(1)}%` : '91.6%'}
+                  {simResult?.original_probability != null ? `${(simResult.original_probability * 100).toFixed(1)}%` : '91.6%'}
                 </span>
                 <span className="text-[10px] text-white/40 block font-mono">SEV: {simResult?.original_severity || 'HIGH'}</span>
               </div>
@@ -1876,7 +1890,7 @@ export function WhatIfDefenseSimulator({ report }) {
               <div className="bg-[#30D158]/10 border border-[#30D158]/30 rounded-xl p-3">
                 <span className="text-[10px] font-mono text-[#30D158] block">Mitigated Risk Level</span>
                 <span className="text-lg font-bold text-[#30D158]">
-                  {simResult ? `${(simResult.mitigated_probability * 100).toFixed(1)}%` : '12.4%'}
+                  {simResult?.mitigated_probability != null ? `${(simResult.mitigated_probability * 100).toFixed(1)}%` : '12.4%'}
                 </span>
                 <span className="text-[10px] text-[#30D158]/70 block font-mono">SEV: {simResult?.mitigated_severity || 'LOW'}</span>
               </div>
