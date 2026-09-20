@@ -360,15 +360,14 @@ function AttackDnaHelix({ report }) {
   }, [report]);
 
   return (
-    <div className="relative h-48 overflow-hidden rounded-2xl" style={{ background: 'rgba(0,0,0,0.6)' }}>
+    <div className="relative h-48 overflow-hidden rounded-2xl border border-white/10" style={{ background: 'rgba(0,0,0,0.6)' }}>
       <canvas ref={canvasRef} className="w-full h-full" style={{ display: 'block' }} />
-      <div className="absolute inset-0 flex flex-col justify-between p-3 pointer-events-none">
-        <div className="label">Attack DNA Pattern Encoder · Feature → Nucleotide Mapping</div>
-        <div className="flex gap-3 text-[9px] font-mono">
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500 inline-block" /> Malicious Feature</span>
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400 inline-block" /> Benign Feature</span>
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-cyan-400 inline-block" /> Strand Alpha</span>
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-purple-400 inline-block" /> Strand Beta</span>
+      <div className="absolute inset-x-0 bottom-0 flex items-center justify-center p-2.5 pointer-events-none">
+        <div className="flex flex-wrap items-center justify-center gap-3 text-[10px] font-mono bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
+          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500 inline-block shadow-[0_0_6px_#FF3B30]" /> Malicious Feature</span>
+          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-green-400 inline-block shadow-[0_0_6px_#30D158]" /> Benign Feature</span>
+          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shadow-[0_0_6px_#00F0FF]" /> Strand Alpha</span>
+          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-purple-400 inline-block shadow-[0_0_6px_#BF5AF2]" /> Strand Beta</span>
         </div>
       </div>
     </div>
@@ -641,7 +640,7 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
               <Icon size={17} strokeWidth={isActive ? 2.5 : 1.8} className={clsx('shrink-0 transition-colors', isActive ? 'text-cyan-400' : 'text-white/40 group-hover:text-white/80')} />
               <span className="truncate flex-1">{item.label}</span>
               {item.badge && (
-                <span className="text-[9px] font-mono font-black px-2 py-0.5 rounded-md shrink-0 leading-none"
+                <span className="text-[9px] font-mono font-black px-2 py-0.5 rounded-md shrink-0 leading-none ml-auto"
                   style={{
                     background: item.badge==='AI' ? 'rgba(191,90,242,0.25)' : 'rgba(255,59,48,0.25)',
                     color:      item.badge==='AI' ? '#BF5AF2' : '#FF453A',
@@ -660,7 +659,7 @@ function Sidebar({ activeTab, onTabChange, report, currentUser, onOpenAuth }) {
           {[
             { k: 'Flows Analyzed', v: (report.traffic_summary?.total_flows||0).toLocaleString() },
             { k: 'MITRE Stage', v: report.mitre_kill_chain?.active_stage || 'N/A' },
-            { k: 'Lead Time', v: report.time_to_compromise || 'N/A' },
+            { k: 'Lead Time', v: report.time_to_compromise ? (typeof report.time_to_compromise === 'string' ? report.time_to_compromise.split(' until ')[0] : report.time_to_compromise) : 'N/A' },
           ].map(s => (
             <div key={s.k} className="flex justify-between items-center gap-2 py-1 border-b border-white/5 last:border-0">
               <span className="text-xs text-white/45 font-medium">{s.k}</span>
@@ -815,11 +814,11 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
                 AI World Model that learns network state dynamics from live traffic telemetry, anticipates attacker kill-chain progression, and provides XAI-explainable decision support before compromise is complete.
               </p>
               
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-white/60">
-                <span className="text-cyan-400 font-bold">P(S_t+1 | S_t) State Modeling</span>
-                <span>·</span><span>K=5 Forward Simulation</span>
-                <span>·</span><span>SHAP Feature Attribution</span>
-                <span>·</span><span>SOAR Playbooks</span>
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
+                <span className="px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-bold">P(S_t+1 | S_t) State Modeling</span>
+                <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-white/70">K=5 Forward Simulation</span>
+                <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-white/70">SHAP Feature Attribution</span>
+                <span className="px-2.5 py-1 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-300">SOAR Playbooks</span>
               </div>
             </div>
 
@@ -827,21 +826,30 @@ function LandingHero({ onFileSelected, isUploading, error, onSelectScenario, act
             <div className="relative rounded-2xl overflow-hidden border border-white/12 bg-black/60 h-[135px] mt-3 shadow-inner">
               <WorldModelCanvas threatLevel={0.20} active={true} />
               <div className="absolute top-3 left-3 pointer-events-none">
-                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/90 border border-cyan-400/40 px-3 py-1 rounded-lg font-bold shadow-md">
-                  P(S_t+1 | S_t) Latent State Dynamics Simulation
+                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/90 border border-cyan-400/40 px-3 py-1 rounded-lg font-bold shadow-md tracking-wider">
+                  LATENT DYNAMICS TOPOLOGY SIMULATION
                 </span>
               </div>
             </div>
           </div>
 
           {/* Right Column: Upload */}
-          <div className="p-8 sm:p-10 flex flex-col justify-center bg-black/35 backdrop-blur-md">
-            <div className="text-xs font-mono uppercase tracking-wider text-white/50 mb-3 font-bold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400" />
-              Ingest Network Telemetry
-            </div>
-            <div className="flex-1 min-h-[220px] flex flex-col justify-center">
+          <div className="p-8 sm:p-10 flex flex-col justify-between bg-black/35 backdrop-blur-md">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/60 font-bold flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  Ingest Network Telemetry
+                </div>
+                <span className="text-[10px] font-mono text-cyan-400/90 bg-cyan-950/70 border border-cyan-400/30 px-2 py-0.5 rounded-md font-semibold">
+                  LIVE PARSER
+                </span>
+              </div>
               <UploadDropzone onFileSelected={onFileSelected} isUploading={isUploading} error={error} />
+            </div>
+            <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-white/40">
+              <span>Supports .pcap, .csv, .binetflow, .log, .json</span>
+              <span className="text-cyan-400/80 font-semibold">Stage-1 & Stage-2 Automated</span>
             </div>
           </div>
         </div>
@@ -978,11 +986,11 @@ function ReportView({ report, isUploading, onReset, onSelectScenario, onFileSele
         <AttackDnaHelix report={report} />
       </div>
 
-      {/* Risk Trajectory */}
-      <RiskTrajectory report={report} />
-
-      {/* Threat Intel Feed */}
-      <ThreatIntelFeed report={report} />
+      {/* Risk Trajectory + Live Threat Intel Feed */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-4">
+        <RiskTrajectory report={report} />
+        <ThreatIntelFeed report={report} />
+      </div>
 
       {/* Lead-Time Radar + War Map */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
