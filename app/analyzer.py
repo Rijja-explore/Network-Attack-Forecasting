@@ -1656,6 +1656,8 @@ def generate_report(records: list[dict], filename: str) -> dict:
     report = {
         'case_id': f'UPLOAD_{datetime.now().strftime("%Y%m%d_%H%M%S")}',
         'purpose': f'Live analysis of uploaded file: {filename}',
+        'filename': filename,
+        'attack_probability': round(float(probability), 4),
         'input_context': {
             'filename': filename,
             'total_records': len(records),

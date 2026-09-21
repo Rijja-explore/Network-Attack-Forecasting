@@ -41,7 +41,7 @@ app.add_middleware(
 
 SUPPORTED_EXTENSIONS = {
     '.csv', '.binetflow', '.pcap', '.pcapng', '.cap',
-    '.log', '.json', '.tsv', '.netflow', '.nfcapd',
+    '.log', '.json', '.tsv', '.txt', '.netflow', '.nfcapd',
 }
 
 MAX_FILE_SIZE = 500 * 1024 * 1024  # 500 MB
@@ -64,6 +64,7 @@ def supported_formats():
             {"ext": ".log",      "name": "Zeek Log",     "desc": "Zeek/Bro IDS connection logs"},
             {"ext": ".json",     "name": "JSON",         "desc": "JSON-formatted flow/packet records"},
             {"ext": ".tsv",      "name": "TSV",          "desc": "Tab-separated flow data"},
+            {"ext": ".txt",      "name": "Text/CSV",     "desc": "Delimited text/CSV flow records"},
             {"ext": ".netflow",  "name": "NetFlow",      "desc": "NetFlow export files"},
         ]
     }
@@ -130,7 +131,8 @@ def get_scenarios():
 
 @app.post("/api/scenarios/{scenario_id}/load")
 def load_scenario(scenario_id: str):
-    match = next((s for s in SCENARIOS if s["id"] == scenario_id), None)
+    target_id = "zeroday" if scenario_id == "zero_day" else scenario_id
+    match = next((s for s in SCENARIOS if s["id"] == target_id or s["id"] == scenario_id), None)
     if not match:
         raise HTTPException(status_code=404, detail="Scenario not found")
     

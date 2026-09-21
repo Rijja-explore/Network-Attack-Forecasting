@@ -24,6 +24,7 @@ def parse_uploaded_file(filepath: str, filename: str) -> list[dict]:
         '.log':      parse_zeek_log,
         '.json':     parse_json_flows,
         '.tsv':      parse_tsv,
+        '.txt':      parse_csv,
         '.netflow':  parse_csv,        # NetFlow exports are usually CSV
         '.nfcapd':   parse_csv,
     }
@@ -98,35 +99,29 @@ def parse_binetflow(filepath: str) -> list[dict]:
                 val = v.strip() if isinstance(v, str) else v
                 
                 # Normalize common binetflow columns
-                if key in ('dur', 'totpkts', 'totbytes', 'srcbytes', 'stos', 'dtos'):
+                if key == 'srcaddr':     flow['srcaddr'] = val
+                elif key == 'dstaddr':    flow['dstaddr'] = val
+                elif key == 'sport':      flow['sport'] = int(val) if str(val).isdigit() else 0
+                elif key == 'dport':      flow['dport'] = int(val) if str(val).isdigit() else 0
+                elif key == 'proto':      flow['proto'] = val
+                elif key == 'totpkts':    flow['totpkts'] = float(val) if val else 0
+                elif key == 'totbytes':   flow['totbytes'] = float(val) if val else 0
+                elif key == 'dur':        flow['dur'] = float(val) if val else 0
+                elif key == 'label':      flow['label'] = val
+                elif key == 'state':      flow['state'] = val
+                else:
                     try:
                         flow[key] = float(val)
                     except (ValueError, TypeError):
-                        flow[key] = 0.0
-                elif key == 'sport' or key == 'dport':
-                    try:
-                        flow[key] = int(val) if val else 0
-                    except ValueError:
-                        flow[key] = 0
-                else:
-                    flow[key] = val
-            
-            # Compute derived features
-            dur = flow.get('dur', 0.0)
-            pkts = flow.get('totpkts', 0.0)
-            bytez = flow.get('totbytes', 0.0)
-            flow['packet_rate'] = pkts / dur if dur > 0 else pkts
-            flow['byte_rate'] = bytez / dur if dur > 0 else bytez
-            flow['avg_packet_size'] = bytez / pkts if pkts > 0 else 0
-            
+                        flow[key] = val
             rows.append(flow)
     return rows
 
 
 def parse_pcap(filepath: str) -> list[dict]:
     """
-    Parse PCAP files using raw binary parsing (no external dependencies).
-    Extracts packet-level metadata and aggregates into flow-level records.
+    Pure Python PCAP parser. Extracts flow features without scapy/tshark dependency.
+    Reads global header, packet headers, Ethernet + IPv4 + TCP/UDP layers.
     """
     flows = defaultdict(lambda: {
         'packets': 0, 'bytes': 0, 'start_time': None, 'end_time': None,
@@ -141,10 +136,17 @@ def parse_pcap(filepath: str) -> list[dict]:
             raise ValueError("Invalid PCAP file: header too short")
         
         magic = struct.unpack('<I', header[:4])[0]
+        ts_divisor = 1_000_000
         if magic == 0xa1b2c3d4:
             endian = '<'
         elif magic == 0xd4c3b2a1:
             endian = '>'
+        elif magic == 0xa1b23c4d:
+            endian = '<'
+            ts_divisor = 1_000_000_000
+        elif magic == 0x4d3cb2a1:
+            endian = '>'
+            ts_divisor = 1_000_000_000
         elif magic == 0x0a0d0d0a:
             # PCAPNG - simplified extraction
             return _parse_pcapng_simple(filepath)
@@ -161,7 +163,7 @@ def parse_pcap(filepath: str) -> list[dict]:
                 break
             
             ts_sec, ts_usec, incl_len, orig_len = struct.unpack(f'{endian}IIII', pkt_header)
-            timestamp = ts_sec + ts_usec / 1_000_000
+            timestamp = ts_sec + ts_usec / ts_divisor
             
             # Read packet data
             pkt_data = f.read(incl_len)
