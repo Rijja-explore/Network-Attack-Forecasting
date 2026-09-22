@@ -548,12 +548,13 @@ export function AssessmentHero({ report }) {
   }
 
   return (
-    <div className="glass-card p-6 overflow-hidden relative">
+    <div className="glass-card p-6 overflow-hidden relative flex-1 flex flex-col">
       <div className={clsx("absolute -top-20 -left-20 w-64 h-64 rounded-full blur-[80px] opacity-20 pointer-events-none", severityConfig.bg)} />
       
-      <div className="flex flex-col xl:flex-row gap-6 xl:gap-8 relative z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-[auto_1px_auto_1px_1fr] gap-y-5 gap-x-6 relative z-10 flex-1 items-start">
         
-        <div className="flex flex-col gap-5 shrink-0 xl:w-64">
+        {/* Column 1: Severity */}
+        <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4">
             <AppleIcon Icon={ShieldAlert} bgClass={severityConfig.bg} size={28} />
             <div>
@@ -564,9 +565,11 @@ export function AssessmentHero({ report }) {
           <AttackStateBadge state={attackState} />
         </div>
 
-        <div className="hidden xl:block w-px bg-white/10" />
+        {/* Divider 1 */}
+        <div className="hidden lg:block w-px self-stretch bg-white/10" />
 
-        <div className="flex flex-col gap-3 shrink-0 xl:w-56">
+        {/* Column 2: Attack Probability + Estimated Window */}
+        <div className="flex flex-col gap-3">
           <div>
             <div className="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-1">Attack Probability</div>
             <div className="text-3xl font-black font-mono tracking-tighter text-white/90">
@@ -575,23 +578,25 @@ export function AssessmentHero({ report }) {
           </div>
           <div>
             <div className="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-1">Estimated Window</div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-white/90 text-[12px] font-medium">
-              <Clock size={14} className="text-[#0A84FF]" />
-              {windowStr}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-white/90 text-[12px] font-medium whitespace-nowrap">
+              <Clock size={14} className="text-[#0A84FF] shrink-0" />
+              <span className="truncate">{windowStr}</span>
             </div>
           </div>
         </div>
 
-        <div className="hidden xl:block w-px bg-white/10" />
+        {/* Divider 2 */}
+        <div className="hidden lg:block w-px self-stretch bg-white/10" />
 
-        <div className="flex-1 flex flex-col justify-between min-w-0">
+        {/* Column 3: Recommended Action + Confidence */}
+        <div className="flex flex-col justify-between min-w-0 gap-4">
           <div>
             <div className="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-1.5">Recommended Action</div>
-            <div className="text-white/80 text-[14px] font-medium leading-relaxed">
+            <div className="text-white/80 text-[13px] font-medium leading-relaxed">
               {report.recommended_action}
             </div>
           </div>
-          <div className="mt-4">
+          <div>
             <div className="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-1.5">Confidence Level</div>
             <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/10 border border-white/5 text-white/90 text-[12px] font-medium">
               <Crosshair size={14} className="mr-2 text-white/50" />
@@ -1395,24 +1400,24 @@ export function AuthModal({ isOpen, onClose, onLoginSuccess, currentUser }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-fade-in">
-      <div className="bg-[#161618] border border-white/15 rounded-3xl max-w-xl w-full p-6 shadow-2xl relative">
+      <div className="bg-[#161618] border border-white/15 rounded-3xl max-w-xl w-full p-5 sm:p-6 shadow-2xl relative overflow-hidden">
         <button 
           onClick={onClose}
-          className="absolute top-5 right-5 text-white/40 hover:text-white text-sm font-mono"
+          className="absolute top-4 right-4 text-white/40 hover:text-white text-sm font-mono z-10"
         >
           ✕
         </button>
 
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-5">
           <AppleIcon Icon={UserCheck} colorClass="text-[#0A84FF]" bgClass="bg-[#0A84FF]/20" size={24} />
-          <div>
-            <h2 className="text-lg font-bold text-white tracking-tight">NetThreat SOC Authentication</h2>
-            <p className="text-xs text-white/50">Select an analyst persona or sign in with security credentials</p>
+          <div className="min-w-0">
+            <h2 className="text-base font-bold text-white tracking-tight">NetThreat SOC Authentication</h2>
+            <p className="text-[11px] text-white/50 leading-snug">Select an analyst persona or sign in with security credentials</p>
           </div>
         </div>
 
-        <div className="space-y-3 mb-6">
-          <div className="text-[11px] font-mono text-white/40 uppercase tracking-wider font-semibold">
+        <div className="space-y-2.5 mb-5">
+          <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider font-semibold">
             One-Click Persona Profiles (Demo Mode)
           </div>
           {PERSONAS.map(p => (
@@ -1420,36 +1425,34 @@ export function AuthModal({ isOpen, onClose, onLoginSuccess, currentUser }) {
               key={p.id}
               onClick={() => handleQuickLogin(p.id)}
               className={clsx(
-                "p-3.5 rounded-2xl border transition-all cursor-pointer flex items-center justify-between group",
+                "p-3 rounded-xl border transition-all cursor-pointer flex items-center gap-3 group min-w-0",
                 currentUser?.username === p.id 
                   ? "bg-white/15 border-white/40" 
                   : "bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20"
               )}
             >
-              <div className="flex items-center gap-3">
-                <div 
-                  className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs border"
-                  style={{ color: p.color, backgroundColor: `${p.color}18`, borderColor: `${p.color}40` }}
-                >
-                  {p.name.split(' ').map(n => n[0]).join('')}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-white group-hover:text-white">{p.name}</span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border"
-                      style={{ color: p.color, backgroundColor: `${p.color}15`, borderColor: `${p.color}35` }}>
-                      {p.badge}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-white/50 mt-0.5">{p.desc}</p>
-                </div>
+              <div 
+                className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-[11px] border shrink-0"
+                style={{ color: p.color, backgroundColor: `${p.color}18`, borderColor: `${p.color}40` }}
+              >
+                {p.name.split(' ').map(n => n[0]).join('')}
               </div>
-              <ArrowRight size={16} className="text-white/30 group-hover:text-white transition-colors" />
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-sm font-bold text-white">{p.name}</span>
+                  <span className="text-[9px] font-mono font-bold px-1.5 py-px rounded-full border whitespace-nowrap"
+                    style={{ color: p.color, backgroundColor: `${p.color}15`, borderColor: `${p.color}35` }}>
+                    {p.badge}
+                  </span>
+                </div>
+                <p className="text-[11px] text-white/50 mt-0.5 leading-snug truncate">{p.desc}</p>
+              </div>
+              <ArrowRight size={15} className="text-white/30 group-hover:text-white transition-colors shrink-0" />
             </div>
           ))}
         </div>
 
-        <div className="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-white/40">
+        <div className="border-t border-white/10 pt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-white/40">
           <span>Enterprise Role-Based Access Control</span>
           <span className="font-mono text-[10px]">SIH-153 COMPLIANT</span>
         </div>
@@ -1572,30 +1575,36 @@ export function MitreMatrixNavigator({ matrix }) {
 
   const cols = (matrix && matrix.length > 0) ? matrix : defaultMatrix;
 
+  const statusLabel = (s) => {
+    if (s === 'FORECASTED_NEXT') return 'FORECAST';
+    if (s === 'STANDBY') return 'STANDBY';
+    return s;
+  };
+
   return (
-    <div className="bg-[#161618] border border-white/10 rounded-3xl p-6 shadow-lg mb-6">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
+    <div className="bg-[#161618] border border-white/10 rounded-3xl p-5 shadow-lg mb-6 overflow-hidden">
+      <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <AppleIcon Icon={Layers} colorClass="text-[#FF9F0A]" bgClass="bg-[#FF9F0A]/20" size={20} />
-          <div>
-            <h3 className="text-sm font-bold text-white">MITRE ATT&CK Enterprise Matrix Navigator</h3>
-            <p className="text-xs text-white/50">Live tactical coverage mapped from flow and packet behavior</p>
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-white">MITRE ATT&CK Matrix Navigator</h3>
+            <p className="text-[11px] text-white/50 leading-snug">Live tactical coverage mapped from flow and packet behavior</p>
           </div>
         </div>
-        <span className="text-[11px] font-mono text-white/40 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
-          v14.1 Matrix Mapping
+        <span className="text-[10px] font-mono text-white/40 bg-white/5 px-2 py-0.5 rounded-lg border border-white/10 shrink-0">
+          v14.1
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
         {cols.map((col, idx) => (
-          <div key={idx} className="bg-black/30 border border-white/10 rounded-2xl p-3.5 flex flex-col">
-            <div className="text-xs font-bold text-white/80 pb-2 mb-3 border-b border-white/10 uppercase tracking-wider flex items-center justify-between">
-              <span>{col.tactic}</span>
-              <span className="text-[10px] font-mono text-white/40">{(col.techniques||[]).length} TTPs</span>
+          <div key={idx} className="bg-black/30 border border-white/10 rounded-2xl p-3 flex flex-col min-w-0">
+            <div className="text-[11px] font-bold text-white/80 pb-2 mb-2.5 border-b border-white/10 uppercase tracking-wider flex items-center justify-between gap-1">
+              <span className="truncate">{col.tactic}</span>
+              <span className="text-[9px] font-mono text-white/40 shrink-0">{(col.techniques||[]).length} TTPs</span>
             </div>
 
-            <div className="space-y-2.5 flex-1">
+            <div className="space-y-2 flex-1">
               {(col.techniques||[]).map((t, tIdx) => {
                 const isActive = t.status === 'ACTIVE';
                 const isNext = t.status === 'FORECASTED_NEXT';
@@ -1604,7 +1613,7 @@ export function MitreMatrixNavigator({ matrix }) {
                   <div
                     key={tIdx}
                     className={clsx(
-                      "p-3 rounded-xl border transition-all text-left group",
+                      "p-2.5 rounded-xl border transition-all text-left group min-w-0",
                       isActive 
                         ? "bg-[#FF453A]/15 border-[#FF453A]/40 shadow-sm" 
                         : isNext 
@@ -1612,31 +1621,31 @@ export function MitreMatrixNavigator({ matrix }) {
                         : "bg-white/5 border-white/5 opacity-60"
                     )}
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] font-mono font-bold text-white/50 group-hover:text-white">
+                    <div className="flex items-center justify-between gap-1 mb-1">
+                      <span className="text-[9px] font-mono font-bold text-white/50 group-hover:text-white truncate">
                         {t.id}
                       </span>
                       <span className={clsx(
-                        "text-[9px] font-mono font-bold px-1.5 py-0.2 rounded border",
+                        "text-[8px] font-mono font-bold px-1 py-px rounded border shrink-0 whitespace-nowrap",
                         isActive 
                           ? "text-[#FF453A] border-[#FF453A]/40 bg-[#FF453A]/20" 
                           : isNext 
                           ? "text-[#FFD60A] border-[#FFD60A]/40 bg-[#FFD60A]/20" 
                           : "text-white/40 border-white/10"
                       )}>
-                        {t.status}
+                        {statusLabel(t.status)}
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-white leading-tight mb-1">
+                    <div className="text-[11px] font-bold text-white leading-tight mb-1 truncate">
                       {t.name}
                     </div>
-                    <div className="text-[10px] text-white/50 leading-relaxed mb-2">
+                    <div className="text-[10px] text-white/50 leading-snug mb-1.5 line-clamp-2">
                       {t.evidence}
                     </div>
-                    <div className="flex items-center justify-between text-[10px] font-mono text-white/40">
+                    <div className="flex items-center justify-between text-[9px] font-mono text-white/40">
                       <span>Conf: {t.confidence}%</span>
-                      <a href={t.url || "https://attack.mitre.org/"} target="_blank" rel="noreferrer" className="text-[#0A84FF] hover:underline flex items-center gap-1">
-                        MITRE <ExternalLink size={10} />
+                      <a href={t.url || "https://attack.mitre.org/"} target="_blank" rel="noreferrer" className="text-[#0A84FF] hover:underline flex items-center gap-0.5 shrink-0">
+                        MITRE <ExternalLink size={9} />
                       </a>
                     </div>
                   </div>
@@ -1666,27 +1675,34 @@ export function BlastRadiusGraph({ blastRadius }) {
   const nodes = blastRadius?.nodes || defaultNodes;
   const containmentStatus = blastRadius?.containment_status || 'CONTAINMENT_RECOMMENDED';
 
+  const shortStatus = (s) => {
+    if (s === 'COMPROMISED') return 'COMPRO';
+    if (s === 'SUSCEPTIBLE') return 'SUSCP';
+    if (s === 'TARGETED') return 'TARGET';
+    return s;
+  };
+
   return (
-    <div className="bg-[#161618] border border-white/10 rounded-3xl p-6 shadow-lg mb-6">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
+    <div className="bg-[#161618] border border-white/10 rounded-3xl p-5 shadow-lg mb-6 overflow-hidden">
+      <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <AppleIcon Icon={GitFork} colorClass="text-[#30D158]" bgClass="bg-[#30D158]/20" size={20} />
-          <div>
-            <h3 className="text-sm font-bold text-white">Blast Radius & Lateral Propagation Model</h3>
-            <p className="text-xs text-white/50">Predicted infection paths across internal subnet assets</p>
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-white">Blast Radius & Lateral Propagation</h3>
+            <p className="text-[11px] text-white/50 leading-snug">Predicted infection paths across internal subnet assets</p>
           </div>
         </div>
         <span className={clsx(
-          "text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border",
+          "text-[9px] font-mono font-bold px-2 py-0.5 rounded-full border shrink-0 whitespace-nowrap",
           containmentStatus === 'CONTAINMENT_REQUIRED'
             ? "text-[#FF453A] bg-[#FF453A]/15 border-[#FF453A]/40"
             : "text-[#30D158] bg-[#30D158]/15 border-[#30D158]/40"
         )}>
-          {containmentStatus}
+          {containmentStatus.replace('_', ' ')}
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-3 mt-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-3">
         {nodes.map((node, i) => {
           const isThreat = node.type === 'THREAT_ACTOR';
           const isCompromised = node.status === 'COMPROMISED';
@@ -1696,7 +1712,7 @@ export function BlastRadiusGraph({ blastRadius }) {
             <div 
               key={node.id} 
               className={clsx(
-                "p-4 rounded-2xl border transition-all flex flex-col justify-between relative overflow-hidden",
+                "p-3 rounded-xl border transition-all flex flex-col justify-between relative overflow-hidden min-w-0",
                 isThreat 
                   ? "bg-[#FF453A]/10 border-[#FF453A]/30" 
                   : isCompromised 
@@ -1706,28 +1722,30 @@ export function BlastRadiusGraph({ blastRadius }) {
                   : "bg-white/5 border-white/10"
               )}
             >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono text-white/40">{node.zone}</span>
+              <div className="flex items-center justify-between gap-1 mb-1.5">
+                <span className="text-[9px] font-mono text-white/40 truncate">{node.zone}</span>
                 <span className={clsx(
-                  "text-[9px] font-mono font-bold px-1.5 py-0.5 rounded",
-                  node.risk_level === 'CRITICAL' ? "bg-[#FF453A]/20 text-[#FF453A]" : "bg-white/10 text-white/60"
+                  "text-[8px] font-mono font-bold px-1 py-px rounded shrink-0",
+                  node.risk_level === 'CRITICAL' ? "bg-[#FF453A]/20 text-[#FF453A]" 
+                  : node.risk_level === 'HIGH' ? "bg-[#FF9F0A]/20 text-[#FF9F0A]"
+                  : "bg-white/10 text-white/60"
                 )}>
                   {node.risk_level}
                 </span>
               </div>
-              <div className="text-xs font-bold text-white mb-1">
+              <div className="text-[11px] font-bold text-white mb-0.5 truncate">
                 {node.label}
               </div>
-              <div className="text-[11px] font-mono text-white/50 mb-3">
+              <div className="text-[10px] font-mono text-white/50 mb-2 truncate">
                 {node.ip}
               </div>
-              <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono">
+              <div className="pt-1.5 border-t border-white/10 flex items-center justify-between gap-1 text-[9px] font-mono">
                 <span className="text-white/40">Status</span>
                 <span className={clsx(
-                  "font-bold",
+                  "font-bold truncate",
                   isThreat ? "text-[#FF453A]" : isCompromised ? "text-[#FF3B30]" : isTargeted ? "text-[#FF9F0A]" : "text-[#30D158]"
                 )}>
-                  {node.status}
+                  {shortStatus(node.status)}
                 </span>
               </div>
             </div>
@@ -1735,12 +1753,12 @@ export function BlastRadiusGraph({ blastRadius }) {
         })}
       </div>
 
-      <div className="mt-4 p-3 bg-white/5 border border-white/10 rounded-2xl text-xs text-white/60 flex items-center justify-between">
-        <span className="flex items-center gap-2">
-          <AlertTriangle size={14} className="text-[#FF9F0A]" />
-          <span>Forecast warns lateral pivot into <strong>Core Database (10.0.2.20)</strong> via SMB within 5–15 mins.</span>
+      <div className="mt-3 p-2.5 bg-white/5 border border-white/10 rounded-xl text-[11px] text-white/60 flex flex-wrap items-center justify-between gap-2">
+        <span className="flex items-center gap-2 min-w-0">
+          <AlertTriangle size={13} className="text-[#FF9F0A] shrink-0" />
+          <span className="truncate">Forecast warns lateral pivot into <strong>Core Database (10.0.2.20)</strong> via SMB within 5–15 mins.</span>
         </span>
-        <span className="font-mono text-[11px] text-white/40">Containment Priority: Tier-1</span>
+        <span className="font-mono text-[10px] text-white/40 shrink-0">Priority: Tier-1</span>
       </div>
     </div>
   );
@@ -1996,29 +2014,30 @@ export function LiveCaptureStudio({ onSnapshotAnalyzed, isUploading }) {
   };
 
   return (
-    <div className="bg-[#161618] border border-white/10 rounded-3xl p-6 shadow-lg mb-6 animate-fade-in">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
+    <div className="bg-[#161618] border border-white/10 rounded-3xl p-5 shadow-lg mb-6 animate-fade-in overflow-hidden">
+      {/* Header */}
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <div className="flex items-center gap-3 min-w-0">
           <AppleIcon Icon={Radio} colorClass="text-[#FF453A]" bgClass="bg-[#FF453A]/20" size={20} />
-          <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              Live Network Packet Sniffer Studio
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-white flex flex-wrap items-center gap-2">
+              <span>Live Network Packet Sniffer Studio</span>
               {isCapturing && (
-                <span className="flex items-center gap-1.5 text-[10px] font-mono text-[#FF453A] bg-[#FF453A]/20 px-2 py-0.5 rounded-full border border-[#FF453A]/30">
-                  <span className="w-2 h-2 rounded-full bg-[#FF453A] animate-ping" /> REC ACTIVE
+                <span className="flex items-center gap-1.5 text-[10px] font-mono text-[#FF453A] bg-[#FF453A]/20 px-2 py-0.5 rounded-full border border-[#FF453A]/30 whitespace-nowrap shrink-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF453A] animate-ping" /> REC ACTIVE
                 </span>
               )}
             </h3>
-            <p className="text-xs text-white/50">Capture raw live packets in real-time and stream directly into ML inference</p>
+            <p className="text-[11px] text-white/50 leading-snug">Capture raw live packets in real-time and stream directly into ML inference</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
           <select 
             value={selectedInterface}
             onChange={(e) => setSelectedInterface(e.target.value)}
             disabled={isCapturing}
-            className="bg-white/5 border border-white/15 text-white text-xs font-mono rounded-xl px-3 py-1.5 outline-none"
+            className="bg-white/5 border border-white/15 text-white text-[11px] font-mono rounded-xl px-2.5 py-1.5 outline-none"
           >
             <option value="eth0 (Sensor Bridge)">eth0 (Sensor Bridge)</option>
             <option value="Wi-Fi (wlan0)">Wi-Fi (wlan0)</option>
@@ -2028,76 +2047,76 @@ export function LiveCaptureStudio({ onSnapshotAnalyzed, isUploading }) {
           {!isCapturing ? (
             <button
               onClick={startSniffer}
-              className="bg-[#30D158] hover:bg-[#28b84b] text-black font-bold text-xs px-4 py-1.5 rounded-xl flex items-center gap-2 transition-all shadow-lg"
+              className="bg-[#30D158] hover:bg-[#28b84b] text-black font-bold text-[11px] px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-all shadow-lg whitespace-nowrap"
             >
-              <Play size={14} /> Start Sniffer
+              <Play size={13} /> Start Sniffer
             </button>
           ) : (
             <button
               onClick={stopSniffer}
-              className="bg-[#FF453A] hover:bg-[#d8352b] text-white font-bold text-xs px-4 py-1.5 rounded-xl flex items-center gap-2 transition-all shadow-lg"
+              className="bg-[#FF453A] hover:bg-[#d8352b] text-white font-bold text-[11px] px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-all shadow-lg whitespace-nowrap"
             >
-              <Square size={14} /> Stop Capture
+              <Square size={13} /> Stop Capture
             </button>
           )}
 
           <button
             onClick={handleAnalyzeSnapshot}
             disabled={isUploading}
-            className="bg-[#0A84FF] hover:bg-[#0071e3] text-white font-bold text-xs px-4 py-1.5 rounded-xl flex items-center gap-2 transition-all shadow-lg disabled:opacity-50"
+            className="bg-[#0A84FF] hover:bg-[#0071e3] text-white font-bold text-[11px] px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-all shadow-lg disabled:opacity-50 whitespace-nowrap"
           >
-            <Activity size={14} /> Analyze Snapshot
+            <Activity size={13} /> Analyze Snapshot
           </button>
         </div>
       </div>
 
       {/* Live Metrics Grid */}
-      <div className="grid grid-cols-4 gap-3 my-4">
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-3 text-center">
-          <span className="text-[10px] font-mono text-white/40 block">Total Packets Captured</span>
-          <span className="text-xl font-bold font-mono text-white">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 my-4">
+        <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-center min-w-0">
+          <span className="text-[9px] font-mono text-white/40 block truncate">Total Packets Captured</span>
+          <span className="text-lg font-bold font-mono text-white">
             {captureStatus?.packet_count || 0}
           </span>
         </div>
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-3 text-center">
-          <span className="text-[10px] font-mono text-white/40 block">Packet Rate</span>
-          <span className="text-xl font-bold font-mono text-[#0A84FF]">
+        <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-center min-w-0">
+          <span className="text-[9px] font-mono text-white/40 block truncate">Packet Rate</span>
+          <span className="text-lg font-bold font-mono text-[#0A84FF]">
             {captureStatus?.pps || 0} pps
           </span>
         </div>
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-3 text-center">
-          <span className="text-[10px] font-mono text-white/40 block">Bandwidth Throughput</span>
-          <span className="text-xl font-bold font-mono text-[#30D158]">
+        <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-center min-w-0">
+          <span className="text-[9px] font-mono text-white/40 block truncate">Bandwidth Throughput</span>
+          <span className="text-lg font-bold font-mono text-[#30D158]">
             {captureStatus?.kbps || 0} KB/s
           </span>
         </div>
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-3 text-center">
-          <span className="text-[10px] font-mono text-white/40 block">Buffered Flows</span>
-          <span className="text-xl font-bold font-mono text-[#FF9F0A]">
+        <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-center min-w-0">
+          <span className="text-[9px] font-mono text-white/40 block truncate">Buffered Flows</span>
+          <span className="text-lg font-bold font-mono text-[#FF9F0A]">
             {captureStatus?.buffered_flows || 0}
           </span>
         </div>
       </div>
 
       {/* Terminal-style live packet stream */}
-      <div className="bg-black/60 border border-white/10 rounded-2xl p-3 font-mono text-[11px] overflow-hidden">
+      <div className="bg-black/60 border border-white/10 rounded-xl p-3 font-mono text-[11px] overflow-hidden">
         <div className="flex items-center justify-between text-white/40 text-[10px] pb-2 border-b border-white/10 mb-2">
           <span>LIVE PACKET STREAM BUFFER</span>
           <span>AUTOSCROLL ON</span>
         </div>
 
-        <div className="h-40 overflow-y-auto space-y-1 scrollbar-thin">
+        <div className="h-40 overflow-y-auto overflow-x-hidden space-y-1 scrollbar-thin">
           {captureStatus?.recent_packets && captureStatus.recent_packets.length > 0 ? (
             captureStatus.recent_packets.map((pkt) => (
-              <div key={pkt.id} className="flex items-center justify-between text-white/70 hover:text-white hover:bg-white/5 px-2 py-0.5 rounded transition-colors">
-                <span className="text-white/40 w-16">#{pkt.id}</span>
-                <span className="w-14 font-bold text-[#0A84FF]">{pkt.proto}</span>
-                <span className="w-48 truncate">{pkt.src}</span>
-                <span className="text-white/40">➔</span>
-                <span className="w-48 truncate">{pkt.dst}</span>
-                <span className="w-16 text-right text-white/40">{pkt.len}B</span>
+              <div key={pkt.id} className="flex items-center gap-2 text-white/70 hover:text-white hover:bg-white/5 px-2 py-0.5 rounded transition-colors text-[10px] min-w-0">
+                <span className="text-white/40 w-12 shrink-0">#{pkt.id}</span>
+                <span className="w-12 font-bold text-[#0A84FF] shrink-0">{pkt.proto}</span>
+                <span className="flex-1 truncate min-w-0">{pkt.src}</span>
+                <span className="text-white/40 shrink-0">➔</span>
+                <span className="flex-1 truncate min-w-0">{pkt.dst}</span>
+                <span className="w-12 text-right text-white/40 shrink-0">{pkt.len}B</span>
                 <span className={clsx(
-                  "w-12 text-right font-bold text-[10px]",
+                  "w-10 text-right font-bold text-[9px] shrink-0",
                   pkt.flags === 'SYN' ? "text-[#FF453A]" : "text-white/40"
                 )}>
                   {pkt.flags}
@@ -2166,20 +2185,20 @@ export function ThreatOriginWarMap({ geoContext }) {
 
   return (
     <div className="bg-[#161618] border border-white/10 rounded-3xl p-6 shadow-lg mb-6 relative overflow-hidden">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <AppleIcon Icon={Globe} colorClass="text-[#00F0FF]" bgClass="bg-[#00F0FF]/20" size={20} />
-          <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              Global Threat Origin & Ballistic Attack Vector
-              <span className="text-[10px] font-mono text-[#00F0FF] bg-[#00F0FF]/15 px-2 py-0.5 rounded-full border border-[#00F0FF]/30">
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-white flex flex-wrap items-center gap-2">
+              <span>Threat Origin & Attack Vector</span>
+              <span className="text-[10px] font-mono text-[#00F0FF] bg-[#00F0FF]/15 px-2 py-0.5 rounded-full border border-[#00F0FF]/30 whitespace-nowrap">
                 GEO-IP INTEL
               </span>
             </h3>
-            <p className="text-xs text-white/50">Physical origin tracking, ASN attribution, and ballistic trajectory toward enterprise perimeter</p>
+            <p className="text-[11px] text-white/50 leading-snug">Physical origin tracking, ASN attribution & ballistic trajectory</p>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-xs font-mono text-white/50">
+        <div className="flex items-center gap-2 text-[11px] font-mono text-white/50 shrink-0">
           <span>Range: <strong>{arc.distance_km || 4800} km</strong></span>
           <span className="text-white/20">|</span>
           <span className="text-[#FF453A] font-bold">{origin.country_code} ➔ {target.country_code}</span>
@@ -2243,7 +2262,7 @@ export function ThreatOriginWarMap({ geoContext }) {
       </div>
 
       {/* Origin Metadata Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
         <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
           <span className="text-[10px] font-mono text-white/40 block">Threat Group Attribution</span>
           <span className="font-bold text-white text-sm block mt-0.5">{origin.threat_group}</span>
@@ -2292,107 +2311,107 @@ export function LeadTimeThreatRadar({ timeToCompromise, probability }) {
   const isUrgent = ttc.urgency === 'CRITICAL' || ttc.urgency === 'HIGH';
 
   return (
-    <div className="bg-[#161618] border border-white/10 rounded-3xl p-6 shadow-lg mb-6 relative overflow-hidden">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
+    <div className="bg-[#161618] border border-white/10 rounded-3xl p-5 shadow-lg mb-6 relative overflow-hidden flex flex-col">
+      {/* Header */}
+      <div className="flex flex-wrap items-start gap-2 mb-4">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <AppleIcon Icon={Crosshair} colorClass="text-[#FF2D55]" bgClass="bg-[#FF2D55]/20" size={20} />
-          <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              Preemptive Time-to-Compromise (TTC) & Threat Radar
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-white flex flex-wrap items-center gap-2">
+              <span>TTC & Threat Radar</span>
               {isUrgent && (
-                <span className="text-[10px] font-mono text-[#FF2D55] bg-[#FF2D55]/15 px-2 py-0.5 rounded-full border border-[#FF2D55]/30 animate-pulse">
-                  CRITICAL PREEMPTION WINDOW
+                <span className="text-[10px] font-mono text-[#FF2D55] bg-[#FF2D55]/15 px-2 py-0.5 rounded-full border border-[#FF2D55]/30 animate-pulse whitespace-nowrap">
+                  CRITICAL
                 </span>
               )}
             </h3>
-            <p className="text-xs text-white/50">Estimated lead-time before attack escalation transitions to crown-jewel assets</p>
+            <p className="text-[11px] text-white/50 leading-snug">Lead-time before attack escalation to crown-jewel assets</p>
           </div>
         </div>
-        <span className="text-[11px] font-mono text-white/40 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
-          Escalation Velocity: <strong className="text-[#FF9F0A]">{ttc.velocity}</strong>
-        </span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4 items-center">
-        {/* Radar Visualizer */}
-        <div className="flex flex-col items-center justify-center p-4 bg-black/40 border border-white/10 rounded-2xl relative h-[220px]">
-          <div className="w-[180px] h-[180px] rounded-full border border-white/10 relative flex items-center justify-center">
-            <div className="w-[130px] h-[130px] rounded-full border border-white/10 absolute" />
-            <div className="w-[80px] h-[80px] rounded-full border border-[#FF453A]/30 absolute" />
-            <div className="w-[30px] h-[30px] rounded-full bg-[#00F0FF]/20 border border-[#00F0FF] absolute flex items-center justify-center">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF] animate-ping" />
-            </div>
-
-            <div 
-              className="absolute inset-0 rounded-full animate-[spin_4s_linear_infinite] pointer-events-none"
-              style={{
-                background: 'conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(255, 45, 85, 0.35) 360deg)'
-              }}
-            />
-
-            <div className="absolute top-8 right-12 w-2.5 h-2.5 rounded-full bg-[#FF453A] animate-ping" />
-            <div className="absolute bottom-12 left-10 w-2 h-2 rounded-full bg-[#FF9F0A]" />
-          </div>
-
-          <div className="absolute bottom-2 text-[10px] font-mono text-white/40 flex items-center gap-2">
-            <span>Radius: <strong>{ttc.radar_distance_hops} Network Hops</strong></span>
-            <span>|</span>
-            <span className="text-[#00F0FF]">DC Core Centered</span>
-          </div>
+      {/* Countdown Display */}
+      <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider">
+            Lead-Time Clock
+          </span>
+          <span className={clsx(
+            "text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border shrink-0",
+            isUrgent ? "text-[#FF2D55] bg-[#FF2D55]/15 border-[#FF2D55]/40" : "text-[#30D158] bg-[#30D158]/15 border-[#30D158]/40"
+          )}>
+            {ttc.status}
+          </span>
         </div>
 
-        {/* Big Countdown Display */}
-        <div className="lg:col-span-2 flex flex-col justify-between h-full space-y-4">
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                Autonomous Lead-Time Clock to Catastrophic Impact
-              </span>
-              <span className={clsx(
-                "text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border",
-                isUrgent ? "text-[#FF2D55] bg-[#FF2D55]/15 border-[#FF2D55]/40" : "text-[#30D158] bg-[#30D158]/15 border-[#30D158]/40"
-              )}>
-                {ttc.status}
-              </span>
-            </div>
-
-            <div className="text-3xl sm:text-4xl font-extrabold font-mono text-white tracking-wider my-2 flex items-baseline gap-3">
-              <span className={clsx(isUrgent ? "text-[#FF453A]" : "text-[#30D158]")}>
-                {ttc.countdown_display}
-              </span>
-              <span className="text-xs font-mono text-white/40 font-normal">Remaining Window</span>
-            </div>
-
-            <p className="text-xs text-white/60 leading-relaxed">
-              Autonomous trajectory models indicate the attacker is advancing across operational kill-chain phases. 
-              Deploying SOAR countermeasures within this window prevents data exfiltration and credential escalation.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3 text-xs">
-            <div className="bg-black/30 border border-white/10 rounded-xl p-3">
-              <span className="text-[10px] font-mono text-white/40 block">Intervention Urgency</span>
-              <span className={clsx(
-                "font-bold text-sm block mt-0.5",
-                isUrgent ? "text-[#FF453A]" : "text-[#30D158]"
-              )}>
-                {ttc.urgency}
-              </span>
-            </div>
-            <div className="bg-black/30 border border-white/10 rounded-xl p-3">
-              <span className="text-[10px] font-mono text-white/40 block">Forecast Velocity</span>
-              <span className="font-bold text-sm block mt-0.5 text-[#FF9F0A] font-mono">
-                {ttc.velocity}
-              </span>
-            </div>
-            <div className="bg-black/30 border border-white/10 rounded-xl p-3">
-              <span className="text-[10px] font-mono text-white/40 block">Target Asset Protection</span>
-              <span className="font-bold text-sm block mt-0.5 text-[#00F0FF] font-mono">
-                ACTIVE SHIELD
-              </span>
-            </div>
-          </div>
+        <div className="flex flex-wrap items-baseline gap-2 my-2">
+          <span className={clsx("text-2xl font-extrabold font-mono tracking-wider", isUrgent ? "text-[#FF453A]" : "text-[#30D158]")}>
+            {ttc.countdown_display}
+          </span>
+          <span className="text-[11px] font-mono text-white/40">Remaining</span>
         </div>
+
+        <p className="text-[11px] text-white/50 leading-relaxed">
+          Autonomous trajectory models indicate the attacker is advancing across operational kill-chain phases. 
+          Deploying SOAR countermeasures within this window prevents data exfiltration and credential escalation.
+        </p>
+      </div>
+
+      {/* Radar Visualizer */}
+      <div className="flex flex-col items-center justify-center p-4 bg-black/40 border border-white/10 rounded-2xl relative h-[200px] mb-4">
+        <div className="w-[160px] h-[160px] rounded-full border border-white/10 relative flex items-center justify-center">
+          <div className="w-[115px] h-[115px] rounded-full border border-white/10 absolute" />
+          <div className="w-[70px] h-[70px] rounded-full border border-[#FF453A]/30 absolute" />
+          <div className="w-[28px] h-[28px] rounded-full bg-[#00F0FF]/20 border border-[#00F0FF] absolute flex items-center justify-center">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF] animate-ping" />
+          </div>
+
+          <div 
+            className="absolute inset-0 rounded-full animate-[spin_4s_linear_infinite] pointer-events-none"
+            style={{
+              background: 'conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(255, 45, 85, 0.35) 360deg)'
+            }}
+          />
+
+          <div className="absolute top-6 right-10 w-2.5 h-2.5 rounded-full bg-[#FF453A] animate-ping" />
+          <div className="absolute bottom-10 left-8 w-2 h-2 rounded-full bg-[#FF9F0A]" />
+        </div>
+
+        <div className="absolute bottom-2 text-[9px] font-mono text-white/40 flex items-center gap-1.5">
+          <span>Radius: <strong>{ttc.radar_distance_hops} Hops</strong></span>
+          <span>|</span>
+          <span className="text-[#00F0FF]">DC Core</span>
+        </div>
+      </div>
+
+      {/* Bottom Metrics */}
+      <div className="grid grid-cols-3 gap-2 text-xs">
+        <div className="bg-black/30 border border-white/10 rounded-xl p-2.5 min-w-0">
+          <span className="text-[9px] font-mono text-white/40 block truncate">Urgency</span>
+          <span className={clsx(
+            "font-bold text-[13px] block mt-0.5 truncate",
+            isUrgent ? "text-[#FF453A]" : "text-[#30D158]"
+          )}>
+            {ttc.urgency}
+          </span>
+        </div>
+        <div className="bg-black/30 border border-white/10 rounded-xl p-2.5 min-w-0">
+          <span className="text-[9px] font-mono text-white/40 block truncate">Velocity</span>
+          <span className="font-bold text-[13px] block mt-0.5 text-[#FF9F0A] font-mono truncate" title={ttc.velocity}>
+            {ttc.velocity?.split(' ')[0] || 'Moderate'}
+          </span>
+        </div>
+        <div className="bg-black/30 border border-white/10 rounded-xl p-2.5 min-w-0">
+          <span className="text-[9px] font-mono text-white/40 block truncate">Protection</span>
+          <span className="font-bold text-[13px] block mt-0.5 text-[#00F0FF] font-mono truncate">
+            ACTIVE
+          </span>
+        </div>
+      </div>
+
+      {/* Escalation Velocity footer */}
+      <div className="mt-3 text-[10px] font-mono text-white/40 text-center">
+        Escalation: <strong className="text-[#FF9F0A]">{ttc.velocity}</strong>
       </div>
     </div>
   );

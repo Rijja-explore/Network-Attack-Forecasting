@@ -376,20 +376,20 @@ export default function App() {
               <div className="lg:col-span-8 flex flex-col">
                 <AssessmentHero report={report} />
               </div>
-              <div className="lg:col-span-4 glass-card p-6 flex flex-col items-center justify-center text-center">
+              <div className="lg:col-span-4 glass-card p-6 flex flex-col items-center justify-center text-center min-w-0">
                 <RadialGauge
                   value={report?.attack_probability || 0}
                   label="Threat Score"
                   size={140}
                   color={severityColor}
                 />
-                <div className="mt-4 flex items-center gap-2">
+                <div className="mt-4 flex items-center gap-2 max-w-full">
                   <ProbWaveBars active={severity === 'CRITICAL' || severity === 'HIGH'} color={severityColor} />
-                  <span className="text-xs font-mono font-bold" style={{ color: severityColor }}>
+                  <span className="text-xs font-mono font-bold truncate" style={{ color: severityColor }}>
                     {formatTTC(report?.time_to_compromise)}
                   </span>
                 </div>
-                <p className="text-xs text-white/50 mt-3 font-mono">
+                <p className="text-[11px] text-white/50 mt-3 font-mono leading-snug">
                   Stage 1 Dual Temporal Classifier (XGBoost + CatBoost)
                 </p>
               </div>
