@@ -8,6 +8,8 @@ export const MOCK_SCENARIOS = {
     filename: "01_benign_normal_traffic.csv",
     severity: "NORMAL",
     attack_probability: 0.042,
+    confidence: "HIGH: Nominal baseline model inference",
+    recommended_action: "Continue passive monitoring. Telemetry conforms to baseline operational profile.",
     time_to_compromise: "No Threat Detected",
     traffic_summary: {
       total_flows: 1842,
@@ -115,6 +117,8 @@ export const MOCK_SCENARIOS = {
     filename: "02_reconnaissance_portscan.pcap",
     severity: "MEDIUM",
     attack_probability: 0.485,
+    confidence: "HIGH: Multi-port probe signature verified",
+    recommended_action: "Enforce dynamic SYN drop on border firewall & blacklist probing IP 198.51.100.44.",
     time_to_compromise: "18 - 25 mins until breach attempt",
     traffic_summary: {
       total_flows: 4820,
@@ -223,6 +227,8 @@ export const MOCK_SCENARIOS = {
     filename: "03_ssh_rdp_bruteforce_auth.pcap",
     severity: "HIGH",
     attack_probability: 0.764,
+    confidence: "HIGH: High-frequency authentication bursts detected",
+    recommended_action: "Quarantine source IP 203.0.113.88, mandate SSH key-only auth & rotate credentials.",
     time_to_compromise: "8 - 12 mins until root session establishment",
     traffic_summary: {
       total_flows: 2450,
@@ -331,6 +337,8 @@ export const MOCK_SCENARIOS = {
     filename: "04_neris_botnet_c2_beacon.pcap",
     severity: "CRITICAL",
     attack_probability: 0.948,
+    confidence: "HIGH: RBot / Neris IRC C2 heartbeat confirmed",
+    recommended_action: "Isolate compromised host 147.32.84.165, sever outbound port 6667 & block lateral SMB.",
     time_to_compromise: "3 - 5 mins until lateral worm propagation",
     traffic_summary: {
       total_flows: 5120,
@@ -440,6 +448,8 @@ export const MOCK_SCENARIOS = {
     filename: "05_ddos_volumetric_synflood.pcap",
     severity: "CRITICAL",
     attack_probability: 0.982,
+    confidence: "HIGH: Volumetric SYN flood saturation identified",
+    recommended_action: "Engage upstream DDoS cloud scrubbing & enforce connection rate limits.",
     time_to_compromise: "Immediate Service Degradation Active (0 mins lead time)",
     traffic_summary: {
       total_flows: 14800,
@@ -548,6 +558,8 @@ export const MOCK_SCENARIOS = {
     filename: "06_zeroday_novel_threat_vector.pcap",
     severity: "CRITICAL",
     attack_probability: 0.912,
+    confidence: "HIGH: Novel OOD entropy anomaly detected",
+    recommended_action: "Quarantine novel anomalous flow cluster, deploy zero-trust egress filter & conduct memory forensics.",
     time_to_compromise: "6 - 10 mins until polymorphic shellcode execution",
     traffic_summary: {
       total_flows: 3200,
@@ -678,6 +690,8 @@ export function generateOfflineReportForFile(fileName) {
     ...base,
     filename: fileName,
     case_id: `OFFLINE_${Date.now()}`,
+    confidence: base.confidence || "HIGH: Offline temporal inference",
+    recommended_action: base.recommended_action || "Prioritize analyst review and monitor network perimeter.",
     input_context: {
       ...(base.input_context || {}),
       filename: fileName,
