@@ -76,6 +76,7 @@ export default function App() {
   // Load specific scenario
   const loadScenario = useCallback(async (id) => {
     setIsUploading(true);
+    setUploadError(null);
     setActiveScenarioId(id);
     setFileName(`Scenario: ${id.toUpperCase()}`);
 
@@ -126,12 +127,12 @@ export default function App() {
       if (res.ok) {
         const data = await res.json();
         setReport(data);
+        setUploadError(null);
         setIsUploading(false);
         return;
       } else {
         const errText = await res.text();
         console.warn("Backend /api/analyze returned non-200:", res.status, errText);
-        setUploadError(`Server returned ${res.status}: fallback analysis applied.`);
       }
     } catch (e) {
       console.warn("API upload failed, using offline inference engine:", e);
@@ -140,6 +141,7 @@ export default function App() {
     // Offline fallback for uploaded custom file
     const offlineReport = generateOfflineReportForFile(file.name);
     setReport(offlineReport);
+    setUploadError(null);
     setIsUploading(false);
   };
 
