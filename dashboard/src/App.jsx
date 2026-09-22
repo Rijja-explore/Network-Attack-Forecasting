@@ -397,6 +397,9 @@ export default function App() {
               </div>
             </div>
 
+            {/* Traffic Summary - 4 Live Network Telemetry KPIs */}
+            <TrafficSummary report={report} />
+
             {/* Attack Chain Context & Risk Trajectory */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <AttackChainContext report={report} />
@@ -409,11 +412,8 @@ export default function App() {
               <FamilyBars report={report} />
             </div>
 
-            {/* Traffic Summary & Zero-Day Breakdown */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <TrafficSummary report={report} />
-              <ZeroDayAnalysisPanel report={report} />
-            </div>
+            {/* Zero-Day & Novelty Breakdown */}
+            <ZeroDayAnalysisPanel report={report} />
 
             {/* Countermeasures & Executive Briefing */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

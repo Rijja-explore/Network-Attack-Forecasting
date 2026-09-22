@@ -152,7 +152,7 @@ export function UploadDropzone({ onFileSelected, isUploading, error }) {
    TRAFFIC SUMMARY CARDS (NEW)
 ═════════════════════════════════════════════ */
 export function TrafficSummary({ report }) {
-  const summary = report.traffic_summary;
+  const summary = report?.traffic_summary;
   if (!summary) return null;
 
   const cards = [
@@ -163,15 +163,22 @@ export function TrafficSummary({ report }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {cards.map(c => (
-        <div key={c.label} className="glass-card p-4 flex items-center gap-4 min-w-0">
-          <div className={clsx("w-10 h-10 rounded-[28%] flex items-center justify-center shrink-0", c.color)}>
-            <c.icon size={20} className="text-white" strokeWidth={2} />
+        <div 
+          key={c.label} 
+          className="glass-card p-4 sm:p-5 flex items-center gap-3.5 min-w-0 rounded-2xl border border-white/10 hover:border-white/20 transition-all shadow-md group"
+        >
+          <div className={clsx("w-11 h-11 rounded-[28%] flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform", c.color)}>
+            <c.icon size={22} className="text-white" strokeWidth={2} />
           </div>
-          <div className="min-w-0">
-            <div className="text-[11px] font-semibold text-white/40 uppercase tracking-wider">{c.label}</div>
-            <div className="text-[18px] font-bold text-white/90 font-mono truncate">{c.value}</div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-bold text-white/50 uppercase tracking-wider truncate mb-1">
+              {c.label}
+            </div>
+            <div className="text-[18px] sm:text-[20px] font-extrabold text-white font-mono tracking-tight whitespace-nowrap overflow-visible">
+              {c.value || '0'}
+            </div>
           </div>
         </div>
       ))}
